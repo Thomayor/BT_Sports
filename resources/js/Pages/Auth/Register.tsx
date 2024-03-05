@@ -18,6 +18,7 @@ export default function Register() {
     email: '',
     password: '',
     password_confirmation: '',
+    user_role: 'player',
     terms: false,
   });
 
@@ -94,6 +95,34 @@ export default function Register() {
             className="mt-2"
             message={form.errors.password_confirmation}
           />
+        </div>
+
+        <div className="mt-4 text-center">
+          <InputLabel htmlFor="user_role">Vous êtes ?</InputLabel>
+
+          <div className="flex justify-evenly mt-2">
+            <div
+              className={`cursor-pointer mr-4 p-4 border rounded ${
+                form.data.user_role === 'player'
+                  ? 'border-blue-500'
+                  : 'border-gray-300'
+              }`}
+              onClick={() => form.setData('user_role', 'player')}
+            >
+              Un Joueur
+            </div>
+
+            <div
+              className={`cursor-pointer p-4 border rounded ${
+                form.data.user_role === 'club'
+                  ? 'border-blue-500'
+                  : 'border-gray-300'
+              }`}
+              onClick={() => form.setData('user_role', 'club')}
+            >
+              Un Club
+            </div>
+          </div>
         </div>
 
         {page.props.jetstream.hasTermsAndPrivacyPolicyFeature && (
