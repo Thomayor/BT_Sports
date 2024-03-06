@@ -1,0 +1,17 @@
+@font-face {
+  font-family: 'Eurostile';
+  src:
+    url('../fonts/eurostileltstd-boldex2-webfont.woff2') format('woff2'),
+    url('../fonts/eurostileltstd-boldex2-webfont.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Eurostile-bold';
+  src:
+    url('../fonts/eurostileltstd-ex2-webfont.woff2') format('woff2'),
+    url('../fonts/eurostileltstd-ex2-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}

@@ -1,6 +1,7 @@
 import { useForm, Head } from '@inertiajs/react';
 import classNames from 'classnames';
 import React, { useRef, useState } from 'react';
+import { t } from 'i18next';
 import useRoute from '@/Hooks/useRoute';
 import AuthenticationCard from '@/Components/AuthenticationCard';
 import InputLabel from '@/Components/InputLabel';
@@ -18,7 +19,7 @@ export default function TwoFactorChallenge() {
   const recoveryCodeRef = useRef<HTMLInputElement>(null);
   const codeRef = useRef<HTMLInputElement>(null);
 
-  function toggleRecovery(e: React.FormEvent) {
+  const toggleRecovery = (e: React.FormEvent) => {
     e.preventDefault();
     const isRecovery = !recovery;
     setRecovery(isRecovery);
@@ -32,12 +33,12 @@ export default function TwoFactorChallenge() {
         form.setData('recovery_code', '');
       }
     }, 100);
-  }
+  };
 
-  function onSubmit(e: React.FormEvent) {
+  const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     form.post(route('two-factor.login'));
-  }
+  };
 
   return (
     <AuthenticationCard>
@@ -52,7 +53,9 @@ export default function TwoFactorChallenge() {
       <form onSubmit={onSubmit}>
         {recovery ? (
           <div>
-            <InputLabel htmlFor="recovery_code">Recovery Code</InputLabel>
+            <InputLabel htmlFor="recovery_code">
+              {t('pages.auth.twoFactorChallenge.recovery')}
+            </InputLabel>
             <TextInput
               id="recovery_code"
               type="text"
@@ -68,7 +71,9 @@ export default function TwoFactorChallenge() {
           </div>
         ) : (
           <div>
-            <InputLabel htmlFor="code">Code</InputLabel>
+            <InputLabel htmlFor="code">
+              {t('pages.auth.twoFactorChallenge.code')}
+            </InputLabel>
             <TextInput
               id="code"
               type="text"
@@ -94,10 +99,11 @@ export default function TwoFactorChallenge() {
           </button>
 
           <PrimaryButton
+            type="submit"
             className={classNames('ml-4', { 'opacity-25': form.processing })}
             disabled={form.processing}
           >
-            Log in
+            {t('pages.auth.twoFactorChallenge.login')}
           </PrimaryButton>
         </div>
       </form>

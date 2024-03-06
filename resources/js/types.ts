@@ -12,7 +12,8 @@ export interface Team {
 
 export interface User {
   id: number;
-  name: string;
+  firstname: string;
+  lastname: string;
   email: string;
   current_team_id: Nullable<number>;
   profile_photo_path: Nullable<string>;
