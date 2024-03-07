@@ -18,14 +18,12 @@ import DropdownMessage from '@/Components/Dropdown/DropdownMessage';
 
 interface Props {
   title: string;
-  active: string;
   renderHeader?(): JSX.Element;
 }
 
 export default function AppLayout({
   title,
   renderHeader,
-  active,
   children,
 }: PropsWithChildren<Props>) {
   const page = useTypedPage();
@@ -78,12 +76,16 @@ export default function AppLayout({
                   >
                     Dashboard
                   </NavLink>
+                  <NavLink   href={route('teams')}
+                    active={route().current('teams')}>Team</NavLink>
+                     <NavLink   href={route('conversations.index')}
+                    active={route().current('conversations.index')}>Messagerie</NavLink>
                 </div>
               </div>
-             
+
               <div className="hidden sm:flex sm:items-center sm:ml-6">
                 <ul className="flex items-center gap-1">
-                <LanguageSelector />
+                  <LanguageSelector />
                   <DropdownNotification />
                   <DropdownMessage />
                 </ul>
@@ -179,7 +181,7 @@ export default function AppLayout({
                     </Dropdown>
                   ) : null}
                 </div>
-              
+
                 {/* <!-- Settings Dropdown --> */}
                 <div className="ml-3 relative">
                   <Dropdown
@@ -328,12 +330,12 @@ export default function AppLayout({
                   </div>
                 </div>
                 <ul className="ml-40 flex  items-center gap-1">
-                  <Link href='/'>
-                  <DropdownNotification />
-                  </Link>
-                  <Link href='/'>
+                 
+                    <DropdownNotification />
+            
+              
                     <DropdownMessage />
-                    </Link>
+              
                 </ul>
               </div>
               <div className="mt-3 space-y-1">

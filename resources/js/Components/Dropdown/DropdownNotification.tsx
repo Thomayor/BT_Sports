@@ -1,15 +1,19 @@
 import React from 'react';
 import { Link } from '@inertiajs/react';
 import DropdownIcon from './DropdownIcon';
+import { Notification } from '@/types';
 
-function DropdownNotification() {
+function DropdownNotification({
+  notifications,
+}: {
+  notifications: Notification[];
+}) {
   const title = 'Notification';
-  const count = 12;
   const color = 'bg-yellow-500';
   const icon = (
     <svg
-      width="20"
-      height="20"
+      width="24"
+      height="24"
       viewBox="0 0 28 28"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -25,71 +29,37 @@ function DropdownNotification() {
     </svg>
   );
   return (
-    <DropdownIcon title={title} count={count} color={color} icon={icon}>
+    <DropdownIcon
+      title={title}
+      count={notifications?.length}
+      color={color}
+      icon={icon}
+    >
       <ul className="flex h-auto flex-col overflow-y-auto">
-        <li>
-          <Link
-            className="flex flex-col gap-2.5 border-t border-stroke px-4.5 py-3 hover:bg-gray-2 dark:border-strokedark dark:hover:bg-meta-4"
-            href="/#"
-          >
-            <p className="text-sm">
-              <span className="text-black dark:text-white">
-                Edit your information in a swipe
-              </span>{' '}
-              Sint occaecat cupidatat non proident, sunt in culpa qui officia
-              deserunt mollit anim.
+        {notifications && notifications.length > 0 ? (
+          notifications.map((notification: Notification) => (
+            <li key={notification.id}>
+              <Link
+                className="flex flex-col gap-2.5 border-t border-stroke px-4.5 py-3 hover:bg-gray-2 dark:border-strokedark dark:hover:bg-meta-4"
+                href={notification.link}
+              >
+                <p className="text-sm">
+                  <span className="text-black dark:text-white">
+                    {notification.message}
+                  </span>
+                  {notification.date}
+                </p>
+                <p className="text-xs">{notification.date}</p>
+              </Link>
+            </li>
+          ))
+        ) : (
+          <li>
+            <p className="text-sm px-4.5 py-3 text-center">
+              Pas de notifications
             </p>
-
-            <p className="text-xs">12 May, 2025</p>
-          </Link>
-        </li>
-        <li>
-          <Link
-            className="flex flex-col gap-2.5 border-t border-stroke px-4.5 py-3 hover:bg-gray-2 dark:border-strokedark dark:hover:bg-meta-4"
-            href="/#"
-          >
-            <p className="text-sm">
-              <span className="text-black dark:text-white">
-                It is a long established fact
-              </span>{' '}
-              that a reader will be distracted by the readable.
-            </p>
-
-            <p className="text-xs">24 Feb, 2025</p>
-          </Link>
-        </li>
-        <li>
-          <Link
-            className="flex flex-col gap-2.5 border-t border-stroke px-4.5 py-3 hover:bg-gray-2 dark:border-strokedark dark:hover:bg-meta-4"
-            href="/#"
-          >
-            <p className="text-sm">
-              <span className="text-black dark:text-white">
-                There are many variations
-              </span>{' '}
-              of passages of Lorem Ipsum available, but the majority have
-              suffered
-            </p>
-
-            <p className="text-xs">04 Jan, 2025</p>
-          </Link>
-        </li>
-        <li>
-          <Link
-            className="flex flex-col gap-2.5 border-t border-stroke px-4.5 py-3 hover:bg-gray-2 dark:border-strokedark dark:hover:bg-meta-4"
-            href="/#"
-          >
-            <p className="text-sm">
-              <span className="text-black dark:text-white">
-                There are many variations
-              </span>{' '}
-              of passages of Lorem Ipsum available, but the majority have
-              suffered
-            </p>
-
-            <p className="text-xs">01 Dec, 2024</p>
-          </Link>
-        </li>
+          </li>
+        )}
       </ul>
     </DropdownIcon>
   );

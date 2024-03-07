@@ -138,6 +138,7 @@
         "sure": "Êtes-vous sûr de vouloir supprimer cette équipe ? Une fois qu'une équipe est supprimée, toutes ses ressources et données seront définitivement supprimées.",
         "cancel": "Annuler",
         "deleteTeam": "Delete Team",
+        "createTeam":"Créer équipe",
         "createDesc": "Créez une nouvelle équipe pour collaborer avec d'autres sur des activités sportives.",
         "permanently": "Supprimer définitivement cette équipe.",
         "addTeamMember": "Ajouter un membre à l'équipe",
@@ -165,7 +166,10 @@
             "name": "Éditeur",
             "description": "Les utilisateurs éditeurs ont la capacité de lire, créer et mettre à jour."
           }
-        }
+        },
+        "teamSettings":"Paramètres d'équipe",
+        "teams":"Equipes",
+        "members":"Membres de l'équipe"
       },
       "faq": {
         "title": "Questions fréquentes.",

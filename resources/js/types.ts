@@ -31,6 +31,14 @@ export interface Auth {
       current_team?: Team;
     }
   >;
+  notifications: Notification[];
+}
+
+export interface Notification {
+  id: number;
+  message: string;
+  date: string;
+  link: string;
 }
 
 export type InertiaSharedProps<T = {}> = T & {
@@ -94,4 +102,26 @@ export interface TeamInvitation {
   role: Nullable<string>;
   created_at: DateTime;
   updated_at: DateTime;
+}
+
+
+export interface Conversation {
+  id: number;
+  sender_id: number;
+  receiver_id: number;
+  created_at: string;
+  updated_at: string;
+  title: string;
+  content: string;
+  sender: User;
+  receiver: User;
+  messages: Message[];
+}
+export interface Message {
+  id: number;
+  content: string;
+  conversation_id: number;
+  created_at: string;
+  updated_at: string;
+  user_id: number;
 }
