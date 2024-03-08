@@ -10,7 +10,7 @@ import Dropdown from '@/Components/Dropdown';
 import DropdownLink from '@/Components/DropdownLink';
 import NavLink from '@/Components/NavLink';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
-import { Team } from '@/types';
+import { Notification, Team } from '@/types';
 import LanguageSelector from '@/Components/LanguageSelector';
 import { t } from 'i18next';
 import DropdownNotification from '@/Components/Dropdown/DropdownNotification';
@@ -76,17 +76,25 @@ export default function AppLayout({
                   >
                     Dashboard
                   </NavLink>
-                  <NavLink   href={route('teams')}
-                    active={route().current('teams')}>Team</NavLink>
-                     <NavLink   href={route('conversations.index')}
-                    active={route().current('conversations.index')}>Messagerie</NavLink>
+                  <NavLink
+                    href={route('teams')}
+                    active={route().current('teams')}
+                  >
+                    Team
+                  </NavLink>
+                  <NavLink
+                    href={route('conversations.index')}
+                    active={route().current('conversations.index')}
+                  >
+                    Messagerie
+                  </NavLink>
                 </div>
               </div>
 
               <div className="hidden sm:flex sm:items-center sm:ml-6">
                 <ul className="flex items-center gap-1">
                   <LanguageSelector />
-                  <DropdownNotification />
+                  <DropdownNotification notifications={page.props.auth.notifications!} />
                   <DropdownMessage />
                 </ul>
                 <div className="ml-3 relative">
@@ -330,12 +338,9 @@ export default function AppLayout({
                   </div>
                 </div>
                 <ul className="ml-40 flex  items-center gap-1">
-                 
-                    <DropdownNotification />
-            
-              
-                    <DropdownMessage />
-              
+                  <DropdownNotification />
+
+                  <DropdownMessage />
                 </ul>
               </div>
               <div className="mt-3 space-y-1">

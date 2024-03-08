@@ -4,7 +4,6 @@ import AppLayout from '@/Layouts/AppLayout';
 import ShowMessages from './Show';
 import { Conversation, User } from '@/types';
 
-
 interface IndexProps {
   conversations: Conversation[];
   conversation?: Conversation;
@@ -33,13 +32,6 @@ function Index({ conversations, conversation, messages, auth }: IndexProps) {
     return true;
   });
 
-  
- 
-  const otherUsers = conversation?.users?.filter(
-    (user: User) => user.id !== (auth.user ? auth.user.id : null)
-  ) || [];
-
-    const otherUser = otherUsers[0];
 
   return (
     <AppLayout title="Ma Messagerie">
@@ -111,7 +103,13 @@ function Index({ conversations, conversation, messages, auth }: IndexProps) {
                         <div className="rounded-full overflow-hidden w-12 h-12">
                           <img
                             src={
-                              otherUser?.profile_photo_url ||
+                              (c.messages.length > 0 &&
+                                (auth.user.id ===
+                                c.messages[c.messages.length - 1].user.id
+                                  ? c.users.find(u => u.id !== auth.user.id)
+                                      ?.profile_photo_url
+                                  : c.messages[c.messages.length - 1].user
+                                      .profile_photo_url)) ||
                               'https://placekitten.com/200/200'
                             }
                             alt="Utilisateur"
@@ -120,7 +118,13 @@ function Index({ conversations, conversation, messages, auth }: IndexProps) {
                         </div>
                         <div className="flex-1">
                           <h3 className="text-lg font-semibold mb-1">
-                            {otherUser?.firstname}
+                            {c.messages.length > 0 &&
+                              (auth.user.id ===
+                              c.messages[c.messages.length - 1].user.id
+                                ? c.users.find(u => u.id !== auth.user.id)
+                                    ?.firstname
+                                : c.messages[c.messages.length - 1].user
+                                    .firstname)}
                           </h3>
                           <p className="text-sm text-gray-500 flex justify-between">
                             {c.messages.length > 0 && (

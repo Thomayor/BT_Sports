@@ -32,8 +32,8 @@ class Conversation extends Model
             $userIds = $conversation->users->pluck('id')->toArray();
     
             $notification = new Notification([
-                'content' => 'Vous avez une nouvelle conversation : ' . $conversation->title,
-                'link' => '/conversations/' . $conversation->id,
+                'content' => 'Vous avez une nouvelle conversation : ',
+                'link' => route('conversations.messages', ['id' => $conversation->id]),
                 'type' => Notification::ENTITY_CONVERSATION,
             ]);
     

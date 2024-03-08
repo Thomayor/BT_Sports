@@ -69,6 +69,7 @@ class ConversationController extends Controller
     ]);
 
     $conversation->messages()->save($message);
+    
     $conversation->generateNotificationNewConversation();
 
     return Redirect::route('conversations.messages', $conversation->id)->with(

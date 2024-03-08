@@ -28,6 +28,9 @@ function DropdownNotification({
       />
     </svg>
   );
+
+  console.log(notifications,'er');
+  
   return (
     <DropdownIcon
       title={title}

@@ -14,6 +14,7 @@ class Notification extends Model
         'user_id',
         'type',
         'content',
+        'link',
         'read_at',
     ];
     
@@ -27,6 +28,11 @@ class Notification extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'notification_user', 'notification_id', 'user_id');
     }
 
     public function notifiable()

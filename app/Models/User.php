@@ -68,8 +68,12 @@ class User extends Authenticatable
     
     public function notifications()
     {
-        return $this->hasMany(Notification::class)->orderBy('created_at', 'desc')->take(10);
+        return  $this->belongsToMany(Notification::class, 'notification_user', 'user_id', 'notification_id')->orderBy('created_at', 'desc')->take(10);
     }
 
-
+    public function conversations()
+    {
+        return $this->belongsToMany(Conversation::class, 'conversations_users', 'user_id', 'conversation_id')
+            ->withTimestamps();
+    }
 }
