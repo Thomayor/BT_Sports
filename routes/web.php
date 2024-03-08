@@ -35,6 +35,7 @@ Route::middleware([
   Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
   })->name('dashboard');
+  
   Route::get('/teams', [TeamController::class, 'showTeams'])->name('teams');
   Route::get('/teams/{teamId}/members', [
     TeamController::class,

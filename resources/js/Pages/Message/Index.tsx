@@ -1,11 +1,10 @@
-// Import des modules nécessaires
 import React, { useState } from 'react';
 import { Link } from '@inertiajs/react';
 import AppLayout from '@/Layouts/AppLayout';
 import ShowMessages from './Show';
-import { Conversation } from '@/types';
+import { Conversation, User } from '@/types';
 
-// Interface pour les propriétés du composant
+
 interface IndexProps {
   conversations: Conversation[];
   conversation?: Conversation;
@@ -13,33 +12,40 @@ interface IndexProps {
   auth: { user: { id: number } };
 }
 
-// Composant principal
 function Index({ conversations, conversation, messages, auth }: IndexProps) {
   const [searchTerm, setSearchTerm] = useState('');
   const [filter, setFilter] = useState('all');
   const selectedConversation: Conversation | undefined = conversation;
 
-  // Filtrage des conversations en fonction de la recherche et des filtres
   const filteredConversations = conversations.filter(c => {
-    const searchMatch = c.title
-      .toLowerCase()
-      .includes(searchTerm.toLowerCase());
+    const matchingMessages = c.messages.filter(message =>
+      message.content.toLowerCase().includes(searchTerm.toLowerCase()),
+    );
+
+    const hasMatchingMessages = matchingMessages.length > 0;
     const isRead = c.messages.length > 0;
     const isUnread = !isRead;
 
-    if (filter === 'all') return searchMatch;
-    if (filter === 'read') return isRead && searchMatch;
-    if (filter === 'unread') return isUnread && searchMatch;
+    if (filter === 'all') return hasMatchingMessages;
+    if (filter === 'read') return isRead && hasMatchingMessages;
+    if (filter === 'unread') return isUnread && hasMatchingMessages;
 
     return true;
   });
 
-  // Rendu du composant
+  
+ 
+  const otherUsers = conversation?.users?.filter(
+    (user: User) => user.id !== (auth.user ? auth.user.id : null)
+  ) || [];
+
+    const otherUser = otherUsers[0];
+
   return (
     <AppLayout title="Ma Messagerie">
       <div className="flex items-center justify-between p-4">
         <div className="flex items-center space-x-3">
-          <span className="text-primary text-2xl">Messagerie</span>
+          <span className="text-blue-500 text-2xl ml-2">Messagerie</span>
         </div>
       </div>
 
@@ -60,7 +66,33 @@ function Index({ conversations, conversation, messages, auth }: IndexProps) {
                 className="border rounded p-2"
               />
               <div className="mt-2 sm:space-x-2">
-                {/* ... (autres boutons de filtre) */}
+                <button
+                  type="button"
+                  onClick={() => setFilter('all')}
+                  className={`border rounded  px-5 py-2 ${
+                    filter === 'all' ? 'bg-blue-500 text-white' : ''
+                  }`}
+                >
+                  Tous
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setFilter('read')}
+                  className={`border rounded px-6 py-2 ${
+                    filter === 'read' ? 'bg-blue-500 text-white' : ''
+                  }`}
+                >
+                  Lus
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setFilter('unread')}
+                  className={`border rounded py-2 px-3 ${
+                    filter === 'unread' ? 'bg-blue-500 text-white' : ''
+                  }`}
+                >
+                  Non lus
+                </button>
               </div>
             </div>
             {filteredConversations.length === 0 ? (
@@ -79,7 +111,7 @@ function Index({ conversations, conversation, messages, auth }: IndexProps) {
                         <div className="rounded-full overflow-hidden w-12 h-12">
                           <img
                             src={
-                              c.profile_photo_url ||
+                              otherUser?.profile_photo_url ||
                               'https://placekitten.com/200/200'
                             }
                             alt="Utilisateur"
@@ -88,7 +120,7 @@ function Index({ conversations, conversation, messages, auth }: IndexProps) {
                         </div>
                         <div className="flex-1">
                           <h3 className="text-lg font-semibold mb-1">
-                          {c.messages[c.messages.length - 1]?.user?.firstname || 'Utilisateur'}
+                            {otherUser?.firstname}
                           </h3>
                           <p className="text-sm text-gray-500 flex justify-between">
                             {c.messages.length > 0 && (
@@ -96,7 +128,6 @@ function Index({ conversations, conversation, messages, auth }: IndexProps) {
                                 <span>
                                   {c.messages[c.messages.length - 1]?.content ||
                                     ''}
-                                 
                                 </span>
                                 <span>
                                   {new Date(

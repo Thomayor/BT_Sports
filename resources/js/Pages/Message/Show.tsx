@@ -1,11 +1,11 @@
 import React from 'react';
 import MessagesList from './MessagesList';
-import { Conversation, Message } from '@/types';
+import { Auth, Conversation, Message } from '@/types';
 
 interface ShowProps {
   conversation: Conversation;
   messages: Message[];
-  auth: { user: { id: number } };
+  auth: Auth;
 }
 
 function Show({ conversation, messages, auth }: ShowProps) {

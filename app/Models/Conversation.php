@@ -24,26 +24,26 @@ class Conversation extends Model
     }
 
    
-
-  public function generateNotificationNewConversation($user_id)
-  {
-    $conversation = Conversation::find($this->id);
-
-    if ($conversation) {
-      $notification = new Notification();
-      $notification->message =
-        'Vous avez une nouvelle conversation : ' . $conversation->title;
-      $notification->user_id = $user_id;
-      $notification->entity_id = $conversation->id;
-      $notification->entity = Notification::ENTITY_CONVERSATION;
-      $notification->link = '/conversations/' . $conversation->id;
-      $notification->save();
-    } else {
-      dd(
-        $conversation,
-        "La conversation avec l'ID {$this->conversation_id} n'a pas été trouvée."
-      );
+    public function generateNotificationNewConversation()
+    {
+        $conversation = Conversation::find($this->id);
+    
+        if ($conversation) {
+            $userIds = $conversation->users->pluck('id')->toArray();
+    
+            $notification = new Notification([
+                'content' => 'Vous avez une nouvelle conversation : ' . $conversation->title,
+                'link' => '/conversations/' . $conversation->id,
+                'type' => Notification::ENTITY_CONVERSATION,
+            ]);
+    
+            $notification->save();
+    
+            // Associer la notification à tous les utilisateurs de la conversation
+            $notification->users()->sync($userIds);
+        } else {
+            dd($conversation, "La conversation avec l'ID {$this->conversation_id} n'a pas été trouvée.");
+        }
     }
-  }
 
 }

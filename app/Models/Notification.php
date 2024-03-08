@@ -17,7 +17,12 @@ class Notification extends Model
         'read_at',
     ];
     
-
+    
+    const ENTITY_CONVERSATION = "Conversation";
+    const ENTITY_MESSAGE = "Message";
+    const ENTITY_TEAM = "Team";
+    const ENTITY_OTHERS = "Other";
+    const ENTITY_MATCHS = "Matchs";
 
     public function user()
     {

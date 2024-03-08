@@ -42,11 +42,25 @@ class ConversationController extends Controller
     $sender = Auth::user();
     $receiver = User::find($id);
 
-    $conversation = Conversation::create([
+    $existingConversation = Conversation::whereHas('users', function ($query) use ($sender, $receiver) {
+      $query->where('user_id', $sender->id)->orWhere('user_id', $receiver->id);
+  })->whereHas('users', function ($query) use ($sender, $receiver) {
+      $query->where('user_id', $sender->id)->orWhere('user_id', $receiver->id);
+  })->first();
+
+  if ($existingConversation) {
+      // Une conversation existe déjà, redirigez l'utilisateur vers cette conversation
+      return Redirect::route('conversations.messages', $existingConversation->id)->with(
+          'success',
+          'You already have a conversation with this user.'
+      );
+  }
+
+  // Si aucune conversation n'existe, créez une nouvelle conversation
+  $conversation = Conversation::create([
       'title' => 'Message',
       'user_id' => $sender->id,
-    ]);
-
+  ]);
     $conversation->users()->attach([$sender->id, $receiver->id]);
 
     $message = new Message([
@@ -55,6 +69,7 @@ class ConversationController extends Controller
     ]);
 
     $conversation->messages()->save($message);
+    $conversation->generateNotificationNewConversation();
 
     return Redirect::route('conversations.messages', $conversation->id)->with(
       'success',

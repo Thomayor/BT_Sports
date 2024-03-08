@@ -8,7 +8,7 @@ function DropdownNotification({
 }: {
   notifications: Notification[];
 }) {
-  const title = 'Notification';
+  const title = 'Notifications';
   const color = 'bg-yellow-500';
   const icon = (
     <svg
@@ -45,7 +45,7 @@ function DropdownNotification({
               >
                 <p className="text-sm">
                   <span className="text-black dark:text-white">
-                    {notification.message}
+                    {notification.content}
                   </span>
                   {notification.date}
                 </p>

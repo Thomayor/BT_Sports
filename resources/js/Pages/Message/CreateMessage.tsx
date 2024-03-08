@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { FormTextarea } from '@/Components/Form';
 
 function CreateMessage(props: {
-  submitMessage: (m: string | undefined) => void;
+  submitMessage: (m: string ) => void;
 }) {
   const { submitMessage } = props;
   const [messageState, setMessage] = useState('');

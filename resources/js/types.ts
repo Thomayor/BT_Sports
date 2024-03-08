@@ -31,12 +31,12 @@ export interface Auth {
       current_team?: Team;
     }
   >;
-  notifications: Notification[];
+  notifications?: Notification[];
 }
 
 export interface Notification {
   id: number;
-  message: string;
+  content: string;
   date: string;
   link: string;
 }
@@ -106,6 +106,7 @@ export interface TeamInvitation {
 
 
 export interface Conversation {
+  users: any;
   id: number;
   sender_id: number;
   receiver_id: number;
@@ -124,4 +125,5 @@ export interface Message {
   created_at: string;
   updated_at: string;
   user_id: number;
+  user: User;
 }
