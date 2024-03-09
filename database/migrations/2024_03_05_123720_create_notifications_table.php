@@ -17,8 +17,7 @@ class CreateNotificationsTable extends Migration
             $table->id();
             $table->string('content', 255);
             $table->string('link',255)->nullable();
-            $table->enum('type', ['Conversation','Message', 'Matchs', 'Team', 'Other'])->nullable();
-            $table->boolean('read_at')->default(false);
+            $table->enum('type', ['Conversation','Message', 'Game', 'Team', 'Other'])->nullable();
             $table->timestamps();
         });
     }

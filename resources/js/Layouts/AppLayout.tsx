@@ -14,7 +14,6 @@ import { Notification, Team } from '@/types';
 import LanguageSelector from '@/Components/LanguageSelector';
 import { t } from 'i18next';
 import DropdownNotification from '@/Components/Dropdown/DropdownNotification';
-import DropdownMessage from '@/Components/Dropdown/DropdownMessage';
 
 interface Props {
   title: string;
@@ -49,6 +48,7 @@ export default function AppLayout({
     router.post(route('logout'));
   }
 
+  const notifications = page.props.notifications || [];
   return (
     <div>
       <Head title={title} />
@@ -94,8 +94,7 @@ export default function AppLayout({
               <div className="hidden sm:flex sm:items-center sm:ml-6">
                 <ul className="flex items-center gap-1">
                   <LanguageSelector />
-                  <DropdownNotification notifications={page.props.auth.notifications!} />
-                  <DropdownMessage />
+                  <DropdownNotification notifications={notifications} />
                 </ul>
                 <div className="ml-3 relative">
                   {/* <!-- Teams Dropdown --> */}
@@ -338,9 +337,9 @@ export default function AppLayout({
                   </div>
                 </div>
                 <ul className="ml-40 flex  items-center gap-1">
-                  <DropdownNotification />
+                  <DropdownNotification notifications={notifications} />
 
-                  <DropdownMessage />
+
                 </ul>
               </div>
               <div className="mt-3 space-y-1">

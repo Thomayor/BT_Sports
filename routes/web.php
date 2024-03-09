@@ -6,7 +6,7 @@ use Inertia\Inertia;
 use App\Http\Controllers\TeamController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ConversationController;
-
+use App\Http\Controllers\NotificationController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -35,20 +35,41 @@ Route::middleware([
   Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
   })->name('dashboard');
-  
+
   Route::get('/teams', [TeamController::class, 'showTeams'])->name('teams');
   Route::get('/teams/{teamId}/members', [
     TeamController::class,
     'showMembers',
   ])->name('team.members');
 
-  Route::get('/conversations', [ConversationController::class, 'index'])->name('conversations.index');
-  Route::get('/conversations/{id}', [ConversationController::class, 'show'])->name('conversations.show');
-  Route::post('/conversations/{id}', [ConversationController::class, 'store'])
-      ->name('conversations.store');
+  Route::post('/notifications/{id}/read', [
+    NotificationController::class,
+    'read',
+  ])->name('notifications.read');
+  Route::post('/notifications/readall', [
+    NotificationController::class,
+    'readAll',
+  ])->name('notifications.readall');
 
-  Route::get('/conversations/{id}/messages', [MessageController::class, 'showMessage'])
-      ->name('conversations.messages');
+  Route::get('/conversations', [ConversationController::class, 'index'])->name(
+    'conversations.index'
+  );
+  Route::get('/conversations/{id}', [
+    ConversationController::class,
+    'show',
+  ])->name('conversations.show');
+  Route::post('/conversations/{id}', [
+    ConversationController::class,
+    'store',
+  ])->name('conversations.store');
 
-  Route::post('/conversations/{conversation}/messages', [MessageController::class, 'storeMessage'])->name('conversations.message.store');
+  Route::get('/conversations/{id}/messages', [
+    MessageController::class,
+    'showMessage',
+  ])->name('conversations.messages');
+
+  Route::post('/conversations/{conversation}/messages', [
+    MessageController::class,
+    'storeMessage',
+  ])->name('conversations.message.store');
 });

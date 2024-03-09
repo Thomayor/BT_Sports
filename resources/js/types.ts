@@ -35,9 +35,10 @@ export interface Auth {
 }
 
 export interface Notification {
+  pivot: { read_at: string | null;}
   id: number;
   content: string;
-  date: string;
+  created_at: string;
   link: string;
 }
 
@@ -127,3 +128,13 @@ export interface Message {
   user_id: number;
   user: User;
 }
+
+export enum Method {
+  GET = 'get',
+  POST = 'post',
+  PUT = 'put',
+  PATCH = 'patch',
+  DELETE = 'delete',
+}
+
+export default Method;

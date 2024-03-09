@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 
 interface DropdownIconProps {
-  title: string;
   count?: number;
   color?: string;
   icon: any;
@@ -9,7 +8,6 @@ interface DropdownIconProps {
 }
 
 function DropdownIcon({
-  title,
   count,
   color,
   icon,
@@ -58,14 +56,14 @@ function DropdownIcon({
         }}
         className="relative flex h-12 w-12 items-center justify-center rounded-full border-stroke bg-gray hover:text-primary dark:border-strokedark dark:bg-meta-4 dark:text-white"
       >
-        {count && (
+        {count && count > 0 && (
           <span
             className={`absolute -top-0.5 right-3 z-1 h-2 w-2 rounded-full bg-meta-1 ${
               notifying === false ? 'hidden' : 'inline'
             }`}
           >
             <span
-              className={`inline-block p-1 text-center font-semibold text-xs align-baseline leading-none rounded light text-white ${color} rounded-full`}
+              className={`inline-block px-2 py-1  text-center font-semibold text-xs align-baseline leading-none rounded light text-white ${color} rounded-full`}
             >
               {count}
             </span>
@@ -83,9 +81,7 @@ function DropdownIcon({
           dropdownOpen === true ? 'block' : 'hidden'
         }`}
       >
-        <div className="px-4.5 py-3">
-          <h5 className="text-sm font-medium text-bodydark2">{title}</h5>
-        </div>
+       
 
         {children}
       </div>

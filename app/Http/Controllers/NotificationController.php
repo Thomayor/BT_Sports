@@ -15,24 +15,24 @@ class NotificationController extends Controller
         $notification->notifiable();
 
     }
-   
-    public function readAll(Request $request)
+    public function readAll()
     {
-        $user = Auth::user()->id;
+        $userId = Auth::id();
+    
         $notification = new Notification();
         $notificationIds = $notification->getNotifIdsAttribute();
-        
-        $notifications = Notification::where('user_id', $user)
-            ->whereIn('id', $notificationIds)
-            ->get();
-
-        foreach ($notifications as $notif) {
-                $notif->notifiable();
-                }
-        
-        
     
+        $notifications = Notification::with('users')
+            ->whereIn('id', $notificationIds)
+            ->whereHas('users', function ($query) use ($userId) {
+                $query->where('users.id', $userId);
+            })
+            ->get();
+    
+        foreach ($notifications as $notif) {
+            $notif->notifiable();
         }
+    }
 
 
 }

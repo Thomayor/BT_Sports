@@ -1,15 +1,18 @@
 import React from 'react';
-import { Link } from '@inertiajs/react';
+import { Link, router } from '@inertiajs/react';
 import DropdownIcon from './DropdownIcon';
-import { Notification } from '@/types';
+import Method, { Notification } from '@/types';
+import useRoute from '@/Hooks/useRoute';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
 
-function DropdownNotification({
-  notifications,
-}: {
+interface DropdownNotificationProps {
   notifications: Notification[];
-}) {
+}
+
+function DropdownNotification({ notifications }: DropdownNotificationProps) {
   const title = 'Notifications';
-  const color = 'bg-yellow-500';
+  const color = 'bg-red-500';
   const icon = (
     <svg
       width="24"
@@ -29,41 +32,88 @@ function DropdownNotification({
     </svg>
   );
 
-  console.log(notifications,'er');
-  
+  const route = useRoute();
+
+  const newUnreadNotifications = notifications.filter(
+    notification => notification.pivot.read_at === null,
+  );
+  const notificationCount = newUnreadNotifications.length;
+
+  function handleMarkAllAsRead(e) {
+    e.preventDefault();
+    router.post(route('notifications.readall'));
+  }
+
+  function handleMarkAsRead(id: number) {
+    router.post(
+      route('notifications.read', {
+        id,
+      }),
+    );
+  }
+
   return (
-    <DropdownIcon
-      title={title}
-      count={notifications?.length}
-      color={color}
-      icon={icon}
-    >
-      <ul className="flex h-auto flex-col overflow-y-auto">
+    <DropdownIcon count={notificationCount} color={color} icon={icon}>
+      <div className="flex justify-between items-center text-base font-medium">
+        <h5 className="text-sm font-medium">{title}</h5>
+        <button
+          onClick={handleMarkAllAsRead}
+          className="bg-blue-500 text-white rounded-md"
+        >
+          <FontAwesomeIcon icon={faCheck} className="w-15 h-15" />
+        </button>
+      </div>
+
+      <div className="flex h-auto flex-col overflow-y-auto">
         {notifications && notifications.length > 0 ? (
           notifications.map((notification: Notification) => (
-            <li key={notification.id}>
-              <Link
-                className="flex flex-col gap-2.5 border-t border-stroke px-4.5 py-3 hover:bg-gray-2 dark:border-strokedark dark:hover:bg-meta-4"
-                href={notification.link}
-              >
-                <p className="text-sm">
-                  <span className="text-black dark:text-white">
-                    {notification.content}
-                  </span>
-                  {notification.date}
-                </p>
-                <p className="text-xs">{notification.date}</p>
-              </Link>
-            </li>
+            <div key={notification.id} className="relative flex cursor-pointer">
+              <div className="mt-3 flex w-full justify-between">
+                <div
+                  className={`mb-1 mr-2 flex justify-start ${
+                    notification.pivot.read_at === null
+                      ? 'font-bold text-black dark:text-white'
+                      : 'text-slate-500 dark:text-slate-300'
+                  }`}
+                >
+                  <a
+                    href={notification.link}
+                    className="mr-1"
+                    onClick={() => handleMarkAsRead(notification.id)}
+                  >
+                    <p className="text-sm">{notification.content}</p>
+                    <p className="text-xs">
+                      {new Date(notification.created_at).toLocaleString()}
+                    </p>
+                  </a>
+                </div>
+                <div className="flex items-center justify-end">
+                  {notification.pivot.read_at === null ? (
+                    <Link
+                      href={route('notifications.read', {
+                        id: notification.id,
+                      })}
+                      method={Method.POST}
+                      className=""
+                      as="button"
+                    >
+                      <div className="border-gray/20 h-3 w-3 rounded-full border bg-primary dark:text-slate-500" />
+                    </Link>
+                  ) : (
+                    <FontAwesomeIcon icon={faCheck} className="w-4 h-4" />
+                  )}
+                </div>
+              </div>
+            </div>
           ))
         ) : (
-          <li>
+          <div>
             <p className="text-sm px-4.5 py-3 text-center">
               Pas de notifications
             </p>
-          </li>
+          </div>
         )}
-      </ul>
+      </div>
     </DropdownIcon>
   );
 }

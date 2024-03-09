@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import { Link } from '@inertiajs/react';
 import AppLayout from '@/Layouts/AppLayout';
 import ShowMessages from './Show';
-import { Conversation, User } from '@/types';
+import { Auth, Conversation, User } from '@/types';
 
 interface IndexProps {
   conversations: Conversation[];
   conversation?: Conversation;
   messages?: any;
-  auth: { user: { id: number } };
+  auth: Auth;
 }
 
 function Index({ conversations, conversation, messages, auth }: IndexProps) {
@@ -104,9 +104,9 @@ function Index({ conversations, conversation, messages, auth }: IndexProps) {
                           <img
                             src={
                               (c.messages.length > 0 &&
-                                (auth.user.id ===
+                                (auth.user?.id ===
                                 c.messages[c.messages.length - 1].user.id
-                                  ? c.users.find(u => u.id !== auth.user.id)
+                                  ? c.users.find((u:User) => u.id !== auth.user?.id)
                                       ?.profile_photo_url
                                   : c.messages[c.messages.length - 1].user
                                       .profile_photo_url)) ||
@@ -119,9 +119,9 @@ function Index({ conversations, conversation, messages, auth }: IndexProps) {
                         <div className="flex-1">
                           <h3 className="text-lg font-semibold mb-1">
                             {c.messages.length > 0 &&
-                              (auth.user.id ===
+                              (auth.user?.id ===
                               c.messages[c.messages.length - 1].user.id
-                                ? c.users.find(u => u.id !== auth.user.id)
+                                ? c.users.find((u:User) => u.id !== auth.user?.id)
                                     ?.firstname
                                 : c.messages[c.messages.length - 1].user
                                     .firstname)}
