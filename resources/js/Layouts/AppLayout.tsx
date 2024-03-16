@@ -48,6 +48,7 @@ export default function AppLayout({
     router.post(route('logout'));
   }
 
+  
   const notifications = page.props.notifications || [];
   return (
     <div>
@@ -338,8 +339,6 @@ export default function AppLayout({
                 </div>
                 <ul className="ml-40 flex  items-center gap-1">
                   <DropdownNotification notifications={notifications} />
-
-
                 </ul>
               </div>
               <div className="mt-3 space-y-1">

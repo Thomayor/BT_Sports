@@ -26,7 +26,7 @@ class ConversationController extends Controller
       ->with(['users', 'messages'])
       ->get();
 
-    return inertia('Message/Index', [
+    return Inertia::render('Message/Index', [
       'conversations' => $conversations,
     ]);
   }
@@ -76,5 +76,16 @@ class ConversationController extends Controller
       'success',
       'Message sent successfully.'
     );
+  }
+
+  public function destroy($id)
+  {
+    $conversation = Conversation::findOrFail($id);
+    $conversation->delete();
+
+      return redirect()->route('conversations.index')
+          ->with([
+              'flash' => 'Votre Conversation a été supprimé avec succès !'
+          ]);
   }
 }

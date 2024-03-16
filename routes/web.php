@@ -63,6 +63,8 @@ Route::middleware([
     'store',
   ])->name('conversations.store');
 
+  Route::delete('/conversations/{id}', [ConversationController::class, 'destroy'])->name('conversation.destroy');
+
   Route::get('/conversations/{id}/messages', [
     MessageController::class,
     'showMessage',
