@@ -94,3 +94,40 @@ export interface TeamInvitation {
   created_at: DateTime;
   updated_at: DateTime;
 }
+
+export interface Sport {
+  id: number,
+  name: string
+}
+
+export interface Game {
+  id: number,
+  date: Date,
+  start_time: DateTime,
+  end_time: DateTime,
+  max_player: number,
+  sport_id: number,
+  playground_id: number
+  user_id: number,
+}
+
+export interface CreateGameProps {
+  sports: Sport[],
+  playgrounds: Playground[]
+}
+
+export interface UpdateGameProps extends CreateGameProps {
+  game_id: number
+}
+
+export interface Playground {
+  id: number,
+  name: string,
+  is_covered: boolean,
+  is_booked: boolean,
+  city: string,
+  adress: string,
+  postcode: string,
+  coordgpsx: number,
+  coordgpsy: number
+}
