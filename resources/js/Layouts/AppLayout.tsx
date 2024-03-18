@@ -11,9 +11,9 @@ import DropdownLink from '@/Components/DropdownLink';
 import NavLink from '@/Components/NavLink';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
 import { Notification, Team } from '@/types';
-import LanguageSelector from '@/Components/LanguageSelector';
 import { t } from 'i18next';
-import DropdownNotification from '@/Components/Dropdown/DropdownNotification';
+import ModalNotification from '@/Components/Modal/ModalNotification';
+
 
 interface Props {
   title: string;
@@ -48,8 +48,10 @@ export default function AppLayout({
     router.post(route('logout'));
   }
 
-  
-  const notifications = page.props.notifications || [];
+  const notifications = (page.props.notifications || []) as Notification[];
+
+
+
   return (
     <div>
       <Head title={title} />
@@ -93,10 +95,8 @@ export default function AppLayout({
               </div>
 
               <div className="hidden sm:flex sm:items-center sm:ml-6">
-                <ul className="flex items-center gap-1">
-                  <LanguageSelector />
-                  <DropdownNotification notifications={notifications} />
-                </ul>
+                <ModalNotification notifications={notifications} />
+
                 <div className="ml-3 relative">
                   {/* <!-- Teams Dropdown --> */}
                   {page.props.jetstream.hasTeamFeatures ? (
@@ -337,8 +337,13 @@ export default function AppLayout({
                     {page.props.auth.user?.email}
                   </div>
                 </div>
-                <ul className="ml-40 flex  items-center gap-1">
-                  <DropdownNotification notifications={notifications} />
+                <ul>
+                  <Link
+                    href="/notifications"
+                    className="ml-40 flex  items-center gap-1"
+                  >
+                    <ModalNotification notifications={notifications} />
+                  </Link>
                 </ul>
               </div>
               <div className="mt-3 space-y-1">

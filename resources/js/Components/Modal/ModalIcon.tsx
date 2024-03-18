@@ -1,53 +1,53 @@
 import React, { useEffect, useRef, useState } from 'react';
 
-interface DropdownIconProps {
+interface ModalIconProps {
   count?: number;
   color?: string;
   icon: any;
   children: any;
 }
 
-function DropdownIcon({ count, color, icon, children }: DropdownIconProps) {
-  const [dropdownOpen, setDropdownOpen] = useState(false);
+function ModalIcon({ count, color, icon, children }: ModalIconProps) {
+  const [modalOpen, setModalOpen] = useState(false);
   const [notifying, setNotifying] = useState(true);
 
   const trigger = useRef<any>(null);
-  const dropdown = useRef<any>(null);
+  const modal = useRef<any>(null);
 
   // close on click outside
   useEffect(() => {
     const clickHandler = ({ target }: MouseEvent) => {
-      if (!dropdown.current) return;
+      if (!modal.current) return;
       if (
-        !dropdownOpen ||
-        dropdown.current.contains(target) ||
+        !modalOpen ||
+        modal.current.contains(target) ||
         trigger.current.contains(target)
       )
         return;
-      setDropdownOpen(false);
+      setModalOpen(false);
     };
     document.addEventListener('click', clickHandler);
     return () => document.removeEventListener('click', clickHandler);
-  }, [trigger, dropdown, dropdownOpen]);
+  }, [trigger, modal, modalOpen]);
 
   // close if the esc key is pressed
   useEffect(() => {
     const keyHandler = ({ keyCode }: KeyboardEvent) => {
-      if (!dropdownOpen || keyCode !== 27) return;
-      setDropdownOpen(false);
+      if (!modalOpen || keyCode !== 27) return;
+      setModalOpen(false);
     };
     document.addEventListener('keydown', keyHandler);
     return () => document.removeEventListener('keydown', keyHandler);
   });
 
   return (
-    <li className="relative">
+    <div className="relative">
       <button
         type="button"
         ref={trigger}
         onClick={() => {
           setNotifying(false);
-          setDropdownOpen(!dropdownOpen);
+          setModalOpen(!modalOpen);
         }}
         className="relative flex h-12 w-12 items-center justify-center rounded-full border-stroke bg-gray hover:text-primary dark:border-strokedark dark:bg-meta-4 dark:text-white"
       >
@@ -67,20 +67,20 @@ function DropdownIcon({ count, color, icon, children }: DropdownIconProps) {
         {icon}
       </button>
 
-      {/* <!-- Dropdown Start --> */}
+      {/* <!-- Start --> */}
       <div
-        ref={dropdown}
-        onFocus={() => setDropdownOpen(true)}
-        // onBlur={() => setDropdownOpen(false)}
-        className={`absolute -right-16 mt-2.5 flex h-90 w-75 flex-col rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark sm:right-0 sm:w-80 ${
-          dropdownOpen === true ? 'block' : 'hidden'
+        ref={modal}
+        onFocus={() => setModalOpen(true)}
+        // onBlur={() => setModalOpen(false)}
+        className={`absolute -right-16 mt-2.5 flex h-90 w-75 flex-col rounded-lg  border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark sm:right-0 sm:w-80 ${
+          modalOpen === true ? 'sm:block hidden' : 'hidden'
         }`}
       >
         {children}
       </div>
-      {/* <!-- Dropdown End --> */}
-    </li>
+      {/* <!--  End --> */}
+    </div>
   );
 }
 
-export default DropdownIcon;
+export default ModalIcon;

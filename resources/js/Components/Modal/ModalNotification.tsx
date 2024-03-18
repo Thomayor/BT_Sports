@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 import { Link, router } from '@inertiajs/react';
-import DropdownIcon from './DropdownIcon';
+import ModalIcon from './ModalIcon';
 import Method, { Notification } from '@/types';
 import useRoute from '@/Hooks/useRoute';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBell, faCheck, faEllipsis } from '@fortawesome/free-solid-svg-icons';
 
-interface DropdownNotificationProps {
+interface ModalNotificationProps {
   notifications: Notification[];
 }
 
-function DropdownNotification({ notifications }: DropdownNotificationProps) {
+function ModalNotification({ notifications }: ModalNotificationProps) {
   const title = 'Notifications';
   const color = 'bg-red-500';
   const icon = (
@@ -20,7 +20,7 @@ function DropdownNotification({ notifications }: DropdownNotificationProps) {
   );
 
   const route = useRoute();
-  const [showDropdown, setShowDropdown] = useState(false);
+  const [showModal, setShowModal] = useState(false);
   const newUnreadNotifications = notifications.filter(
     notification => notification.pivot.read_at === null,
   );
@@ -39,16 +39,16 @@ function DropdownNotification({ notifications }: DropdownNotificationProps) {
   }
 
   return (
-    <DropdownIcon count={notificationCount} color={color} icon={icon}>
+    <ModalIcon count={notificationCount} color={color} icon={icon}>
       <div className="p-2 flex justify-between items-center text-base font-medium">
         <h5 className="text-sm font-medium">{title}</h5>
         <button
           className="absolute top-1 right-2 cursor-pointer rounded-full border px-2 hover:border-blue-500"
-          onClick={() => setShowDropdown(!showDropdown)}
+          onClick={() => setShowModal(!showModal)}
         >
           <FontAwesomeIcon icon={faEllipsis} className="w-15 h-15" />
         </button>
-        {showDropdown && (
+        {showModal && (
           <div className="absolute z-20 top-8 right-0 bg-white shadow-md rounded-md ">
             <button
               className="flex space-x-2 items-center p-6 hover:text-blue-500  rounded-md"
@@ -114,8 +114,8 @@ function DropdownNotification({ notifications }: DropdownNotificationProps) {
           </div>
         )}
       </div>
-    </DropdownIcon>
+    </ModalIcon>
   );
 }
 
-export default DropdownNotification;
+export default ModalNotification;

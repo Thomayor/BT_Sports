@@ -7,6 +7,8 @@ use App\Http\Controllers\TeamController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ConversationController;
 use App\Http\Controllers\NotificationController;
+use App\Models\Notification;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -41,6 +43,11 @@ Route::middleware([
     TeamController::class,
     'showMembers',
   ])->name('team.members');
+
+  Route::get('/notifications',function () {
+    return Inertia::render('Notifications/View');
+  })->name('notifications');
+  
 
   Route::post('/notifications/{id}/read', [
     NotificationController::class,

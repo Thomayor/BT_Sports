@@ -78,4 +78,9 @@ class User extends Authenticatable
       'conversation_id'
     )->withTimestamps();
   }
+
+  public function isAdmin()
+  {
+      return $this->role === 'ADMIN';
+  }
 }
