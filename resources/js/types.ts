@@ -113,11 +113,16 @@ export interface Game {
 
 export interface CreateGameProps {
   sports: Sport[],
-  playgrounds: Playground[]
+  playgrounds: Playground[],
+  teams: Team[]
 }
 
 export interface UpdateGameProps extends CreateGameProps {
   game_id: number
+}
+
+export interface ShowGamesProps extends CreateGameProps {
+  games: Game[],
 }
 
 export interface Playground {

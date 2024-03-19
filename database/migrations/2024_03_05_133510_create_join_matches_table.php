@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Game;
+use App\Models\Team;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -14,8 +16,16 @@ class CreateJoinMatchesTable extends Migration
     public function up()
     {
         Schema::create('join_matches', function (Blueprint $table) {
-            $table->foreignId('match_id')->constrained()->onDelete('cascade');
-            $table->foreignId('team_id')->constrained()->onDelete('cascade');
+            $table
+                ->foreignIdFor(Game::class, 'game_id')
+                ->constrained()
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+            $table
+                ->foreignId(Team::class, 'team_id')
+                ->constrained()
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
             $table->primary(['match_id', 'team_id']); 
             $table->timestamps(); 
         });

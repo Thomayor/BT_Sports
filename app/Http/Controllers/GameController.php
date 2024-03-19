@@ -7,6 +7,7 @@ use Inertia\Inertia;
 use App\Http\Requests\GameRequest;
 use App\Models\Playground;
 use App\Models\Sport;
+use App\Models\Team;
 use Illuminate\Support\Facades\Auth;
 
 class GameController extends Controller
@@ -14,20 +15,29 @@ class GameController extends Controller
     public function index()
     {
         $games = Game::all();
+        $sports = Sport::all();
+        $playgrounds = Playground::all();
+        $teams = Team::all();
 
         return Inertia::render('Games/ShowGames', [
-            'games' => $games
+            'games' => $games,
+            'sports' => $sports,
+            'playgrounds' => $playgrounds,
+            'teams' => $teams
         ]);
     }
 
     public function create()
     {
+        $user = auth()->id();
         $playgrounds = Playground::all();
         $sports = Sport::all();
+        $teams = Team::where('user_id', $user)->get();
 
         return Inertia::render('Games/Partials/CreateGameForm', [
             'playgrounds' => $playgrounds,
-            'sports' => $sports
+            'sports' => $sports,
+            'teams' => $teams
         ]);
     }
 
@@ -45,7 +55,7 @@ class GameController extends Controller
             'user_id' => $user
         ]);
 
-        return to_route('dashboard')->with([
+        return response()->json([
             'game' => $game
         ], 200);
     }

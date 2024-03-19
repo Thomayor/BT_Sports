@@ -47,7 +47,7 @@ Route::middleware([
     );
 
     Route::get('/games/{id}', [GameController::class, 'show'])->name(
-        'game.show'
+        'games.show'
     );
 
     Route::get('/games/edit/', [GameController::class, 'edit'])->name(

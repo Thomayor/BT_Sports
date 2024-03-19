@@ -73,8 +73,8 @@ export default function AppLayout({
                     Dashboard
                   </NavLink>
                   <NavLink
-                    href={route('games.create')}
-                    active={route().current('games.create')}
+                    href={route('games.index')}
+                    active={route().current('games.index')}
                   >
                     Matchs
                   </NavLink>
