@@ -125,6 +125,13 @@ export interface ShowGamesProps extends CreateGameProps {
   games: Game[],
 }
 
+export interface ShowGameProps {
+  game: Game,
+  teams: Team[],
+  playground: Playground,
+  sport: Sport
+}
+
 export interface Playground {
   id: number,
   name: string,

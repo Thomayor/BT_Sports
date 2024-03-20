@@ -3,7 +3,7 @@ import CreateGameForm from './Partials/CreateGameForm';
 import AppLayout from '@/Layouts/AppLayout';
 import { CreateGameProps } from '@/types';
 
-export default function CreateGame({ playgrounds, sports, teams }: CreateGameProps) {
+export default function Create({ playgrounds, sports, teams }: CreateGameProps) {
     return (
         <AppLayout
             title="Create Team"

@@ -19,7 +19,7 @@ class GameController extends Controller
         $playgrounds = Playground::all();
         $teams = Team::all();
 
-        return Inertia::render('Games/ShowGames', [
+        return Inertia::render('Games/Index', [
             'games' => $games,
             'sports' => $sports,
             'playgrounds' => $playgrounds,
@@ -34,7 +34,7 @@ class GameController extends Controller
         $sports = Sport::all();
         $teams = Team::where('user_id', $user)->get();
 
-        return Inertia::render('Games/Partials/CreateGameForm', [
+        return Inertia::render('Games/Create', [
             'playgrounds' => $playgrounds,
             'sports' => $sports,
             'teams' => $teams
@@ -63,9 +63,13 @@ class GameController extends Controller
     public function show($id)
     {
         $game = Game::findOrFail($id);
+        $sport = Sport::where('id', '=', $game->sport_id)->get();
+        $playground = Playground::where('id', '=', $game->playground_id)->get();
 
-        return Inertia::render('Games/ShowGame', [
-            'game' => $game
+        return Inertia::render('Games/Show', [
+            'game' => $game,
+            'sport' => $sport,
+            'playground' => $playground
         ]);
     }
 
@@ -74,7 +78,7 @@ class GameController extends Controller
         $playgrounds = Playground::all();
         $sports = Sport::all();
 
-        return Inertia::render('Games/EditGame', [
+        return Inertia::render('Games/Edit', [
             'playground' => $playgrounds,
             'sports' => $sports
         ]);

@@ -13,7 +13,6 @@ import { CreateGameProps, Playground, Sport, Team } from "@/types";
 
 export default function CreateGameForm({ playgrounds, sports, teams }: CreateGameProps) {
     const [isCompleted, setIsCompleted] = useState<boolean>(false);
-    const [gameID, setGameID] = useState<number>(0);
 
     const route = useRoute();
     //const page = useTypedPage();
@@ -31,6 +30,9 @@ export default function CreateGameForm({ playgrounds, sports, teams }: CreateGam
             errorBag: 'createGame',
             preserveScroll: true,
         });
+    }
+
+    function showAddTeam() {
         setIsCompleted(true);
     }
 
@@ -38,7 +40,7 @@ export default function CreateGameForm({ playgrounds, sports, teams }: CreateGam
         <div>
             {!isCompleted ? (
                 <FormSection
-                    onSubmit={createGame}
+                    onSubmit={showAddTeam}
                     title={'Game Details'}
                     description={'Create a new game and challenge opponents'}
                     renderActions={() => (
@@ -51,7 +53,7 @@ export default function CreateGameForm({ playgrounds, sports, teams }: CreateGam
                                 className={classNames({ 'opacity-25': form.processing })}
                                 disabled={form.processing}
                             >
-                                Create
+                                Next
                             </PrimaryButton>
                         </>
                     )}
