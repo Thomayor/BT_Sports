@@ -3,6 +3,11 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Controllers\TeamController;
+use App\Http\Controllers\MessageController;
+use App\Http\Controllers\ConversationController;
+use App\Http\Controllers\NotificationController;
+use App\Models\Notification;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,20 +21,64 @@ use Inertia\Inertia;
 */
 
 Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
+  return Inertia::render('Welcome', [
+    'canLogin' => Route::has('login'),
+    'canRegister' => Route::has('register'),
+    'laravelVersion' => Application::VERSION,
+    'phpVersion' => PHP_VERSION,
+  ]);
 });
 
 Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified',
+  'auth:sanctum',
+  config('jetstream.auth_session'),
+  'verified',
 ])->group(function () {
-    Route::get('/dashboard', function () {
-        return Inertia::render('Dashboard');
-    })->name('dashboard');
+  Route::get('/dashboard', function () {
+    return Inertia::render('Dashboard');
+  })->name('dashboard');
+
+  Route::get('/teams', [TeamController::class, 'showTeams'])->name('teams');
+  Route::get('/teams/{teamId}/members', [
+    TeamController::class,
+    'showMembers',
+  ])->name('team.members');
+
+  Route::get('/notifications',function () {
+    return Inertia::render('Notifications/View');
+  })->name('notifications');
+  
+
+  Route::post('/notifications/{id}/read', [
+    NotificationController::class,
+    'read',
+  ])->name('notifications.read');
+  Route::post('/notifications/readall', [
+    NotificationController::class,
+    'readAll',
+  ])->name('notifications.readall');
+
+  Route::get('/conversations', [ConversationController::class, 'index'])->name(
+    'conversations.index'
+  );
+  Route::get('/conversations/{id}', [
+    ConversationController::class,
+    'show',
+  ])->name('conversations.show');
+  Route::post('/conversations/{id}', [
+    ConversationController::class,
+    'store',
+  ])->name('conversations.store');
+
+  Route::delete('/conversations/{id}', [ConversationController::class, 'destroy'])->name('conversation.destroy');
+
+  Route::get('/conversations/{id}/messages', [
+    MessageController::class,
+    'showMessage',
+  ])->name('conversations.messages');
+
+  Route::post('/conversations/{conversation}/messages', [
+    MessageController::class,
+    'storeMessage',
+  ])->name('conversations.message.store');
 });

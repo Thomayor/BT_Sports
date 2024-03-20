@@ -7,6 +7,7 @@ import { Team } from '@/types';
 import { useForm } from '@inertiajs/react';
 import classNames from 'classnames';
 import React, { useState } from 'react';
+import { t } from 'i18next';
 
 interface Props {
   team: Team;
@@ -29,17 +30,15 @@ export default function DeleteTeamForm({ team }: Props) {
 
   return (
     <ActionSection
-      title={'Delete Team'}
-      description={'Permanently delete this team.'}
+      title={t('pages.team.deleteTeam')}
+      description={t('pages.team.permanently')}
     >
       <div className="max-w-xl text-sm text-gray-600 dark:text-gray-400">
-        Once a team is deleted, all of its resources and data will be
-        permanently deleted. Before deleting this team, please download any data
-        or information regarding this team that you wish to retain.
+      {t('pages.team.text')}
       </div>
 
       <div className="mt-5">
-        <DangerButton onClick={confirmTeamDeletion}>Delete Team</DangerButton>
+        <DangerButton onClick={confirmTeamDeletion}> {t('pages.team.deleteTeam')}</DangerButton>
       </div>
 
       {/* <!-- Delete Team Confirmation Modal --> */}
@@ -47,14 +46,13 @@ export default function DeleteTeamForm({ team }: Props) {
         isOpen={confirmingTeamDeletion}
         onClose={() => setConfirmingTeamDeletion(false)}
       >
-        <ConfirmationModal.Content title={'Delete Team'}>
-          Are you sure you want to delete this team? Once a team is deleted, all
-          of its resources and data will be permanently deleted.
+        <ConfirmationModal.Content title={t('pages.team.deleteTeam')}>
+        {t('pages.team.sure')}
         </ConfirmationModal.Content>
 
         <ConfirmationModal.Footer>
           <SecondaryButton onClick={() => setConfirmingTeamDeletion(false)}>
-            Cancel
+          {t('pages.team.cancel')}
           </SecondaryButton>
 
           <DangerButton
@@ -62,7 +60,7 @@ export default function DeleteTeamForm({ team }: Props) {
             className={classNames('ml-2', { 'opacity-25': form.processing })}
             disabled={form.processing}
           >
-            Delete Team
+             {t('pages.team.deleteTeam')}
           </DangerButton>
         </ConfirmationModal.Footer>
       </ConfirmationModal>

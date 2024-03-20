@@ -1,0 +1,187 @@
+{
+  "translation": {
+    "nav": {
+      "dashboard": "Tableau de bord",
+      "team": {
+        "title": "Gérer l'équipe",
+        "settings": "Paramètres de l'équipe",
+        "newTeam": "Créer une nouvelle équipe",
+        "switch": "Changer d'équipe"
+      },
+      "profile": {
+        "title": "Gérer le compte",
+        "profile": "Profil",
+        "APIToken": "Jetons API",
+        "logout": "Déconnexion"
+      }
+    },
+    "pages": {
+      "auth": {
+        "login": {
+          "email": "Email",
+          "password": "Mot de passe",
+          "remember": "Se souvenir de moi",
+          "forgotPassword": "Mot de passe oublié ?",
+          "needAccount": "Besoin d'un compte ?",
+          "login": "Se connecter"
+        },
+        "register": {
+          "firstname": "Prénom",
+          "lastname": "Nom",
+          "email": "Email",
+          "password": "Mot de passe",
+          "confirmPassword": "Confirmer le mot de passe",
+          "alreadyReg": "Déjà enregistré ?",
+          "register": "S'inscrire"
+        },
+        "confirmPassword": {
+          "text": "Ceci est une zone sécurisée de l'application. Veuillez confirmer votre mot de passe avant de continuer.",
+          "password": "Mot de passe",
+          "confirm": "Confirmer"
+        },
+        "forgotPassword": {
+          "text": "Mot de passe oublié ? Pas de problème. Indiquez simplement votre adresse e-mail et nous vous enverrons un lien de réinitialisation du mot de passe qui vous permettra d'en choisir un nouveau.",
+          "email": "Email",
+          "link": "Lien de réinitialisation du mot de passe par e-mail"
+        },
+        "resetPassword": {
+          "email": "Email",
+          "password": "Mot de passe",
+          "confirm": "Confirmer le mot de passe",
+          "reset": "Réinitialiser le mot de passe"
+        },
+        "twoFactorChallenge": {
+          "recovery": "Code de récupération",
+          "code": "Code",
+          "login": "Se connecter"
+        },
+        "verifyEmail": {
+          "link": "Avant de continuer, pourriez-vous vérifier votre adresse e-mail en cliquant sur le lien que nous venons de vous envoyer par e-mail ? Si vous n'avez pas reçu l'e-mail, nous serons ravis de vous en envoyer un autre.",
+          "newLink": "Un nouveau lien de vérification a été envoyé à l'adresse e-mail que vous avez fournie lors de l'inscription.",
+          "resendBtn": "Renvoyer l'e-mail de vérification",
+          "edit": "Modifier le profil",
+          "logout": "Déconnexion"
+        }
+      },
+      "profile": {
+        "updateProfile": {
+          "title": "Informations du profil",
+          "description": "Mettez à jour les informations de profil de votre compte et votre adresse e-mail.",
+          "photo": "Photo",
+          "selectPhoto": "Sélectionner une nouvelle photo",
+          "removePhoto": "Supprimer la photo",
+          "firstname": "Prénom",
+          "lastname": "Nom",
+          "email": "Email",
+          "unverifEmail": "Votre adresse e-mail n'est pas vérifiée.",
+          "resentLink": "Cliquez ici pour renvoyer l'e-mail de vérification.",
+          "alertResend": "Un nouveau lien de vérification a été envoyé à votre adresse e-mail.",
+          "alert": "Enregistré.",
+          "save": "Enregistrer"
+        },
+        "updatePassword": {
+          "title": "Mettre à jour le mot de passe",
+          "description": "Assurez-vous que votre compte utilise un mot de passe long et aléatoire pour rester sécurisé.",
+          "currentPw": "Mot de passe actuel",
+          "newPw": "Nouveau mot de passe",
+          "confirmPw": "Confirmer le mot de passe",
+          "alert": "Enregistré.",
+          "save": "Enregistrer"
+        },
+        "twoFactorAuth": {
+          "title": "Authentification à deux facteurs",
+          "description": "Ajoutez une sécurité supplémentaire à votre compte en utilisant l'authentification à deux facteurs.",
+          "enabled": "Vous avez activé l'authentification à deux facteurs.",
+          "enabling": "Terminez l'activation de l'authentification à deux facteurs.",
+          "notEnabled": "Vous n'avez pas activé l'authentification à deux facteurs.",
+          "textEnabled": "Lorsque l'authentification à deux facteurs est activée, on vous demandera un jeton sécurisé et aléatoire lors de l'authentification. Vous pouvez récupérer ce jeton à partir de l'application Google Authenticator de votre téléphone.",
+          "finishEnabling": "Pour terminer l'activation de l'authentification à deux facteurs, scannez le code QR suivant à l'aide de l'application d'authentification de votre téléphone ou saisissez la clé de configuration et fournissez le code OTP généré.",
+          "nowEnable": "L'authentification à deux facteurs est maintenant activée. Scannez le code QR suivant à l'aide de l'application d'authentification de votre téléphone ou saisissez la clé de configuration.",
+          "setupKey": "Clé de configuration :",
+          "recoveryCodes": "Stockez ces codes de récupération dans un gestionnaire de mots de passe sécurisé. Ils peuvent être utilisés pour récupérer l'accès à votre compte si votre appareil d'authentification à deux facteurs est perdu.",
+          "confirm": "Confirmer",
+          "regRecoveryCodes": "Regénérer les codes de récupération",
+          "showRecoveryCodes": "Afficher les codes de récupération",
+          "cancel": "Annuler",
+          "disable": "Désactiver",
+          "enable": "Activer"
+        },
+        "logoutOtherBrowser": {
+          "title": "Sessions du navigateur",
+          "description": "Gérez et déconnectez-vous de vos sessions actives sur d'autres navigateurs et appareils.",
+          "text": "Si nécessaire, vous pouvez vous déconnecter de toutes les autres sessions de votre navigateur sur tous vos appareils. Certaines de vos sessions récentes sont répertoriées ci-dessous; cependant, cette liste peut ne pas être exhaustive. Si vous pensez que votre compte a été compromis, vous devriez également mettre à jour votre mot de passe.",
+          "thisDevice": "Cet appareil",
+          "lastActive": "Dernière activité",
+          "logoutOther": "Déconnecter les autres sessions de navigateur",
+          "alert": "Fait.",
+          "confirmPw": "Veuillez entrer votre mot de passe pour confirmer que vous souhaitez vous déconnecter de vos autres sessions de navigateur sur tous vos appareils.",
+          "cancel": "Annuler"
+        },
+        "deleteUser": {
+          "title": "Supprimer le compte",
+          "description": "Supprimez définitivement votre compte.",
+          "text": "Une fois votre compte supprimé, toutes ses ressources et données seront définitivement supprimées. Avant de supprimer votre compte, veuillez télécharger toutes les données ou informations que vous souhaitez conserver.",
+          "delete": "Supprimer le compte",
+          "confirmText": "Êtes-vous sûr de vouloir supprimer votre compte ? Une fois votre compte supprimé, toutes ses ressources et données seront définitivement supprimées. Veuillez entrer votre mot de passe pour confirmer que vous souhaitez supprimer définitivement votre compte.",
+          "cancel": "Annuler"
+        }
+      },
+      "team": {
+        "title": "Informations de l'équipe",
+        "teamOwner": "Propriétaire de l'équipe",
+        "description": "Mettez à jour les informations de votre équipe.",
+        "name": "Nom de l'équipe",
+        "nameDesc": "Le nom d'équipe et les informations du propriétaire.",
+        "alert": "Enregistré.",
+        "save": "Enregistrer",
+        "text": "Une fois qu'une équipe est supprimée, toutes ses ressources et données seront définitivement supprimées. Avant de supprimer cette équipe, veuillez télécharger toutes les données ou informations concernant cette équipe que vous souhaitez conserver.",
+        "sure": "Êtes-vous sûr de vouloir supprimer cette équipe ? Une fois qu'une équipe est supprimée, toutes ses ressources et données seront définitivement supprimées.",
+        "cancel": "Annuler",
+        "deleteTeam": "Delete Team",
+        "createTeam":"Créer équipe",
+        "createDesc": "Créez une nouvelle équipe pour collaborer avec d'autres sur des activités sportives.",
+        "permanently": "Supprimer définitivement cette équipe.",
+        "addTeamMember": "Ajouter un membre à l'équipe",
+        "descTeamMember": "Ajoutez un nouveau membre à votre équipe, lui permettant de partager des activités sportives avec vous.",
+        "added": "Ajouté.",
+        "add": "Ajouter",
+        "addEmail": "Veuillez fournir l'adresse e-mail de la personne que vous souhaitez ajouter à cette équipe.",
+        "pending": "Invitations en attente",
+        "descPending": "Ces personnes ont été invitées dans votre équipe et ont reçu un e-mail d'invitation. Elles peuvent rejoindre l'équipe en acceptant l'invitation par e-mail.",
+        "teamMember": "Membres de l'équipe",
+        "teamMemberDesc": "Toutes les personnes faisant partie de cette équipe.",
+        "leave": "Quitter",
+        "remove": "Supprimer",
+        "manageRole": "Gérer le rôle",
+        "leaveTeam": "Quitter l'équipe",
+        "confirmLeave": "Êtes-vous sûr de vouloir quitter cette équipe ?",
+        "removeTeamMember": "Supprimer le membre de l'équipe",
+        "confirmRemove": "Êtes-vous sûr de vouloir supprimer cette personne de l'équipe ?",
+        "roles": {
+          "admin": {
+            "name": "Administrateur",
+            "description": "Les utilisateurs administrateurs peuvent effectuer n'importe quelle action."
+          },
+          "editor": {
+            "name": "Éditeur",
+            "description": "Les utilisateurs éditeurs ont la capacité de lire, créer et mettre à jour."
+          }
+        },
+        "teamSettings":"Paramètres d'équipe",
+        "teams":"Equipes",
+        "members":"Membres de l'équipe"
+      },
+      "faq": {
+        "title": "Questions fréquentes.",
+        "help": "Besoin d'aide ?",
+        "details": "Voir notre FAQ pour plus de détails."
+      }
+    },
+    "text": {
+      "status": "Status",
+      "active": "actif",
+      "action": "Action",
+      "sendingDate": "Date d'envoie"
+    }
+  }
+}
