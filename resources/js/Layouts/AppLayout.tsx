@@ -91,6 +91,12 @@ export default function AppLayout({
                   >
                     Messagerie
                   </NavLink>
+                  <NavLink
+                    href={route('playgrounds.index')}
+                    active={route().current('playgrounds.index')}
+                  >
+                    Terrains
+                  </NavLink>
                 </div>
               </div>
 

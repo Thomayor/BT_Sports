@@ -21,9 +21,9 @@ class CreatePlaygroundsTable extends Migration
             $table->boolean('is_booked');
             $table->foreignId('user_id')->constrained();
             $table->timestamps();
-            $table->string('city', 20)->nullable();
-            $table->string('adress', 150)->nullable();
-            $table->string('postcode', 20)->nullable();
+            $table->string('city', 20);
+            $table->string('adress', 150);
+            $table->string('postcode', 20);
             $table->float('coordgpsx', 10, 6);
             $table->float('coordgpsy', 10, 6);
             

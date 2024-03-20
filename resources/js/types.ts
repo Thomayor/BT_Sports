@@ -129,6 +129,22 @@ export interface Message {
   user: User;
 }
 
+export interface Playground {
+  id: number;
+  name: string;
+  surface_type: string;
+  is_covered: boolean;
+  is_booked: boolean;
+  user_id: number;
+  created_at: string; 
+  updated_at: string; 
+  city: string; 
+  adress: string; 
+  postcode: string; 
+  coordgpsx: number;
+  coordgpsy: number;
+}
+
 export enum Method {
   GET = 'get',
   POST = 'post',
