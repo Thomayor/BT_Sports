@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import AppLayout from '@/Layouts/AppLayout';
 import { fetchFacilitiesWithFilters } from '@/api';
+import useRoute from '@/Hooks/useRoute';
+import { router } from '@inertiajs/core';
+
 
 export default function ListPlaygrounds() {
   const [results, setResults] = useState([]);
@@ -46,6 +49,20 @@ export default function ListPlaygrounds() {
     }));
   };
 
+
+  const route = useRoute();
+
+
+  const handleChoose = (numequipement: string) => {
+      console.log('Paramètres reçus :', {  numequipement });
+    router.post(route('playgrounds.store'), {
+      numequipement
+    });
+  };
+
+  
+  
+
   return (
     <AppLayout title="Create Playground">
       <div>
@@ -90,7 +107,7 @@ export default function ListPlaygrounds() {
         <span>{page}</span>
         <button
           onClick={() => setPage(page + 1)}
-          disabled={page >= totalResults / pageSize + 1}
+          disabled={page >= totalResults / pageSize}
         >
           Next
         </button>
@@ -104,7 +121,10 @@ export default function ListPlaygrounds() {
               <th>Adresse</th>
               <th>Ville</th>
               <th>Code Postal</th>
-              <th>Type équipement</th>
+              <th>Type de terrain</th>
+              <th>Surface</th>
+              <th>Terrain (couvert/découvert)</th>
+              <th>Selectionner</th>
             </tr>
           </thead>
           <tbody>
@@ -115,6 +135,9 @@ export default function ListPlaygrounds() {
                 <td>{result.new_name}</td>
                 <td>{result.codepostal}</td>
                 <td>{result.typequipement}</td>
+                <td>{result.carac167}</td>
+                <td>{result.carac168}</td>
+                <td><button onClick={() => handleChoose(result.numequipement)}>Choisir</button></td>
               </tr>
             ))}
           </tbody>

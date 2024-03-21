@@ -9,7 +9,6 @@ import classNames from 'classnames';
 import InputLabel from '@/Components/InputLabel';
 import TextInput from '@/Components/TextInput';
 import InputError from '@/Components/InputError';
-import FilterOptions from './FilterOptions';
 
 
 export default function CreateGameForm() {
