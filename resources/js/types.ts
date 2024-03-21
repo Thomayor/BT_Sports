@@ -128,8 +128,8 @@ export interface ShowGamesProps extends CreateGameProps {
 export interface ShowGameProps {
   game: Game,
   teams: Team[],
-  playground: Playground,
-  sport: Sport
+  playground: Playground[],
+  sport: Sport[]
 }
 
 export interface Playground {

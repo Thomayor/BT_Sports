@@ -15,18 +15,18 @@ class CreateJoinMatchesTable extends Migration
      */
     public function up()
     {
-        Schema::create('join_matches', function (Blueprint $table) {
+        Schema::create('join_games', function (Blueprint $table) {
             $table
                 ->foreignIdFor(Game::class, 'game_id')
                 ->constrained()
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
             $table
-                ->foreignId(Team::class, 'team_id')
+                ->foreignIdFor(Team::class, 'team_id')
                 ->constrained()
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
-            $table->primary(['match_id', 'team_id']); 
+            $table->primary(['game_id', 'team_id']); 
             $table->timestamps(); 
         });
     }

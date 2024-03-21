@@ -18,4 +18,14 @@ class Game extends Model
         'playground_id',
         'user_id'
     ];
+
+    public function teams()
+    {
+        return $this->belongsToMany(
+            Team::class,
+            'join_games',
+            'game_id',
+            'team_id'
+        )->take(2)->withTimestamps();
+    }
 }

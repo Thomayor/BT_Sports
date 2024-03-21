@@ -58,7 +58,7 @@ Route::middleware([
         'games.update'
     );
 
-    Route::delete('/game/destroy/{id}', [GameController::class, 'destroy'])->name(
+    Route::delete('/game/delete/{id}', [GameController::class, 'destroy'])->name(
         'game.destroy'
     );
 });
