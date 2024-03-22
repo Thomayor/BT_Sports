@@ -3,16 +3,57 @@ import AppLayout from '@/Layouts/AppLayout';
 import { fetchFacilitiesWithFilters } from '@/api';
 import useRoute from '@/Hooks/useRoute';
 import { router } from '@inertiajs/core';
+import {
+  Button,
+  Input,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+  Table,
+  TableBody,
+  TableCell,
+  TableFooter,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/Components/ui';
 
+import {
+  PlaygroundColumn,
+  Search,
+  getColumns,
+  pageSizes,
+} from './ListPlaygrounds.config';
 
 export default function ListPlaygrounds() {
+  const route = useRoute();
+
+  const handleChoose = (numequipement: string) => {
+    console.log('Paramètres reçus :', { numequipement });
+    router.post(route('playgrounds.store'), {
+      numequipement,
+    });
+  };
+
   const [results, setResults] = useState([]);
   const [totalResults, setTotalResults] = useState(0);
-  const [filters, setFilters] = useState({
-    carac19: '',
-    codepostal: '',
-    carac159: '',
-  });
+
+  const columns = getColumns({ handleChoose });
+
+  const [filters, setFilters] = useState(
+    columns.reduce((acc, column) => {
+      acc[column.key] = '';
+      return acc;
+    }, {} as Record<string, string>),
+  );
 
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
@@ -49,99 +90,117 @@ export default function ListPlaygrounds() {
     }));
   };
 
-
-  const route = useRoute();
-
-
-  const handleChoose = (numequipement: string) => {
-      console.log('Paramètres reçus :', {  numequipement });
-    router.post(route('playgrounds.store'), {
-      numequipement
-    });
-  };
-
-  
-  
-
   return (
     <AppLayout title="Create Playground">
-      <div>
-        <select
-          value={filters.carac19}
-          onChange={e => handleFilterChange('carac19', e.target.value)}
-        >
-          <option value="">Tous</option>
-          <option value="Complexe sportif">Complexe sportif</option>
-          <option value="Etablissement scolaire">Etablissement scolaire</option>
-        </select>
+      <div className="mt-2">
+        {/* FILTER SEARCH */}
+        <div className="flex gap-2">
+          {columns.map((column: PlaygroundColumn) => {
+            if (!column.search) return null;
+            if (column.search.type === 'text') {
+              return (
+                <div key={column.key}>
+                  <Input
+                    type="text"
+                    id={column.key}
+                    value={filters[column.key]}
+                    onChange={e =>
+                      handleFilterChange(column.key, e.target.value)
+                    }
+                    placeholder={column.search.placeholder}
+                  />
+                </div>
+              );
+            }
+            if (column.search.type === 'select') {
+              return (
+                <div key={column.key}>
+                  <Select
+                    onValueChange={value =>
+                      handleFilterChange(column.key, value)
+                    }
+                    value={filters[column.key]}
+                  >
+                    <SelectTrigger className="w-[180px]">
+                      <SelectValue placeholder={column.search.placeholder} />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {column.search.options.map(option => (
+                        <SelectItem key={option.value} value={option.value}>
+                          {option.label}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+              );
+            }
+          })}
 
-        <input
-          value={filters.codepostal}
-          onChange={e => handleFilterChange('codepostal', e.target.value)}
-          type="string"
-          placeholder="Code postal"
-        />
+          <Select
+            onValueChange={value => setPageSize(Number(value))}
+            value={pageSize.toString()}
+          >
+            <SelectTrigger className="w-[180px]">
+              <SelectValue placeholder="" />
+            </SelectTrigger>
+            <SelectContent>
+              {pageSizes.map(option => (
+                <SelectItem key={option} value={option.toString()}>
+                  {option}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
 
-        <select
-          value={filters.carac159}
-          onChange={e => handleFilterChange('carac159', e.target.value)}
-        >
-          <option value="">Tous</option>
-          <option value="Clubs sportifs, comités, ligues, fédérations">
-            Clubs sportifs, comités, ligues, fédérations
-          </option>
-        </select>
-
-        <select
-          value={pageSize}
-          onChange={e => setPageSize(Number(e.target.value))}
-        >
-          <option value="10">10</option>
-          <option value="20">20</option>
-          <option value="30">30</option>
-        </select>
-
-        <button onClick={() => setPage(page - 1)} disabled={page <= 1}>
-          Previous
-        </button>
-        <span>{page}</span>
-        <button
-          onClick={() => setPage(page + 1)}
-          disabled={page >= totalResults / pageSize}
-        >
-          Next
-        </button>
-        <button onClick={handleSubmit}>Rechercher</button>
-
-        <h2>Résultats :</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>Nom du terrain</th>
-              <th>Adresse</th>
-              <th>Ville</th>
-              <th>Code Postal</th>
-              <th>Type de terrain</th>
-              <th>Surface</th>
-              <th>Terrain (couvert/découvert)</th>
-              <th>Selectionner</th>
-            </tr>
-          </thead>
-          <tbody>
-            {results.map((result, index) => (
-              <tr key={index}>
-                <td>{result.nominstallation}</td>
-                <td>{result.adresse}</td>
-                <td>{result.new_name}</td>
-                <td>{result.codepostal}</td>
-                <td>{result.typequipement}</td>
-                <td>{result.carac167}</td>
-                <td>{result.carac168}</td>
-                <td><button onClick={() => handleChoose(result.numequipement)}>Choisir</button></td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+          <PaginationContent>
+            <button onClick={() => setPage(page - 1)} disabled={page <= 1}>
+              <PaginationItem>
+                <PaginationPrevious />
+              </PaginationItem>
+            </button>
+            <PaginationItem>{page}</PaginationItem>
+            <button
+              onClick={() => setPage(page + 1)}
+              disabled={page >= totalResults / pageSize}
+            >
+              <PaginationItem>
+                <PaginationNext />
+              </PaginationItem>
+            </button>
+          </PaginationContent>
+          <Button onClick={handleSubmit}>Rechercher</Button>
+        </div>
+        {/* RESULTS LIST */}
+        <div>
+          <Table>
+            <TableHeader>
+              <TableRow>
+                {columns.map((column: PlaygroundColumn) => (
+                  <TableHead key={column.key}>{column.label}</TableHead>
+                ))}
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {results.map((result, index) => (
+                <TableRow key={index}>
+                  {columns.map((column: PlaygroundColumn) => (
+                    <TableCell key={column.key}>
+                      {column.render
+                        ? column.render(result)
+                        : result[column.key]}
+                    </TableCell>
+                  ))}
+                </TableRow>
+              ))}
+            </TableBody>
+            <TableFooter>
+              <TableRow>
+                <TableCell colSpan={6}>Total {totalResults} infrastructures sportives</TableCell>
+              </TableRow>
+            </TableFooter>
+          </Table>
+        </div>
       </div>
     </AppLayout>
   );

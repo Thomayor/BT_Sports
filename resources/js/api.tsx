@@ -7,19 +7,17 @@ export const fetchFacilitiesWithFilters = async (
       'https://equipements.sports.gouv.fr/api/explore/v2.1/catalog/datasets/data-es/records';
 
     // Construire la liste des paramètres de requête
-    const queryParams = Object.entries(filters).filter(([_, value]) => !!value)
-      .length
-      ? `&${Object.entries(filters)
-          .filter(([_, value]) => !!value)
-          .map(
-            ([key, value]) => `refine=${encodeURIComponent(`${key}:${value}`)}`,
-          )
-          .join('&')}`
-      : null;
+    const queryParams =
+      Object.entries(filters)
+        .filter(([_, value]) => !!value)
+        .map(([key, value]) => `search(${key}, "${value}")`)
+        .join(' and ') || null;
 
     const paginationParams = `limit=${pagination.limit}&offset=${pagination.offset}`;
 
-    const apiUrl = `${baseUrl}?${paginationParams}${queryParams || ''}`;
+    const apiUrl = `${baseUrl}?${paginationParams}&where=${encodeURIComponent(
+      queryParams || '',
+    )}`;
 
     console.log('API URL:', apiUrl);
 
