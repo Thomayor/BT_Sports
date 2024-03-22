@@ -9,7 +9,11 @@ export default function CreateGame({ playgrounds, sports, teams }: CreateGamePro
             title="Create Game"
         >
             <div className="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
-                <CreateGameForm playgrounds={playgrounds} sports={sports} teams={teams} />
+                <CreateGameForm 
+                    playgrounds={playgrounds} 
+                    sports={sports} 
+                    teams={teams} 
+                />
             </div>
         </AppLayout>
     )

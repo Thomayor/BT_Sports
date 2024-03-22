@@ -8,6 +8,7 @@ use App\Http\Requests\GameRequest;
 use App\Models\Playground;
 use App\Models\Sport;
 use App\Models\Team;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class GameController extends Controller
@@ -72,22 +73,35 @@ class GameController extends Controller
         $playground = Playground::where('id', '=', $game->playground_id)->get();
         $teams = $game->teams()->with('users')->get();
 
+        $usersByTeam = [];
+
+        foreach ($teams as $team) {
+            $users = $team->users()->get();
+            $usersByTeam[$team->id] = $users->toArray();
+        }
+
         return Inertia::render('Games/ShowGame', [
             'game' => $game,
             'sport' => $sport,
             'playground' => $playground,
-            'teams' => $teams
+            'teams' => $teams,
+            'users' => $users
         ]);
     }
 
-    public function edit()
+    public function edit($id)
     {
+        $user = auth()->id();
+        $game = Game::findOrFail($id);
         $playgrounds = Playground::all();
         $sports = Sport::all();
+        $teams = Team::where('user_id', $user)->get();
 
         return Inertia::render('Games/EditGame', [
-            'playground' => $playgrounds,
-            'sports' => $sports
+            'game' => $game,
+            'playgrounds' => $playgrounds,
+            'sports' => $sports,
+            'teams' => $teams
         ]);
     }
 
@@ -104,7 +118,7 @@ class GameController extends Controller
             'playground_id' => $request->input('playground_id'), 
         ]);
 
-        return redirect()->route('game.show', ['id' => $game->id]);
+        return redirect()->route('games.show', ['id' => $game->id]);
     }
 
     public function destroy($id)

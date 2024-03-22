@@ -118,18 +118,24 @@ export interface CreateGameProps {
 }
 
 export interface UpdateGameProps extends CreateGameProps {
-  game_id: number
+  game: Game
 }
 
 export interface ShowGamesProps extends CreateGameProps {
   games: Game[],
 }
 
-export interface ShowGameProps {
+export interface ShowGameProps extends CreateGameProps {
   game: Game,
   teams: Team[],
   playground: Playground[],
-  sport: Sport[]
+  sport: Sport[],
+  users: User[]
+}
+
+export interface JoinGameProps {
+  game: Game,
+  teams: Team[]
 }
 
 export interface Playground {

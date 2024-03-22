@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\GameController;
+use App\Http\Controllers\GameTeamController;
+use App\Models\GameTeam;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -38,11 +40,11 @@ Route::middleware([
         'games.index'
     );
 
-    Route::get('/games/create/', [GameController::class, 'create'])->name(
+    Route::get('/games/create', [GameController::class, 'create'])->name(
         'games.create'
     );
 
-    Route::post('/games/store/', [GameController::class, 'store'])->name(
+    Route::post('/games/store', [GameController::class, 'store'])->name(
         'games.store'
     );
 
@@ -50,15 +52,23 @@ Route::middleware([
         'games.show'
     );
 
-    Route::get('/games/edit/', [GameController::class, 'edit'])->name(
+    Route::get('/games/{id}/edit', [GameController::class, 'edit'])->name(
         'games.edit'
     );
 
-    Route::put('/games/update/{id}', [GameController::class, 'update'])->name(
+    Route::put('/games/{id}/update', [GameController::class, 'update'])->name(
         'games.update'
     );
 
-    Route::delete('/game/delete/{id}', [GameController::class, 'destroy'])->name(
-        'game.destroy'
+    Route::delete('/games/{id}/delete', [GameController::class, 'destroy'])->name(
+        'games.destroy'
+    );
+
+    Route::get('/games/{id}/join-team', [GameTeamController::class, 'index'])->name(
+        'games.teams.index'
+    );
+
+    Route::post('/games/{id}/store-team', [GameTeamController::class, 'store'])->name(
+        'games.teams.store'
     );
 });

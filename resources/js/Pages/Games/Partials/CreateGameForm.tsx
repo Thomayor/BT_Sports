@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import useRoute from "@/Hooks/useRoute";
-import useTypedPage from "@/Hooks/useTypedPage";
 import { useForm } from "@inertiajs/react";
 import FormSection from "@/Components/FormSection";
 import ActionMessage from "@/Components/ActionMessage";
@@ -16,7 +15,7 @@ export default function CreateGameForm({ playgrounds, sports, teams }: CreateGam
     const [errorMessage, setErrorMessage] = useState<string>('');
 
     const route = useRoute();
-    //const page = useTypedPage();
+
     const form = useForm({
         date: '',
         start_time: '',
@@ -32,9 +31,10 @@ export default function CreateGameForm({ playgrounds, sports, teams }: CreateGam
             errorBag: 'createGame',
             preserveScroll: true,
         });
+
         setIsCompleted(false);
         setErrorMessage('');
-    }
+    };
 
     function showAddTeam() {
         if (
@@ -47,7 +47,7 @@ export default function CreateGameForm({ playgrounds, sports, teams }: CreateGam
             setIsCompleted(true);
         }
         setErrorMessage('Please fill out all fields in the Game Details section')
-    }
+    };
 
     return (
         <div>
