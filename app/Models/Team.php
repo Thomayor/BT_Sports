@@ -43,6 +43,7 @@ class Team extends JetstreamTeam
         'deleted' => TeamDeleted::class,
     ];
 
+
     public function owner()
     {
         return $this->belongsTo(User::class, 'user_id');

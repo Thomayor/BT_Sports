@@ -106,6 +106,62 @@ export interface TeamInvitation {
 }
 
 
+export interface Sport {
+  id: number,
+  name: string
+}
+
+export interface Game {
+  id: number,
+  date: Date,
+  start_time: DateTime,
+  end_time: DateTime,
+  max_player: number,
+  sport_id: number,
+  playground_id: number
+  user_id: number,
+}
+
+export interface CreateGameProps {
+  sports: Sport[],
+  playgrounds: Playground[],
+  teams: Team[]
+}
+
+export interface UpdateGameProps extends CreateGameProps {
+  game: Game
+}
+
+export interface ShowGamesProps extends CreateGameProps {
+  games: Game[],
+}
+
+export interface ShowGameProps extends CreateGameProps {
+  game: Game,
+  teams: Team[],
+  playground: Playground[],
+  sport: Sport[],
+  users: User[]
+}
+
+export interface JoinGameProps {
+  game: Game,
+  teams: Team[]
+}
+
+export interface Playground {
+  id: number,
+  name: string,
+  is_covered: boolean,
+  is_booked: boolean,
+  city: string,
+  adress: string,
+  postcode: string,
+  coordgpsx: number,
+  coordgpsy: number
+}
+
+
 export interface Conversation {
   users: any;
   id: number;
@@ -138,3 +194,4 @@ export enum Method {
 }
 
 export default Method;
+
