@@ -15,10 +15,9 @@ class CreateNotificationsTable extends Migration
     {
         Schema::create('notifications', function (Blueprint $table) {
             $table->id();
-            $table->string('content_notification', 20);
-            $table->string('link_notification', 150);
-            $table->enum('type_notification', ['message', 'event', 'team', 'other'])->nullable();
-            $table->boolean('read_at')->default(false);
+            $table->string('content', 255);
+            $table->string('link',255)->nullable();
+            $table->enum('type', ['Conversation','Message', 'Game', 'Team', 'Other'])->nullable();
             $table->timestamps();
         });
     }

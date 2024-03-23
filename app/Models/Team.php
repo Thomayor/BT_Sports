@@ -12,6 +12,7 @@ class Team extends JetstreamTeam
 {
     use HasFactory;
 
+   
     /**
      * The attributes that should be cast.
      *
@@ -42,8 +43,15 @@ class Team extends JetstreamTeam
         'deleted' => TeamDeleted::class,
     ];
 
+
+    public function owner()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+    
     public function users()
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(User::class, 'team_user')
+            ->withPivot('role');
     }
 }

@@ -12,7 +12,8 @@ export interface Team {
 
 export interface User {
   id: number;
-  name: string;
+  firstname: string;
+  lastname: string;
   email: string;
   current_team_id: Nullable<number>;
   profile_photo_path: Nullable<string>;
@@ -30,6 +31,15 @@ export interface Auth {
       current_team?: Team;
     }
   >;
+  notifications?: Notification[];
+}
+
+export interface Notification {
+  pivot: { read_at: string | null;}
+  id: number;
+  content: string;
+  created_at: string;
+  link: string;
 }
 
 export type InertiaSharedProps<T = {}> = T & {
@@ -95,6 +105,7 @@ export interface TeamInvitation {
   updated_at: DateTime;
 }
 
+
 export interface Sport {
   id: number,
   name: string
@@ -149,3 +160,38 @@ export interface Playground {
   coordgpsx: number,
   coordgpsy: number
 }
+
+
+export interface Conversation {
+  users: any;
+  id: number;
+  sender_id: number;
+  receiver_id: number;
+  created_at: string;
+  updated_at: string;
+  title: string;
+  content: string;
+  sender: User;
+  receiver: User;
+  messages: Message[];
+}
+export interface Message {
+  id: number;
+  content: string;
+  conversation_id: number;
+  created_at: string;
+  updated_at: string;
+  user_id: number;
+  user: User;
+}
+
+export enum Method {
+  GET = 'get',
+  POST = 'post',
+  PUT = 'put',
+  PATCH = 'patch',
+  DELETE = 'delete',
+}
+
+export default Method;
+

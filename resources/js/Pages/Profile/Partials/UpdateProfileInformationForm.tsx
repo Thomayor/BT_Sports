@@ -2,6 +2,7 @@ import { router } from '@inertiajs/core';
 import { Link, useForm } from '@inertiajs/react';
 import classNames from 'classnames';
 import React, { useRef, useState } from 'react';
+import { t } from 'i18next';
 import useRoute from '@/Hooks/useRoute';
 import ActionMessage from '@/Components/ActionMessage';
 import FormSection from '@/Components/FormSection';
@@ -20,7 +21,8 @@ interface Props {
 export default function UpdateProfileInformationForm({ user }: Props) {
   const form = useForm({
     _method: 'PUT',
-    name: user.name,
+    firstname: user.firstname,
+    lastname: user.lastname,
     email: user.email,
     photo: null as File | null,
   });
@@ -30,19 +32,25 @@ export default function UpdateProfileInformationForm({ user }: Props) {
   const page = useTypedPage();
   const [verificationLinkSent, setVerificationLinkSent] = useState(false);
 
-  function updateProfileInformation() {
+  const clearPhotoFileInput = () => {
+    if (photoRef.current?.value) {
+      photoRef.current.value = '';
+      form.setData('photo', null);
+    }
+  };
+  const updateProfileInformation = () => {
     form.post(route('user-profile-information.update'), {
       errorBag: 'updateProfileInformation',
       preserveScroll: true,
       onSuccess: () => clearPhotoFileInput(),
     });
-  }
+  };
 
-  function selectNewPhoto() {
+  const selectNewPhoto = () => {
     photoRef.current?.click();
-  }
+  };
 
-  function updatePhotoPreview() {
+  const updatePhotoPreview = () => {
     const photo = photoRef.current?.files?.[0];
 
     if (!photo) {
@@ -58,9 +66,9 @@ export default function UpdateProfileInformationForm({ user }: Props) {
     };
 
     reader.readAsDataURL(photo);
-  }
+  };
 
-  function deletePhoto() {
+  const deletePhoto = () => {
     router.delete(route('current-user-photo.destroy'), {
       preserveScroll: true,
       onSuccess: () => {
@@ -68,31 +76,26 @@ export default function UpdateProfileInformationForm({ user }: Props) {
         clearPhotoFileInput();
       },
     });
-  }
+  };
 
-  function clearPhotoFileInput() {
-    if (photoRef.current?.value) {
-      photoRef.current.value = '';
-      form.setData('photo', null);
-    }
-  }
 
   return (
     <FormSection
       onSubmit={updateProfileInformation}
-      title={'Profile Information'}
-      description={`Update your account's profile information and email address.`}
+      title={t('pages.profile.updateProfile.title')}
+      description={t('pages.profile.updateProfile.description')}
       renderActions={() => (
         <>
           <ActionMessage on={form.recentlySuccessful} className="mr-3">
-            Saved.
+            {t('pages.profile.updateProfile.alert')}
           </ActionMessage>
 
           <PrimaryButton
+            type="submit"
             className={classNames({ 'opacity-25': form.processing })}
             disabled={form.processing}
           >
-            Save
+            {t('pages.profile.updateProfile.save')}
           </PrimaryButton>
         </>
       )}
@@ -108,7 +111,10 @@ export default function UpdateProfileInformationForm({ user }: Props) {
             onChange={updatePhotoPreview}
           />
 
-          <InputLabel htmlFor="photo" value="Photo" />
+          <InputLabel
+            htmlFor="photo"
+            value={t('pages.profile.updateProfile.photo')}
+          />
 
           {photoPreview ? (
             // <!-- New Profile Photo Preview -->
@@ -121,14 +127,14 @@ export default function UpdateProfileInformationForm({ user }: Props) {
                   backgroundPosition: 'center center',
                   backgroundImage: `url('${photoPreview}')`,
                 }}
-              ></span>
+              />
             </div>
           ) : (
             // <!-- Current Profile Photo -->
             <div className="mt-2">
               <img
                 src={user.profile_photo_url}
-                alt={user.name}
+                alt={user.firstname}
                 className="rounded-full h-20 w-20 object-cover"
               />
             </div>
@@ -139,7 +145,7 @@ export default function UpdateProfileInformationForm({ user }: Props) {
             type="button"
             onClick={selectNewPhoto}
           >
-            Select A New Photo
+            {t('pages.profile.updateProfile.selectPhoto')}
           </SecondaryButton>
 
           {user.profile_photo_path ? (
@@ -148,7 +154,7 @@ export default function UpdateProfileInformationForm({ user }: Props) {
               className="mt-2"
               onClick={deletePhoto}
             >
-              Remove Photo
+              {t('pages.profile.updateProfile.removePhoto')}
             </SecondaryButton>
           ) : null}
 
@@ -158,21 +164,42 @@ export default function UpdateProfileInformationForm({ user }: Props) {
 
       {/* <!-- Name --> */}
       <div className="col-span-6 sm:col-span-4">
-        <InputLabel htmlFor="name" value="Name" />
+        <InputLabel
+          htmlFor="firstname"
+          value={t('pages.profile.updateProfile.firstname')}
+        />
+        <TextInput
+          id="firstname"
+          type="text"
+          className="mt-1 block w-full"
+          value={form.data.firstname}
+          onChange={e => form.setData('firstname', e.currentTarget.value)}
+          autoComplete="firstname"
+        />
+        <InputError message={form.errors.firstname} className="mt-2" />
+      </div>
+      <div className="col-span-6 sm:col-span-4">
+        <InputLabel
+          htmlFor="lastname"
+          value={t('pages.profile.updateProfile.lastname')}
+        />
         <TextInput
           id="name"
           type="text"
           className="mt-1 block w-full"
-          value={form.data.name}
-          onChange={e => form.setData('name', e.currentTarget.value)}
-          autoComplete="name"
+          value={form.data.lastname}
+          onChange={e => form.setData('lastname', e.currentTarget.value)}
+          autoComplete="lastname"
         />
-        <InputError message={form.errors.name} className="mt-2" />
+        <InputError message={form.errors.lastname} className="mt-2" />
       </div>
 
       {/* <!-- Email --> */}
       <div className="col-span-6 sm:col-span-4">
-        <InputLabel htmlFor="email" value="Email" />
+        <InputLabel
+          htmlFor="email"
+          value={t('pages.profile.updateProfile.email')}
+        />
         <TextInput
           id="email"
           type="email"
@@ -186,7 +213,7 @@ export default function UpdateProfileInformationForm({ user }: Props) {
         user.email_verified_at === null ? (
           <div>
             <p className="text-sm mt-2 dark:text-white">
-              Your email address is unverified.
+              {t('pages.profile.updateProfile.unverifEmail')}
               <Link
                 href={route('verification.send')}
                 method="post"
@@ -197,12 +224,12 @@ export default function UpdateProfileInformationForm({ user }: Props) {
                   setVerificationLinkSent(true);
                 }}
               >
-                Click here to re-send the verification email.
+                {t('pages.profile.updateProfile.resentLink')}
               </Link>
             </p>
             {verificationLinkSent && (
               <div className="mt-2 font-medium text-sm text-green-600 dark:text-green-400">
-                A new verification link has been sent to your email address.
+                {t('pages.profile.updateProfile.alertResend')}
               </div>
             )}
           </div>

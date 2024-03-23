@@ -24,6 +24,7 @@ import { router } from '@inertiajs/core';
 import { useForm } from '@inertiajs/react';
 import classNames from 'classnames';
 import React, { useState } from 'react';
+import { t } from 'i18next';
 
 interface UserMembership extends User {
   membership: {
@@ -134,17 +135,15 @@ export default function TeamMemberManager({
           {/* <!-- Add Team Member --> */}
           <FormSection
             onSubmit={addTeamMember}
-            title={'Add Team Member'}
-            description={
-              'Add a new team member to your team, allowing them to collaborate with you.'
-            }
+            title={t('pages.team.addTeamMember')}
+            description={t('pages.team.descTeamMember')}
             renderActions={() => (
               <>
                 <ActionMessage
                   on={addTeamMemberForm.recentlySuccessful}
                   className="mr-3"
                 >
-                  Added.
+                  {t('pages.team.added')}
                 </ActionMessage>
 
                 <PrimaryButton
@@ -153,15 +152,14 @@ export default function TeamMemberManager({
                   })}
                   disabled={addTeamMemberForm.processing}
                 >
-                  Add
+                  {t('pages.team.add')}
                 </PrimaryButton>
               </>
             )}
           >
             <div className="col-span-6">
               <div className="max-w-xl text-sm text-gray-600 dark:text-gray-400">
-                Please provide the email address of the person you would like to
-                add to this team.
+                {t('pages.team.addEmail')}
               </div>
             </div>
 
@@ -228,7 +226,7 @@ export default function TeamMemberManager({
                               },
                             )}
                           >
-                            {role.name}
+                            {t(`pages.team.roles.${role.key}.name`)}
                           </div>
 
                           {addTeamMemberForm.data.role == role.key ? (
@@ -248,7 +246,7 @@ export default function TeamMemberManager({
 
                         {/* <!-- Role Description --> */}
                         <div className="mt-2 text-xs text-gray-600 dark:text-gray-400">
-                          {role.description}
+                          {t(`pages.team.roles.${role.key}.description`)}
                         </div>
                       </div>
                     </button>
@@ -268,10 +266,8 @@ export default function TeamMemberManager({
           <div className="mt-10 sm:mt-0" />
 
           <ActionSection
-            title={'Pending Team Invitations'}
-            description={
-              'These people have been invited to your team and have been sent an invitation email. They may join the team by accepting the email invitation.'
-            }
+            title={t('pages.team.pending')}
+            description={t('pages.team.descPending')}
           >
             {/* <!-- Pending Team Member Invitation List --> */}
             <div className="space-y-6">
@@ -291,7 +287,7 @@ export default function TeamMemberManager({
                         className="cursor-pointer ml-6 text-sm text-red-500 focus:outline-none"
                         onClick={() => cancelTeamInvitation(invitation)}
                       >
-                        Cancel
+                        {t('pages.team.cancel')}
                       </button>
                     ) : null}
                   </div>
@@ -310,8 +306,8 @@ export default function TeamMemberManager({
           <div className="mt-10 sm:mt-0" />
 
           <ActionSection
-            title={'Team Members'}
-            description={'All of the people that are part of this team.'}
+            title={t('pages.team.teamMember')}
+            description={t('pages.team.teamMemberDesc')}
           >
             {/* <!-- Team Member List --> */}
             <div className="space-y-6">
@@ -324,9 +320,9 @@ export default function TeamMemberManager({
                     <img
                       className="w-8 h-8 rounded-full"
                       src={user.profile_photo_url}
-                      alt={user.name}
+                      alt={user.firstname}
                     />
-                    <div className="ml-4 dark:text-white">{user.name}</div>
+                    <div className="ml-4 dark:text-white">{user.firstname}</div>
                   </div>
 
                   <div className="flex items-center">
@@ -351,7 +347,7 @@ export default function TeamMemberManager({
                         className="cursor-pointer ml-6 text-sm text-red-500"
                         onClick={confirmLeavingTeam}
                       >
-                        Leave
+                        {t('pages.team.leave')}
                       </button>
                     ) : null}
 
@@ -361,7 +357,7 @@ export default function TeamMemberManager({
                         className="cursor-pointer ml-6 text-sm text-red-500"
                         onClick={() => confirmTeamMemberRemoval(user)}
                       >
-                        Remove
+                        {t('pages.team.remove')}
                       </button>
                     ) : null}
                   </div>
@@ -377,7 +373,9 @@ export default function TeamMemberManager({
         isOpen={currentlyManagingRole}
         onClose={() => setCurrentlyManagingRole(false)}
       >
-        <DialogModal.Content title={'Manage Role'}></DialogModal.Content>
+        <DialogModal.Content
+          title={t('pages.team.manageRole')}
+        ></DialogModal.Content>
         {managingRoleFor ? (
           <div>
             <div className="relative z-0 mt-1 border border-gray-200 dark:border-gray-700 rounded-lg cursor-pointer">
@@ -443,7 +441,7 @@ export default function TeamMemberManager({
         ) : null}
         <DialogModal.Footer>
           <SecondaryButton onClick={() => setCurrentlyManagingRole(false)}>
-            Cancel
+            {t('pages.team.cancel')}
           </SecondaryButton>
 
           <PrimaryButton
@@ -453,7 +451,7 @@ export default function TeamMemberManager({
             })}
             disabled={updateRoleForm.processing}
           >
-            Save
+            {t('pages.team.save')}
           </PrimaryButton>
         </DialogModal.Footer>
       </DialogModal>
@@ -463,12 +461,12 @@ export default function TeamMemberManager({
         isOpen={confirmingLeavingTeam}
         onClose={() => setConfirmingLeavingTeam(false)}
       >
-        <ConfirmationModal.Content title={'Leave Team'}>
-          Are you sure you would like to leave this team?
+        <ConfirmationModal.Content title={t('pages.team.leaveTeam')}>
+          {t('pages.team.confirmLeave')}
         </ConfirmationModal.Content>
         <ConfirmationModal.Footer>
           <SecondaryButton onClick={() => setConfirmingLeavingTeam(false)}>
-            Cancel
+            {t('pages.team.cancel')}
           </SecondaryButton>
 
           <DangerButton
@@ -478,7 +476,7 @@ export default function TeamMemberManager({
             })}
             disabled={leaveTeamForm.processing}
           >
-            Leave
+            {t('pages.team.leave')}
           </DangerButton>
         </ConfirmationModal.Footer>
       </ConfirmationModal>
@@ -488,12 +486,12 @@ export default function TeamMemberManager({
         isOpen={!!teamMemberBeingRemoved}
         onClose={() => setTeamMemberBeingRemoved(null)}
       >
-        <ConfirmationModal.Content title={'Remove Team Member'}>
-          Are you sure you would like to remove this person from the team?
+        <ConfirmationModal.Content title={t('pages.team.removeTeamMember')}>
+          {t('pages.team.confirmRemove')}
         </ConfirmationModal.Content>
         <ConfirmationModal.Footer>
           <SecondaryButton onClick={() => setTeamMemberBeingRemoved(null)}>
-            Cancel
+            {t('pages.team.cancel')}
           </SecondaryButton>
 
           <DangerButton
@@ -503,7 +501,7 @@ export default function TeamMemberManager({
             })}
             disabled={removeTeamMemberForm.processing}
           >
-            Remove
+            {t('pages.team.remove')}
           </DangerButton>
         </ConfirmationModal.Footer>
       </ConfirmationModal>

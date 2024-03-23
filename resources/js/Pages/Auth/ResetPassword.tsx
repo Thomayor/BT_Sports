@@ -1,6 +1,7 @@
 import { useForm, Head } from '@inertiajs/react';
 import classNames from 'classnames';
 import React from 'react';
+import { t } from 'i18next';
 import useRoute from '@/Hooks/useRoute';
 import AuthenticationCard from '@/Components/AuthenticationCard';
 import InputLabel from '@/Components/InputLabel';
@@ -22,12 +23,12 @@ export default function ResetPassword({ token, email }: Props) {
     password_confirmation: '',
   });
 
-  function onSubmit(e: React.FormEvent) {
+  const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     form.post(route('password.update'), {
       onFinish: () => form.reset('password', 'password_confirmation'),
     });
-  }
+  };
 
   return (
     <AuthenticationCard>
@@ -35,7 +36,9 @@ export default function ResetPassword({ token, email }: Props) {
 
       <form onSubmit={onSubmit}>
         <div>
-          <InputLabel htmlFor="email">Email</InputLabel>
+          <InputLabel htmlFor="email">
+            {t('pages.auth.resetPassword.email')}
+          </InputLabel>
           <TextInput
             id="email"
             type="email"
@@ -49,7 +52,9 @@ export default function ResetPassword({ token, email }: Props) {
         </div>
 
         <div className="mt-4">
-          <InputLabel htmlFor="password">Password</InputLabel>
+          <InputLabel htmlFor="password">
+            {t('pages.auth.resetPassword.password')}
+          </InputLabel>
           <TextInput
             id="password"
             type="password"
@@ -64,7 +69,7 @@ export default function ResetPassword({ token, email }: Props) {
 
         <div className="mt-4">
           <InputLabel htmlFor="password_confirmation">
-            Confirm Password
+            {t('pages.auth.resetPassword.confirm')}
           </InputLabel>
           <TextInput
             id="password_confirmation"
@@ -85,10 +90,11 @@ export default function ResetPassword({ token, email }: Props) {
 
         <div className="flex items-center justify-end mt-4">
           <PrimaryButton
+            type="submit"
             className={classNames({ 'opacity-25': form.processing })}
             disabled={form.processing}
           >
-            Reset Password
+            {t('pages.auth.resetPassword.reset')}
           </PrimaryButton>
         </div>
       </form>

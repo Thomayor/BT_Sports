@@ -9,6 +9,7 @@ import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import classNames from 'classnames';
+import { t } from 'i18next';
 
 export default function CreateTeamForm() {
   const route = useRoute();
@@ -27,36 +28,36 @@ export default function CreateTeamForm() {
   return (
     <FormSection
       onSubmit={createTeam}
-      title={'Team Details'}
-      description={'Create a new team to collaborate with others on projects.'}
+      title={t('pages.team.title')}
+      description={t('pages.team.createDesc')}
       renderActions={() => (
         <>
           <ActionMessage on={form.recentlySuccessful} className="mr-3">
-            Saved.
+          {t('pages.team.alert')}
           </ActionMessage>
 
           <PrimaryButton
             className={classNames({ 'opacity-25': form.processing })}
             disabled={form.processing}
           >
-            Save
+            {t('pages.team.save')}
           </PrimaryButton>
         </>
       )}
     >
       <div className="col-span-6">
-        <InputLabel value="Team Owner" />
+        <InputLabel value={t('pages.team.teamOwner')} />
 
         <div className="flex items-center mt-2">
           <img
             className="w-12 h-12 rounded-full object-cover"
             src={page.props.auth.user?.profile_photo_url}
-            alt={page.props.auth.user?.name}
+            alt={page.props.auth.user?.firstname}
           />
 
           <div className="ml-4 leading-tight">
             <div className="text-gray-900 dark:text-white">
-              {page.props.auth.user?.name}
+              {page.props.auth.user?.firstname}
             </div>
             <div className="text-gray-700 dark:text-gray-300 text-sm">
               {page.props.auth.user?.email}
@@ -66,7 +67,7 @@ export default function CreateTeamForm() {
       </div>
 
       <div className="col-span-6 sm:col-span-4">
-        <InputLabel htmlFor="name" value="Team Name" />
+        <InputLabel htmlFor="name" value={t('pages.team.name')} />
         <TextInput
           id="name"
           type="text"

@@ -9,6 +9,7 @@ import { JetstreamTeamPermissions, Team, User } from '@/types';
 import { useForm } from '@inertiajs/react';
 import classNames from 'classnames';
 import React from 'react';
+import { t } from 'i18next';
 
 interface Props {
   team: Team & { owner: User };
@@ -31,21 +32,21 @@ export default function UpdateTeamNameForm({ team, permissions }: Props) {
   return (
     <FormSection
       onSubmit={updateTeamName}
-      title={'Team Name'}
-      description={`The team's name and owner information.`}
+      title={ t('pages.team.name') }
+      description={ t('pages.team.nameDesc')}
       renderActions={
         permissions.canUpdateTeam
           ? () => (
               <>
                 <ActionMessage on={form.recentlySuccessful} className="mr-3">
-                  Saved.
+               { t('pages.team.alert')}
                 </ActionMessage>
 
                 <PrimaryButton
                   className={classNames({ 'opacity-25': form.processing })}
                   disabled={form.processing}
                 >
-                  Save
+                  { t('pages.team.save')}
                 </PrimaryButton>
               </>
             )
@@ -54,18 +55,18 @@ export default function UpdateTeamNameForm({ team, permissions }: Props) {
     >
       {/* <!-- Team Owner Information --> */}
       <div className="col-span-6">
-        <InputLabel value="Team Owner" />
+        <InputLabel value={t('pages.team.teamOwner')} />
 
         <div className="flex items-center mt-2">
           <img
             className="w-12 h-12 rounded-full object-cover"
             src={team.owner.profile_photo_url}
-            alt={team.owner.name}
+            alt={team.owner.firstname}
           />
 
           <div className="ml-4 leading-tight">
             <div className="text-gray-900 dark:text-white">
-              {team.owner.name}
+              {team.owner.firstname}
             </div>
             <div className="text-gray-700 dark:text-gray-300 text-sm">
               {team.owner.email}
@@ -76,7 +77,7 @@ export default function UpdateTeamNameForm({ team, permissions }: Props) {
 
       {/* <!-- Team Name --> */}
       <div className="col-span-6 sm:col-span-4">
-        <InputLabel htmlFor="name" value="Team Name" />
+        <InputLabel htmlFor="name" value={t('pages.team.name')} />
 
         <TextInput
           id="name"
