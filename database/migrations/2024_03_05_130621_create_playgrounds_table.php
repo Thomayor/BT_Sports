@@ -17,16 +17,17 @@ class CreatePlaygroundsTable extends Migration
             $table->id(); 
             $table->string('name', 50)->unique();
             $table->string('surface_type', 20);
-            $table->boolean('is_covered');
-            $table->boolean('is_booked');
+            $table->string('playground_type');
+            $table->string('is_covered');
             $table->foreignId('user_id')->constrained();
             $table->timestamps();
-            $table->string('city', 20)->nullable();
-            $table->string('adress', 150)->nullable();
-            $table->string('postcode', 20)->nullable();
+            $table->string('city',50);
+            $table->string('adress', 150);
+            $table->string('postcode', 20);
             $table->float('coordgpsx', 10, 6);
             $table->float('coordgpsy', 10, 6);
-            
+            $table->string('equipment_id');
+            $table->string('installation_id');
         });
     }
 

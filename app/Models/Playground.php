@@ -11,12 +11,18 @@ class Playground extends Model
 
     protected $fillable = [
         'name',
-        'is_covered',
-        'is_booked',
-        'city',
+        'equipment_id',
+        'installation_id',
+        'surface_type',
         'adress',
         'postcode',
+        'playground_type',
+        'is_covered',
+        'city',
         'coordgpsx',
-        'coordgpsy'
+        'coordgpsy',
+        'user_id',
+
+
     ];
 }

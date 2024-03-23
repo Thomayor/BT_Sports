@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Conversation extends Model
 {
+  use HasFactory;
+  
   protected $fillable = ['title', 'user_id'];
   protected $casts = [
     'user_id' => 'integer',

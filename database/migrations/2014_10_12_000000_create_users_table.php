@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('phone', 20)->nullable();
             $table->string('adress', 150)->nullable();
             $table->string('postcode', 20)->nullable();
-            $table->enum('role',['player', 'admin','superAdmin'])->default('player');
+            $table->enum('role',['PLAYER', 'SUPPORT','ADMIN'])->default('PLAYER');
             $table->foreignId('current_team_id')->nullable();
             $table->string('profile_photo_path', 2048)->nullable();
             $table->timestamps();

@@ -1,0 +1,627 @@
+{
+    "typesParticularites": [
+      {
+        "id": 1,
+        "nom": "Complexe sportif"
+      },
+      {
+        "id": 2,
+        "nom": "Etablissement scolaire"
+      },
+      {
+        "id": 3,
+        "nom": "Base de plein air et/ou de loisirs"
+      },
+      {
+        "id": 4,
+        "nom": "Piscine"
+      },
+      {
+        "id": 5,
+        "nom": "Domaine de ski"
+      },
+      {
+        "id": 6,
+        "nom": "Aérodrome/aéroport"
+      }
+    ]
+  ,
+  "typesUtilisation": [
+    {
+      "id": 1,
+      "nom": "Clubs sportifs, comités, ligues, fédérations"
+    },
+    {
+      "id": 2,
+      "nom": "Individuel(s), famille(s)"
+    },
+    {
+      "id": 3,
+      "nom": "Scolaires, universités"
+    },
+    {
+      "id": 4,
+      "nom": "Autre - association(s) et groupes divers"
+    }
+  ],
+  "typesEquipementSportif": [
+    {
+      "id": 1,
+      "nom": "Court de tennis"
+    },
+    {
+      "id": 2,
+      "nom": "Terrain de football"
+    },
+    {
+      "id": 3,
+      "nom": "Boucle de randonnée"
+    },
+    {
+      "id": 4,
+      "nom": "Multisports/City-stades"
+    },
+    {
+      "id": 5,
+      "nom": "Terrain de pétanque"
+    },
+    {
+      "id": 6,
+      "nom": "Salle de musculation/cardiotraining"
+    },
+    {
+      "id": 7,
+      "nom": "Carrière"
+    },
+    {
+      "id": 8,
+      "nom": "Terrain de boules"
+    },
+    {
+      "id": 9,
+      "nom": "Dojo / Salle d'arts martiaux"
+    },
+    {
+      "id": 10,
+      "nom": "Piste d'athlétisme isolée"
+    },
+    {
+      "id": 11,
+      "nom": "Manège"
+    },
+    {
+      "id": 12,
+      "nom": "Salle de cours collectifs"
+    },
+    {
+      "id": 13,
+      "nom": "Salle de danse"
+    },
+    {
+      "id": 14,
+      "nom": "Skatepark"
+    },
+    {
+      "id": 15,
+      "nom": "Site d'escalade en falaise"
+    },
+    {
+      "id": 16,
+      "nom": "Terrain de handball"
+    },
+    {
+      "id": 17,
+      "nom": "Espace de pratique spéléologique"
+    },
+    {
+      "id": 18,
+      "nom": "Structure Artificielle d'Escalade"
+    },
+    {
+      "id": 19,
+      "nom": "Parcours sportif/santé"
+    },
+    {
+      "id": 20,
+      "nom": "Salle de gymnastique sportive"
+    },
+    {
+      "id": 21,
+      "nom": "Site de pêche"
+    },
+    {
+      "id": 22,
+      "nom": "Bassin ludique de natation"
+    },
+    {
+      "id": 23,
+      "nom": "Pas de tir à la cible"
+    },
+    {
+      "id": 24,
+      "nom": "Terrain de rugby"
+    },
+    {
+      "id": 25,
+      "nom": "Site d'activités aquatiques et nautiques"
+    },
+    {
+      "id": 26,
+      "nom": "Stade d’athlétisme"
+    },
+    {
+      "id": 27,
+      "nom": "Bassin sportif de natation"
+    },
+    {
+      "id": 28,
+      "nom": "Terrain mixte"
+    },
+    {
+      "id": 29,
+      "nom": "Point d'embarquement et de débarquement isolé"
+    },
+    {
+      "id": 30,
+      "nom": "Pas de tir à l'arc"
+    },
+    {
+      "id": 31,
+      "nom": "Salle de tennis de table"
+    },
+    {
+      "id": 32,
+      "nom": "Aire de saut"
+    },
+    {
+      "id": 33,
+      "nom": "Mur de tennis"
+    },
+    {
+      "id": 34,
+      "nom": "Site de spéléologie sportive et/ou éducative"
+    },
+    {
+      "id": 35,
+      "nom": "Carrière de dressage/rond de longe"
+    },
+    {
+      "id": 36,
+      "nom": "Terrain de volley-ball"
+    },
+    {
+      "id": 37,
+      "nom": "Salle ou terrain de squash"
+    },
+    {
+      "id": 38,
+      "nom": "Canyon"
+    },
+    {
+      "id": 39,
+      "nom": "Piste de bicross"
+    },
+    {
+      "id": 40,
+      "nom": "Bassin mixte de natation"
+    },
+    {
+      "id": 41,
+      "nom": "Terrain de beach-volley"
+    },
+    {
+      "id": 42,
+      "nom": "Salle de boxe"
+    },
+    {
+      "id": 43,
+      "nom": "Site de plongée"
+    },
+    {
+      "id": 44,
+      "nom": "Parcours de cross"
+    },
+    {
+      "id": 45,
+      "nom": "Aire de décollage"
+    },
+    {
+      "id": 46,
+      "nom": "Parcours Acrobatique en Hauteur/Site d'accrobranche"
+    },
+    {
+      "id": 47,
+      "nom": "Circuit de motocross"
+    },
+    {
+      "id": 48,
+      "nom": "Terrain de boules traditionnelles"
+    },
+    {
+      "id": 49,
+      "nom": "Salle de billard"
+    },
+    {
+      "id": 50,
+      "nom": "Aire de lancer"
+    },
+    {
+      "id": 51,
+      "nom": "Port de plaisance"
+    },
+    {
+      "id": 52,
+      "nom": "Practice"
+    },
+    {
+      "id": 53,
+      "nom": "Parcours fixe de course d’orientation"
+    },
+    {
+      "id": 54,
+      "nom": "Pas de tir aux plateaux"
+    },
+    {
+      "id": 55,
+      "nom": "Refuge de montagne"
+    },
+    {
+      "id": 56,
+      "nom": "Salle de lutte"
+    },
+    {
+      "id": 57,
+      "nom": "Via ferrata / Via corda"
+    },
+    {
+      "id": 58,
+      "nom": "Courses sur piste"
+    }
+  ],
+  "departements": [
+    {
+      "code": "59",
+      "nom": "Nord"
+    },
+    {
+      "code": "57",
+      "nom": "Moselle"
+    },
+    {
+      "code": "44",
+      "nom": "Loire-Atlantique"
+    },
+    {
+      "code": "31",
+      "nom": "Haute-Garonne"
+    },
+    {
+      "code": "64",
+      "nom": "Pyrénées-Atlantiques"
+    },
+    {
+      "code": "33",
+      "nom": "Gironde"
+    },
+    {
+      "code": "38",
+      "nom": "Isère"
+    },
+    {
+      "code": "13",
+      "nom": "Bouches-du-Rhône"
+    },
+    {
+      "code": "62",
+      "nom": "Pas-de-Calais"
+    },
+    {
+      "code": "29",
+      "nom": "Finistère"
+    },
+    {
+      "code": "69",
+      "nom": "Rhône"
+    },
+    {
+      "code": "56",
+      "nom": "Morbihan"
+    },
+    {
+      "code": "34",
+      "nom": "Hérault"
+    },
+    {
+      "code": "76",
+      "nom": "Seine-Maritime"
+    },
+    {
+      "code": "72",
+      "nom": "Maine-et-Loire"
+    },
+    {
+      "code": "77",
+      "nom": "Sarthe"
+    },
+    {
+      "code": "67",
+      "nom": "Bas-Rhin"
+    },
+    {
+      "code": "60",
+      "nom": "Oise"
+    },
+    {
+      "code": "78",
+      "nom": "Yvelines"
+    },
+    {
+      "code": "74",
+      "nom": "Haute-Savoie"
+    },
+    {
+      "code": "63",
+      "nom": "Puy-de-Dôme"
+    },
+    {
+      "code": "91",
+      "nom": "Essonne"
+    },
+    {
+      "code": "22",
+      "nom": "Côtes-d'Armor"
+    },
+    {
+      "code": "17",
+      "nom": "Charente-Maritime"
+    },
+    {
+      "code": "01",
+      "nom": "Ain"
+    },
+    {
+      "code": "83",
+      "nom": "Var"
+    },
+    {
+      "code": "30",
+      "nom": "Gard"
+    },
+    {
+      "code": "85",
+      "nom": "Vendée"
+    },
+    {
+      "code": "54",
+      "nom": "Meurthe-et-Moselle"
+    },
+    {
+      "code": "66",
+      "nom": "Pyrénées-Orientales"
+    },
+    {
+      "code": "68",
+      "nom": "Haut-Rhin"
+    },
+    {
+      "code": "05",
+      "nom": "Hautes-Alpes"
+    },
+    {
+      "code": "80",
+      "nom": "Somme"
+    },
+    {
+      "code": "35",
+      "nom": "Ille-et-Vilaine"
+    },
+    {
+      "code": "02",
+      "nom": "Aisne"
+    },
+    {
+      "code": "06",
+      "nom": "Alpes-Maritimes"
+    },
+    {
+      "code": "95",
+      "nom": "Val-d'Oise"
+    },
+    {
+      "code": "14",
+      "nom": "Calvados"
+    },
+    {
+      "code": "27",
+      "nom": "Eure"
+    },
+    {
+      "code": "45",
+      "nom": "Loiret"
+    },
+    {
+      "code": "37",
+      "nom": "Indre-et-Loire"
+    },
+    {
+      "code": "72",
+      "nom": "Sarthe"
+    },
+    {
+      "code": "51",
+      "nom": "Marne"
+    },
+    {
+      "code": "14",
+      "nom": "Calvados"
+    },
+    {
+      "code": "26",
+      "nom": "Drôme"
+    },
+    {
+      "code":"53",
+      "nom": "Mayenne"
+    },
+    {
+      "code": "84",
+      "nom": "Vaucluse"
+    },
+    {
+      "code": "86",
+      "nom": "Vienne"
+    },
+    {
+      "code": "03",
+      "nom": "Allier"
+    },
+    {
+      "code": "93",
+      "nom": "Seine-Saint-Denis"
+    },
+    {
+      "code": "50",
+      "nom": "Manche"
+    },
+    {
+      "code": "79",
+      "nom": "Deux-Sèvres"
+    },
+    {
+      "code": "36",
+      "nom": "Indre"
+    },
+    {
+      "code": "40",
+      "nom": "Landes"
+    },
+    {
+      "code": "47",
+      "nom": "Lot-et-Garonne"
+    },
+    {
+      "code": "07",
+      "nom": "Ardèche"
+    },
+    {
+      "code": "87",
+      "nom": "Haute-Vienne"
+    },
+    {
+      "code": "19",
+      "nom": "Corrèze"
+    },
+    {
+      "code": "41",
+      "nom": "Loir-et-Cher"
+    },
+    {
+      "code": "18",
+      "nom": "Cher"
+    },
+    {
+      "code": "89",
+      "nom": "Yonne"
+    },
+    {
+      "code": "65",
+      "nom": "Hautes-Pyrénées"
+    },
+    {
+      "code": "04",
+      "nom": "Alpes-de-Haute-Provence"
+    },
+    {
+      "code": "32",
+      "nom": "Gers"
+    },
+    {
+      "code": "08",
+      "nom": "Ardennes"
+    },
+    {
+      "code": "61",
+      "nom": "Orne"
+    },
+    {
+      "code": "43",
+      "nom": "Haute-Loire"
+    },
+    {
+      "code": "16",
+      "nom": "Charente"
+    },
+    {
+      "code": "15",
+      "nom": "Cantal"
+    },
+    {
+      "code": "82",
+      "nom": "Tarn-et-Garonne"
+    },
+    {
+      "code": "10",
+      "nom": "Aube"
+    },
+    {
+      "code": "48",
+      "nom": "Lozère"
+    },
+    {
+      "code": "52",
+      "nom": "Haute-Marne"
+    },
+    {
+      "code": "55",
+      "nom": "Meuse"
+    },
+    {
+      "code": "971",
+      "nom": "Guadeloupe"
+    },
+    {
+      "code": "988",
+      "nom": "Nouvelle-Calédonie"
+    },
+    {
+      "code": "972",
+      "nom": "Martinique"
+    },
+    {
+      "code": "23",
+      "nom": "Creuse"
+    },
+    {
+      "code": "58",
+      "nom": "Nièvre"
+    },
+    {
+      "code": "987",
+      "nom": "Polynésie française"
+    },
+    {
+      "code": "847",
+      "nom": "Territoire de Belfort"
+    },
+    {
+      "code": "90",
+      "nom": "Guyane"
+    },
+    {
+      "code": "819",
+      "nom": "Mayotte"
+    },
+    {
+      "code": "68",
+      "nom": "Haut-Rhin"
+    },
+    {
+      "code": "67",
+      "nom": "Bas-Rhin"
+    },
+    {
+      "code": "976",
+      "nom": "Mayotte"
+    }
+  ]
+}

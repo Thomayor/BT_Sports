@@ -10,7 +10,8 @@ use App\Http\Controllers\TeamController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ConversationController;
 use App\Http\Controllers\NotificationController;
-use App\Models\Notification;
+use App\Http\Controllers\PlaygroundController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -88,10 +89,9 @@ Route::middleware([
     'showMembers',
   ])->name('team.members');
 
-  Route::get('/notifications',function () {
+  Route::get('/notifications', function () {
     return Inertia::render('Notifications/View');
   })->name('notifications');
-  
 
   Route::post('/notifications/{id}/read', [
     NotificationController::class,
@@ -114,7 +114,10 @@ Route::middleware([
     'store',
   ])->name('conversations.store');
 
-  Route::delete('/conversations/{id}', [ConversationController::class, 'destroy'])->name('conversation.destroy');
+  Route::delete('/conversations/{id}', [
+    ConversationController::class,
+    'destroy',
+  ])->name('conversation.destroy');
 
   Route::get('/conversations/{id}/messages', [
     MessageController::class,
@@ -126,4 +129,11 @@ Route::middleware([
     'storeMessage',
   ])->name('conversations.message.store');
 
+});
+
+Route::middleware(['role:ADMIN,SUPPORT'])->group(function () {
+  Route::resource('playgrounds', PlaygroundController::class);
+  Route::get('/list-playgrounds', [PlaygroundController::class, 'listPlaygroundApi'])->name(
+    'playgrounds.listApi'
+  );
 });
