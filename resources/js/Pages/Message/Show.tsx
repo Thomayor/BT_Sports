@@ -8,11 +8,11 @@ interface ShowProps {
   auth: Auth;
 }
 
-function Show({ conversation, messages, auth }: ShowProps) {
+function ShowConversation({ conversation, messages, auth }: ShowProps) {
   return (
     <MessagesList messages={messages} auth={auth} conversation={conversation} />
   );
 }
 
 
-export default Show;
+export default ShowConversation;

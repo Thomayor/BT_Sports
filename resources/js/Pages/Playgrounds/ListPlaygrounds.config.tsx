@@ -29,7 +29,7 @@ export type Search =
 export const getColumns = ({
   handleChoose,
 }: {
-  handleChoose: (num: string) => void;
+  handleChoose: (e,num: string) => void;
 }) =>
   [
     {
@@ -100,7 +100,7 @@ export const getColumns = ({
       key: 'select',
       search: null,
       render: row => (
-        <button onClick={() => handleChoose(row.numequipement)}>Choisir</button>
+        <button onClick={(e) => handleChoose(e,row.numequipement)}>Choisir</button>
       ),
     },
   ] satisfies PlaygroundColumn[];

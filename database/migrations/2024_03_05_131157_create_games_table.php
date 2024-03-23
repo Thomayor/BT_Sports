@@ -28,7 +28,7 @@ class CreateGamesTable extends Migration
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
             $table
-                ->foreignIdFor(Playground::class,'playground_id')
+                ->foreignIdFor(Playground::class,'equipment_id')
                 ->constrained()
                 ->onDelete('cascade')
                 ->onUpdate('cascade');

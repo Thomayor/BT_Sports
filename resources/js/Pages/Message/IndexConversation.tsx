@@ -19,7 +19,7 @@ interface IndexProps {
   auth: Auth;
 }
 
-function Index({ conversations, conversation, messages, auth }: IndexProps) {
+function IndexConversation({ conversations, conversation, messages, auth }: IndexProps) {
   const [searchTerm, setSearchTerm] = useState('');
   const [filter, setFilter] = useState('all');
   const [showDropdown, setShowDropdown] = useState(false);
@@ -226,4 +226,4 @@ function Index({ conversations, conversation, messages, auth }: IndexProps) {
   );
 }
 
-export default Index;
+export default IndexConversation;

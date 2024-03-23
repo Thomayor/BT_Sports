@@ -76,16 +76,19 @@ function ModalNotification({ notifications }: ModalNotificationProps) {
                       : 'text-slate-500 dark:text-slate-300'
                   }`}
                 >
-                  <a
-                    href={`/${notification.link}`}
+                  <div
+                 
                     className="mr-1"
-                    onClick={() => handleMarkAsRead(notification.id)}
+                    onClick={() => {
+                      handleMarkAsRead(notification.id);
+                      window.location.href = `/${notification.link}`;
+                    }}
                   >
                     <p className="text-sm">{notification.content}</p>
                     <p className="text-xs">
                       {new Date(notification.created_at).toLocaleString()}
                     </p>
-                  </a>
+                  </div>
                 </div>
                 <div className="flex items-center justify-end">
                   {notification.pivot.read_at === null ? (

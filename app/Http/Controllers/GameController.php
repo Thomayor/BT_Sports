@@ -52,7 +52,7 @@ class GameController extends Controller
             'end_time' => $request->input('end_time'),
             'max_player' => $request->input('max_player'),
             'sport_id' => $request->input('sport_id'),
-            'playground_id' => $request->input('playground_id'),
+            'equipment_id' => $request->input('equipment_id'),
             'user_id' => $user
         ]);
 
