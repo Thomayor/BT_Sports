@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Playground extends Model
 {
     use HasFactory;
+
     protected $fillable = [
         'name',
         'equipment_id',
@@ -21,5 +22,7 @@ class Playground extends Model
         'coordgpsx',
         'coordgpsy',
         'user_id',
+
+
     ];
 }
