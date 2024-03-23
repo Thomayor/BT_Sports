@@ -11,7 +11,8 @@ use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ConversationController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PlaygroundController;
-
+use App\Http\Controllers\SportController;
+use App\Http\Requests\SportRequest;
 
 /*
 |--------------------------------------------------------------------------
@@ -135,5 +136,21 @@ Route::middleware(['role:ADMIN,SUPPORT'])->group(function () {
   Route::resource('playgrounds', PlaygroundController::class);
   Route::get('/list-playgrounds', [PlaygroundController::class, 'listPlaygroundApi'])->name(
     'playgrounds.listApi'
+  );
+
+  Route::get('/sports', [SportController::class, 'index'])->name(
+    'sports.index'
+  );
+  
+  Route::get('/sports/create', [SportController::class, 'create'])->name(
+    'sports.create'
+  );
+
+  Route::post('/sports/store', [SportController::class, 'store'])->name(
+    'sports.store'
+  );
+
+  Route::delete('/sports/{id}/delete', [SportController::class, 'destroy'])->name(
+    'sports.destroy'
   );
 });

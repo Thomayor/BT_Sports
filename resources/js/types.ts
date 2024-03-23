@@ -22,6 +22,7 @@ export interface User {
   email_verified_at: Nullable<DateTime>;
   created_at: DateTime;
   updated_at: DateTime;
+  role: string
 }
 
 export interface Auth {
@@ -108,7 +109,12 @@ export interface TeamInvitation {
 
 export interface Sport {
   id: number,
-  name: string
+  name: string,
+  user_id: number
+}
+
+export interface ShowSportsProps {
+  sports: Sport[]
 }
 
 export interface Game {

@@ -46,7 +46,7 @@ export default function CreateGameForm({ playgrounds, sports, teams }: CreateGam
         ) {
             setIsCompleted(true);
         }
-        setErrorMessage('Please fill out all fields in the Game Details section')
+        setErrorMessage('Please fill out all fields.');
     };
 
     return (
@@ -54,8 +54,8 @@ export default function CreateGameForm({ playgrounds, sports, teams }: CreateGam
             {!isCompleted ? (
                 <FormSection
                     onSubmit={showAddTeam}
-                    title={'Game Details'}
-                    description={'Create a new game and challenge opponents'}
+                    title={'Game Form'}
+                    description={'Create a game and challenge opponents.'}
                     renderActions={() => (
                         <>
                             <ActionMessage on={form.recentlySuccessful} className="mr-3">
