@@ -172,10 +172,11 @@ export interface Message {
 }
 
 export interface Playground {
+  playground_type: string;
   id: number;
   name: string;
   surface_type: string;
-  is_covered: boolean;
+  is_covered: string;
   user_id: number;
   created_at: string;
   updated_at: string;

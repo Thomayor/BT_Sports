@@ -9,8 +9,8 @@ export default function IndexGameTable({ games, sports, playgrounds, teams }: Sh
     return (
         <div>
             <div className="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
-                <PrimaryButton className='opacity-80 mb-2 bg-sky-500' >
                     <Link href="games/create/">
+                <PrimaryButton className='opacity-80 mb-2 bg-sky-500' >
                         <svg 
                             xmlns="http://www.w3.org/2000/svg" 
                             viewBox="0 0 20 20" 
@@ -23,8 +23,8 @@ export default function IndexGameTable({ games, sports, playgrounds, teams }: Sh
                                 clipRule="evenodd"
                             />
                         </svg>
-                    </Link>
                 </PrimaryButton>
+                    </Link>
 
                 <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
                     <table className="sm:table-auto w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">

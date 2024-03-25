@@ -18,7 +18,7 @@ class PlaygroundController extends Controller
   {
     $playgrounds = Playground::all();
 
-    return Inertia::render('Playgrounds/Index', [
+    return Inertia::render('Playgrounds/IndexPlaygrounds', [
       'playgrounds' => $playgrounds,
     ]);
   }
@@ -101,7 +101,11 @@ class PlaygroundController extends Controller
    */
   public function edit(string $id)
   {
-    //
+    $playground = Playground::findOrFail($id);
+
+    return Inertia::render('Playgrounds/EditPlayground', [
+      'playground' => $playground,
+    ]);
   }
 
   /**
@@ -132,6 +136,11 @@ class PlaygroundController extends Controller
     }
 
     $playground->delete();
-    return response()->json(null, 204);
+
+    return redirect()
+      ->refresh()
+      ->with([
+        'flash' => 'Votre Playground a été supprimé avec succès !',
+      ]);
   }
 }
