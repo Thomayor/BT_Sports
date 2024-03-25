@@ -56,7 +56,7 @@ export default function IndexGameTable({ games, sports, playgrounds, teams }: Sh
                         <tbody>
                             {games.map((game) => {
                                 const sport = sports.find(sport => sport.id === game.sport_id);
-                                const playground = playgrounds.find(playground => playground.id === game.playground_id);
+                                const playground = playgrounds.find(playground => playground.equipment_id === game.equipment_id);
                                 
                                 return (
                                     <tr key={game.id} className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">

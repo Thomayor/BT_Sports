@@ -35,7 +35,7 @@ export interface Auth {
 }
 
 export interface Notification {
-  pivot: { read_at: string | null;}
+  pivot: { read_at: string | null };
   id: number;
   content: string;
   created_at: string;
@@ -105,62 +105,48 @@ export interface TeamInvitation {
   updated_at: DateTime;
 }
 
-
 export interface Sport {
-  id: number,
-  name: string
+  id: number;
+  name: string;
 }
 
 export interface Game {
-  id: number,
-  date: Date,
-  start_time: DateTime,
-  end_time: DateTime,
-  max_player: number,
-  sport_id: number,
-  playground_id: number
-  user_id: number,
+  id: number;
+  date: Date;
+  start_time: DateTime;
+  end_time: DateTime;
+  max_player: number;
+  sport_id: number;
+  equipment_id: string;
+  user_id: number;
 }
 
 export interface CreateGameProps {
-  sports: Sport[],
-  playgrounds: Playground[],
-  teams: Team[]
+  sports: Sport[];
+  playgrounds: Playground[];
+  teams: Team[];
 }
 
 export interface UpdateGameProps extends CreateGameProps {
-  game: Game
+  game: Game;
 }
 
 export interface ShowGamesProps extends CreateGameProps {
-  games: Game[],
+  games: Game[];
 }
 
 export interface ShowGameProps extends CreateGameProps {
-  game: Game,
-  teams: Team[],
-  playground: Playground[],
-  sport: Sport[],
-  users: User[]
+  game: Game;
+  teams: Team[];
+  playground: Playground[];
+  sport: Sport[];
+  users: User[];
 }
 
 export interface JoinGameProps {
-  game: Game,
-  teams: Team[]
+  game: Game;
+  teams: Team[];
 }
-
-export interface Playground {
-  id: number,
-  name: string,
-  is_covered: boolean,
-  is_booked: boolean,
-  city: string,
-  adress: string,
-  postcode: string,
-  coordgpsx: number,
-  coordgpsy: number
-}
-
 
 export interface Conversation {
   users: any;
@@ -190,15 +176,16 @@ export interface Playground {
   name: string;
   surface_type: string;
   is_covered: boolean;
-  is_booked: boolean;
   user_id: number;
-  created_at: string; 
-  updated_at: string; 
-  city: string; 
-  adress: string; 
-  postcode: string; 
+  created_at: string;
+  updated_at: string;
+  city: string;
+  adress: string;
+  postcode: string;
   coordgpsx: number;
   coordgpsy: number;
+  equipment_id: string;
+  installation_id: string;
 }
 
 export enum Method {
@@ -210,4 +197,3 @@ export enum Method {
 }
 
 export default Method;
-
