@@ -22,6 +22,7 @@ export interface User {
   email_verified_at: Nullable<DateTime>;
   created_at: DateTime;
   updated_at: DateTime;
+  role: string;
 }
 
 export interface Auth {
