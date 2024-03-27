@@ -100,7 +100,7 @@ export default function AppLayout({
                   >
                     Messagerie
                   </NavLink>
-                  {page.props.auth.user?.role === "ADMIN" ? (
+                  {page.props.auth.user?.account_type === "ADMIN" ? (
                     
                   <NavLink
                     href={route('playgrounds.index')}
@@ -113,7 +113,10 @@ export default function AppLayout({
               </div>
 
               <div className="hidden sm:flex sm:items-center sm:ml-6">
+                <div className='relative z-20'>
+
                 <ModalNotification notifications={notifications} />
+                </div>
 
                 <div className="ml-3 relative">
                   {/* <!-- Teams Dropdown --> */}

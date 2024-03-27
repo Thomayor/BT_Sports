@@ -1,17 +1,19 @@
 import React, { useState, FormEvent } from 'react';
 
-
 interface SendMessageModalProps {
   onClose: () => void;
   onSubmit: (data: { content: string }) => void;
 }
 
-export default function SendMessageModal({ onClose, onSubmit }: SendMessageModalProps) {
+export default function SendMessageModal({
+  onClose,
+  onSubmit,
+}: SendMessageModalProps) {
   const [content, setContent] = useState<string>('');
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    onSubmit({content });
+    onSubmit({ content });
     setContent('');
     onClose();
   };
@@ -38,7 +40,7 @@ export default function SendMessageModal({ onClose, onSubmit }: SendMessageModal
           </div>
           <button
             type="submit"
-            className="bg-blue-500 text-white py-2 px-4 rounded-md mr-2 hover:bg-secondary"
+            className="bg-sky-500 text-white py-2 px-4 rounded-md mr-2 hover:bg-secondary"
           >
             Envoyer
           </button>
@@ -54,7 +56,3 @@ export default function SendMessageModal({ onClose, onSubmit }: SendMessageModal
     </div>
   );
 }
-
-
-
-

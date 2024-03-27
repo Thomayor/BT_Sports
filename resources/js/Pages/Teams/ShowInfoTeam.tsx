@@ -6,13 +6,11 @@ import useRoute from '@/Hooks/useRoute';
 import SendMessageModal from '@/Components/SendMessage';
 import { router } from '@inertiajs/react';
 
-interface TeamMembersProps {
+interface ShowTeamProps {
   team: Team;
-  members: User[];
-  owner: User;
 }
 
-export default function Members({ team, members, owner }: TeamMembersProps) {
+export default function ShowInfoTeam({ team }: ShowTeamProps) {
   const route = useRoute();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [receiverId, setRecieverId] = useState<number | null>(null);
@@ -27,7 +25,8 @@ export default function Members({ team, members, owner }: TeamMembersProps) {
     <AppLayout title={t('pages.team.members')}>
       <div className="m-5">
         <div>
-          <h2>Fiche de l'équipe</h2>
+          <h2 className="text-sky-500 text-2xl ml-2 mb-5">Fiche de l'équipe</h2>
+
           <div className="my-2 bg-white rounded-lg p-4">
             <p className="my-2">Nom d'équipe : {team.name} </p>
             <p className="my-2">
@@ -46,28 +45,31 @@ export default function Members({ team, members, owner }: TeamMembersProps) {
           </div>
         </div>
 
-        <h3>{t('pages.team.members')}</h3>
+        <h2 className="text-sky-500 text-2xl ml-2 my-5">
+          {t('pages.team.members')}
+        </h2>
         <div className="flex space-x-2 mt-2 p-4 bg-white rounded-lg">
           <div className="group cursor-pointer relative inline-block">
             <img
-              src={owner.profile_photo_url}
+              src={team.owner.profile_photo_url}
               className="rounded-full w-16 h-16 transition-transform transform group-hover:scale-105 hover:opacity-50"
-              alt={`Profil ${owner.firstname} ${owner.lastname}`}
+              alt={`Profil ${team.owner.firstname} ${team.owner.lastname}`}
             />
             <div className="absolute flex flex-col justify-center items-center mt-1 p-4 bg-white rounded-lg text-black opacity-0 group-hover:opacity-100 transition-opacity">
               <img
-                src={owner.profile_photo_url}
+                src={team.owner.profile_photo_url}
                 className="rounded-full w-16 h-16"
-                alt={`Profil ${owner.firstname} ${owner.lastname}`}
+                alt={`Profil ${team.owner.firstname} ${team.owner.lastname}`}
               />
               <p className="mt-1 flex items-center space-x-2 text-lg font-semibold">
-                <span>{owner.firstname}</span> <span>{owner.lastname}</span>
+                <span>{team.owner.firstname}</span>{' '}
+                <span>{team.owner.lastname}</span>
               </p>
               <button
-                className="bg-blue-500 text-white py-2 px-4 rounded mt-2"
+                className="bg-sky-500 text-white py-2 px-4 rounded mt-2"
                 onClick={() => {
                   setIsModalOpen(true);
-                  setRecieverId(owner.id);
+                  setRecieverId(team.owner.id);
                 }}
               >
                 Contacter
@@ -75,7 +77,7 @@ export default function Members({ team, members, owner }: TeamMembersProps) {
             </div>
           </div>
 
-          {members.map(member => (
+          {team.users.map(member => (
             <div
               key={member.id}
               className="group cursor-pointer relative inline-block mr-4"
@@ -95,7 +97,7 @@ export default function Members({ team, members, owner }: TeamMembersProps) {
                   <span>{member.firstname}</span> <span>{member.lastname}</span>
                 </p>
                 <button
-                  className="bg-blue-500 text-white py-2 px-4 rounded mt-2"
+                  className="bg-sky-500 text-white py-2 px-4 rounded mt-2"
                   onClick={() => {
                     setIsModalOpen(true);
                     setRecieverId(member.id);

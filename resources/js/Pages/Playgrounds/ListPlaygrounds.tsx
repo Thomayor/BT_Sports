@@ -182,7 +182,7 @@ export default function ListPlaygrounds({
             </PaginationItem>
           </button>
         </PaginationContent>
-        <Button onClick={handleSubmit}>Rechercher</Button>
+         onClick={handleSubmit}>Rechercher</Button>
       </div>
       {/* RESULTS LIST */}
       <div>

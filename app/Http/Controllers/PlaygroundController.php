@@ -125,7 +125,7 @@ class PlaygroundController extends Controller
   {
     $playground = Playground::findOrFail($id);
 
-    if (Auth::user()->role !== 'ADMIN') {
+    if (Auth::user()->account_type !== 'ADMIN') {
       return response()->json(
         [
           'message' =>

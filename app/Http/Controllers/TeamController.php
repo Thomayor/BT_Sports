@@ -11,20 +11,16 @@ class TeamController extends Controller
   public function showTeams()
   {
     $teams = Team::with('owner', 'users')->get();
-    
-    return Inertia::render('Teams/Index', ['teams' => $teams]);
+
+    return Inertia::render('Teams/IndexTeams', ['teams' => $teams]);
   }
 
-  public function showMembers($teamId)
+  public function showInfoTeam($id)
   {
-    $team = Team::with('users')->findOrFail($teamId);
-    $members = $team->users;
-    $owner = $team->owner;
+    $team = Team::with('owner', 'users')->findOrFail($id);
 
-    return Inertia::render('Teams/Members', [
+    return Inertia::render('Teams/ShowInfoTeam', [
       'team' => $team,
-      'members' => $members,
-      'owner' => $owner,
     ]);
   }
 }

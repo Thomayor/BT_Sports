@@ -62,7 +62,7 @@ function IndexConversation({ conversations, conversation, messages, auth }: Inde
     <AppLayout title="Ma Messagerie">
       <div className="flex items-center justify-between p-4">
         <div className="flex items-center space-x-3">
-          <span className="text-blue-500 text-2xl ml-2">Messagerie</span>
+        <h2 className="text-sky-500 text-2xl ml-2 mb-5">Messagerie</h2>
         </div>
       </div>
 
@@ -87,7 +87,7 @@ function IndexConversation({ conversations, conversation, messages, auth }: Inde
                   type="button"
                   onClick={() => setFilter('all')}
                   className={`border rounded  px-5 py-2 ${
-                    filter === 'all' ? 'bg-blue-500 text-white' : ''
+                    filter === 'all' ? 'bg-sky-500 text-white' : ''
                   }`}
                 >
                   Tous
@@ -96,7 +96,7 @@ function IndexConversation({ conversations, conversation, messages, auth }: Inde
                   type="button"
                   onClick={() => setFilter('read')}
                   className={`border rounded px-6 py-2 ${
-                    filter === 'read' ? 'bg-blue-500 text-white' : ''
+                    filter === 'read' ? 'bg-sky-500 text-white' : ''
                   }`}
                 >
                   Lus
@@ -105,7 +105,7 @@ function IndexConversation({ conversations, conversation, messages, auth }: Inde
                   type="button"
                   onClick={() => setFilter('unread')}
                   className={`border rounded py-2 px-3 ${
-                    filter === 'unread' ? 'bg-blue-500 text-white' : ''
+                    filter === 'unread' ? 'bg-sky-500 text-white' : ''
                   }`}
                 >
                   Non lus
@@ -159,7 +159,7 @@ function IndexConversation({ conversations, conversation, messages, auth }: Inde
                           </Link>
 
                           <button
-                            className="absolute top-1 right-2 cursor-pointer rounded-full border px-2 hover:border-blue-500"
+                            className="absolute top-1 right-2 cursor-pointer rounded-full border px-2 hover:border-sky-500"
                             onClick={() => setShowDropdown(!showDropdown)}
                           >
                             <FontAwesomeIcon

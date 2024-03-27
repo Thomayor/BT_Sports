@@ -8,6 +8,8 @@ export interface Team {
   personal_team: boolean;
   created_at: DateTime;
   updated_at: DateTime;
+  users: User[];
+  owner: User;
 }
 
 export interface User {
@@ -22,7 +24,7 @@ export interface User {
   email_verified_at: Nullable<DateTime>;
   created_at: DateTime;
   updated_at: DateTime;
-  role: string;
+  account_type: string;
 }
 
 export interface Auth {

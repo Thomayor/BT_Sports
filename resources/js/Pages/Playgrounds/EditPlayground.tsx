@@ -11,6 +11,7 @@ import FormSection from '@/Components/FormSection';
 import ActionMessage from '@/Components/ActionMessage';
 import PrimaryButton from '@/Components/PrimaryButton';
 import classNames from 'classnames';
+import { Button } from '@/Components/ui';
 
 interface EditPlaygroundProps {
   playground: Playground;
@@ -42,7 +43,9 @@ const EditPlayground = ({ playground }: EditPlaygroundProps) => {
   return (
     <AppLayout title="Terrains">
       <div className='max-w-7xl mx-auto py-10 sm:px-6 lg:px-8'>
-        <Link href={route('playgrounds.index')} className='rounded-full border-2 px-4 border-slate-500 '> Retour liste </Link>
+        <Button className='my-2 bg-sky-500 hover:bg-sky-200 text-white py-2 px-8 rounded'>
+        <Link href={route('playgrounds.index')} > Retour liste </Link>
+        </Button>
         <FormSection
           onSubmit={updatePlayground}
           title={'Edit Playground'}
