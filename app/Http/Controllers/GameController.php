@@ -8,7 +8,6 @@ use App\Http\Requests\GameRequest;
 use App\Models\Playground;
 use App\Models\Sport;
 use App\Models\Team;
-use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class GameController extends Controller
@@ -18,7 +17,7 @@ class GameController extends Controller
         $games = Game::all();
         $sports = Sport::all();
         $playgrounds = Playground::all();
-        $teams = Team::all();
+        $teams = Team::with('users')->get();
 
         return Inertia::render('Games/IndexGames', [
             'games' => $games,
@@ -73,11 +72,10 @@ class GameController extends Controller
         $playground = Playground::where('id', '=', $game->playground_id)->get();
         $teams = $game->teams()->with('users')->get();
 
-        $usersByTeam = [];
+        $owners = [];
 
-        foreach ($teams as $team) {
-            $users = $team->users()->get();
-            $usersByTeam[$team->id] = $users->toArray();
+        foreach($teams as $team) {
+            $owners[] = $team->owner;
         }
 
         return Inertia::render('Games/ShowGame', [
@@ -85,7 +83,7 @@ class GameController extends Controller
             'sport' => $sport,
             'playground' => $playground,
             'teams' => $teams,
-            'users' => $users
+            'owners' => $owners
         ]);
     }
 

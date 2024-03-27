@@ -8,6 +8,8 @@ export interface Team {
   personal_team: boolean;
   created_at: DateTime;
   updated_at: DateTime;
+  users: User[];
+  owner: User;
 }
 
 export interface User {
@@ -106,65 +108,65 @@ export interface TeamInvitation {
   updated_at: DateTime;
 }
 
-
 export interface Sport {
   id: number,
   name: string,
-  user_id: number
+  user_id: number;
 }
 
 export interface ShowSportsProps {
-  sports: Sport[]
+  sports: Sport[];
 }
 
 export interface Game {
-  id: number,
-  date: Date,
-  start_time: DateTime,
-  end_time: DateTime,
-  max_player: number,
-  sport_id: number,
-  playground_id: number
-  user_id: number,
+  id: number;
+  date: Date;
+  start_time: DateTime;
+  end_time: DateTime;
+  max_player: number;
+  sport_id: number;
+  playground_id: number;
+  user_id: number;
+  teams: Team[];
 }
 
 export interface CreateGameProps {
-  sports: Sport[],
-  playgrounds: Playground[],
-  teams: Team[]
+  sports: Sport[];
+  playgrounds: Playground[];
+  teams: Team[];
 }
 
 export interface UpdateGameProps extends CreateGameProps {
-  game: Game
+  game: Game;
 }
 
 export interface ShowGamesProps extends CreateGameProps {
-  games: Game[],
+  games: Game[];
 }
 
 export interface ShowGameProps extends CreateGameProps {
-  game: Game,
-  teams: Team[],
-  playground: Playground[],
-  sport: Sport[],
-  users: User[]
+  game: Game;
+  teams: Team[];
+  playground: Playground[];
+  sport: Sport[];
+  owners: User[];
 }
 
 export interface JoinGameProps {
-  game: Game,
-  teams: Team[]
+  game: Game;
+  teams: Team[];
 }
 
 export interface Playground {
-  id: number,
-  name: string,
-  is_covered: boolean,
-  is_booked: boolean,
-  city: string,
-  adress: string,
-  postcode: string,
-  coordgpsx: number,
-  coordgpsy: number
+  id: number;
+  name: string;
+  is_covered: boolean;
+  is_booked: boolean;
+  city: string;
+  adress: string;
+  postcode: string;
+  coordgpsx: number;
+  coordgpsy: number;
 }
 
 
