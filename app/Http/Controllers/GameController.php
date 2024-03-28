@@ -14,7 +14,7 @@ class GameController extends Controller
 {
     public function index()
     {
-        $games = Game::all();
+        $games = Game::with('teams.users')->get();
         $sports = Sport::all();
         $playgrounds = Playground::all();
         $teams = Team::with('users')->get();

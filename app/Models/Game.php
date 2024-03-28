@@ -22,10 +22,7 @@ class Game extends Model
     public function teams()
     {
         return $this->belongsToMany(
-            Team::class,
-            'join_games',
-            'game_id',
-            'team_id'
+            Team::class, 'join_games'
         )->take(2)->withTimestamps();
     }
 }
