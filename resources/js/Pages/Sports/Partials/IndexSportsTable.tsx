@@ -3,6 +3,8 @@ import { ShowSportsProps, Sport } from "@/types";
 import PrimaryButton from "@/Components/PrimaryButton";
 import { Link, useForm as inertiaForm } from "@inertiajs/react";
 import useRoute from "@/Hooks/useRoute";
+import TableHeaderCell from "@/Components/Table/TableHeaderCell";
+import TableDataCell from "@/Components/Table/TableDataCell";
 
 export default function IndexSportsTable({ sports }: ShowSportsProps) {
     const route = useRoute();
@@ -43,22 +45,25 @@ export default function IndexSportsTable({ sports }: ShowSportsProps) {
                     <table className="sm:table-auto w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                             <tr>
-                                <th scope="col" className="px-6 py-3">
+                                <TableHeaderCell className="text-center">
                                     Sport Name
-                                </th>
-                                <th scope="col" className="px-6 py-3">
+                                </TableHeaderCell>
+                                <TableHeaderCell className="text-center">
                                     Action
-                                </th>
+                                </TableHeaderCell>
                             </tr>
                         </thead>
 
                         <tbody>
                             {sports.map((sport) => (
                                 <tr key={sport.id} className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
-                                    <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                    <TableHeaderCell
+                                        className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white text-center"
+                                    >
                                         {sport?.name}
-                                    </th>
-                                    <td className="px-6 py-4">
+                                    </TableHeaderCell>
+                                    
+                                    <TableDataCell className="text-center">
                                         <PrimaryButton className='opacity-80 mt-6 bg-rose-700' >
                                             <Link href="" onClick={e => deleteSport(sport.id, e)} >
                                                 <svg
@@ -77,7 +82,7 @@ export default function IndexSportsTable({ sports }: ShowSportsProps) {
                                                 </svg>
                                             </Link>
                                         </PrimaryButton>
-                                    </td>
+                                    </TableDataCell>
                                 </tr>
                             ))}
                         </tbody>

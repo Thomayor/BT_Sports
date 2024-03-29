@@ -209,6 +209,11 @@ export interface Playground {
   coordgpsy: number;
 }
 
+export interface TableProps {
+  children: React.ReactNode;
+  className?: string
+};
+
 export enum Method {
   GET = 'get',
   POST = 'post',
