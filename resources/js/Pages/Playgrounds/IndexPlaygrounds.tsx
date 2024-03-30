@@ -11,6 +11,7 @@ import { Playground } from '@/types';
 import React from 'react';
 import { Link, useForm as inertiaForm } from '@inertiajs/react';
 import useRoute from '@/Hooks/useRoute';
+import PlaygroundCardList from './PlaygroundCard';
 
 interface IndexProps {
   playgrounds: Playground[];
@@ -39,7 +40,14 @@ export default function IndexPlaygrounds({
       <div className="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
         <h2 className="text-sky-500 text-2xl ml-2 mb-5">Playgrounds</h2>
 
-        <Table>
+        <div className="block sm:hidden">
+          <PlaygroundCardList
+            playgrounds={playgrounds}
+            onDeletePlayground={deletePlayground}
+          />
+        </div>
+        <div className="sm:block hidden">
+        <Table >
           <TableHeader>
             <TableRow>
               <TableHead>Nom du terrain</TableHead>
@@ -84,7 +92,8 @@ export default function IndexPlaygrounds({
               ))
             )}
           </TableBody>
-        </Table>
+          </Table>
+          </div>
       </div>
     </AppLayout>
   );

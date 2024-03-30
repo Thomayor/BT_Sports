@@ -34,7 +34,7 @@ export const getColumns = ({
   [
     {
       label: 'Infrastructure',
-      key: 'carac19',
+      key: 'inst_part_type_filter',
       search: {
         type: 'select',
         placeholder: 'Infrastructure',
@@ -50,7 +50,7 @@ export const getColumns = ({
     },
     {
       label: 'Nom du terrain',
-      key: 'nominstallation',
+      key: 'inst_nom',
       search: {
         type: 'text',
         placeholder: 'Nom du terrain',
@@ -58,12 +58,12 @@ export const getColumns = ({
     },
     {
       label: 'Adresse',
-      key: 'adresse',
+      key: 'inst_adresse',
       search: null,
     },
     {
       label: 'Ville',
-      key: 'new_name',
+      key: 'inst_com_nom',
       search: {
         type: 'text',
         placeholder: 'Ville',
@@ -71,7 +71,7 @@ export const getColumns = ({
     },
     {
       label: 'Code Postal',
-      key: 'codepostal',
+      key: 'inst_cp',
       search: {
         type: 'text',
         placeholder: 'Code Postal',
@@ -79,7 +79,7 @@ export const getColumns = ({
     },
     {
       label: 'Activite',
-      key: 'typequipement',
+      key: 'equip_type_name',
       search: {
         type: 'text',
         placeholder: 'Activite',
@@ -87,12 +87,12 @@ export const getColumns = ({
     },
     {
       label: 'Surface',
-      key: 'carac167',
+      key: 'equip_sol',
       search: null,
     },
     {
       label: 'Couvert/Decouvert',
-      key: 'carac168',
+      key: 'equip_nature',
       search: null,
     },
     {
@@ -100,7 +100,7 @@ export const getColumns = ({
       key: 'select',
       search: null,
       render: row => (
-        <button onClick={(e) => handleChoose(e,row.numequipement)}>Choisir</button>
+        <button onClick={(e) => handleChoose(e,row.equip_numero)}>Choisir</button>
       ),
     },
   ] satisfies PlaygroundColumn[];

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link, router } from '@inertiajs/react';
 import Method, { Notification } from '@/types';
 import useRoute from '@/Hooks/useRoute';
@@ -13,6 +13,20 @@ interface DropdownNotificationProps {
 export default function View({ notifications }: DropdownNotificationProps) {
   const route = useRoute();
   const [showDropdown, setShowDropdown] = useState(false);
+  const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setShowDropdown(false);
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   function handleMarkAllAsRead() {
     router.post(route('notifications.readall'));
@@ -37,7 +51,7 @@ export default function View({ notifications }: DropdownNotificationProps) {
           <FontAwesomeIcon icon={faEllipsis} className="w-15 h-15" />
         </button>
         {showDropdown && (
-          <div className="absolute z-20 top-8 right-0 bg-white shadow-md rounded-md ">
+          <div ref={dropdownRef} className="absolute z-20 top-8 right-0 bg-white shadow-md rounded-md">
             <button
               className="flex space-x-2 items-center p-6 hover:text-sky-500  rounded-md"
               onClick={handleMarkAllAsRead}

@@ -71,10 +71,9 @@ const EditPlayground = ({ playground }: EditPlaygroundProps) => {
               id="name"
               type="text"
               className="mt-1 block w-full mb-2"
-              value={form.data.name}
+              value={playground.name}
               onChange={e => form.setData('name', e.currentTarget.value)}
               autoFocus
-              placeholder={playground.name}
             />
             <InputError message={form.errors.name} className="mt-2" />
 
@@ -83,12 +82,11 @@ const EditPlayground = ({ playground }: EditPlaygroundProps) => {
               id="surfaceType"
               type="text"
               className="mt-1 block w-full mb-2"
-              value={form.data.surface_type}
+              value={playground.surface_type}
               onChange={e =>
                 form.setData('surface_type', e.currentTarget.value)
               }
               autoFocus
-              placeholder={playground.surface_type}
             />
             <InputError message={form.errors.surface_type} className="mt-2" />
 
@@ -97,12 +95,11 @@ const EditPlayground = ({ playground }: EditPlaygroundProps) => {
               id="playground_type"
               type="text"
               className="mt-1 block w-full mb-2"
-              value={form.data.playground_type}
+              value={playground.playground_type}
               onChange={e =>
                 form.setData('playground_type', e.currentTarget.value)
               }
               autoFocus
-              placeholder={playground.playground_type}
             />
             <InputError
               message={form.errors.playground_type}
@@ -113,20 +110,20 @@ const EditPlayground = ({ playground }: EditPlaygroundProps) => {
             <TextInput
               id="is_covered"
               type="text"
+              value={playground.is_covered}
               className="mt-1 block w-full mb-2"
               onChange={e => form.setData('is_covered', e.currentTarget.value)}
               autoFocus
-              placeholder={playground.is_covered}
             />
             <InputError message={form.errors.is_covered} className="mt-2" />
             <InputLabel htmlFor="city" value="city" />
             <TextInput
               id="city"
               type="text"
+              value={playground.city}
               className="mt-1 block w-full mb-2"
               onChange={e => form.setData('city', e.currentTarget.value)}
               autoFocus
-              placeholder={playground.city}
             />
 
             <InputError message={form.errors.city} className="mt-2" />
@@ -134,20 +131,20 @@ const EditPlayground = ({ playground }: EditPlaygroundProps) => {
             <TextInput
               id="adress"
               type="text"
+              value={playground.adress}
               className="mt-1 block w-full mb-2"
               onChange={e => form.setData('adress', e.currentTarget.value)}
               autoFocus
-              placeholder={playground.adress}
             />
             <InputError message={form.errors.adress} className="mt-2" />
             <InputLabel htmlFor="postcode" value="postcode" />
             <TextInput
               id="postcode"
               type="text"
+              value={playground.postcode}
               className="mt-1 block w-full mb-2"
               onChange={e => form.setData('postcode', e.currentTarget.value)}
               autoFocus
-              placeholder={playground.postcode}
             />
             <InputError message={form.errors.postcode} className="mt-2" />
             <InputLabel htmlFor="coordgpsx" value="coordgpsx" />
@@ -183,7 +180,7 @@ const EditPlayground = ({ playground }: EditPlaygroundProps) => {
                 form.setData('equipment_id', e.currentTarget.value)
               }
               autoFocus
-              placeholder={playground.equipment_id}
+              value={playground.equipment_id}
             />
             <InputError message={form.errors.equipment_id} className="mt-2" />
             <InputLabel htmlFor="installation_id" value="installation_id" />
@@ -195,7 +192,7 @@ const EditPlayground = ({ playground }: EditPlaygroundProps) => {
                 form.setData('installation_id', e.currentTarget.value)
               }
               autoFocus
-              placeholder={playground.installation_id}
+             value={playground.installation_id}
             />
             <InputError
               message={form.errors.installation_id}

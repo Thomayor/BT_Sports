@@ -12,6 +12,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/Components/ui';
+import GameCardList from './Gamecard';
 
 export default function IndexGameTable({
   games,
@@ -38,8 +39,8 @@ export default function IndexGameTable({
           </svg>
         </PrimaryButton>
       </Link>
-
-      <Table>
+<div className='hidden sm:block'>
+      <Table >
         <TableHeader>
           <TableRow>
             <TableHead>Sport</TableHead>
@@ -91,6 +92,12 @@ export default function IndexGameTable({
           )}
         </TableBody>
       </Table>
+      </div>
+      <div className='block sm:hidden'>
+<GameCardList games={games} sports={sports} playgrounds={playgrounds}/>
+      </div>
+
+      
     </div>
   );
 }

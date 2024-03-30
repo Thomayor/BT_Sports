@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import AppLayout from '@/Layouts/AppLayout';
 import { fetchFacilitiesWithFilters } from '@/api';
 import useRoute from '@/Hooks/useRoute';
 import { router } from '@inertiajs/core';
@@ -41,16 +40,21 @@ export default function ListPlaygrounds({
 
   const handleChoose = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-    numequipement: string,
+    equip_numero: string,
   ) => {
-    console.log('Paramètres reçus :', { numequipement });
+    console.log('Paramètres reçus :', { equip_numero });
     e.preventDefault();
 
-    router.post(route('playgrounds.store'), {
-      numequipement,
-    });
-
-    setEquipmentId(numequipement);
+    try {
+      router.post(route('playgrounds.store'), {
+        equip_numero,
+      });
+      alert('Terrain ajouté, cliquez sur Valider');
+    } catch (error) {
+      console.error('Erreur lors de la requête POST:', error);
+    }
+  
+    setEquipmentId(equip_numero);
   };
 
   const [results, setResults] = useState([]);
@@ -182,10 +186,10 @@ export default function ListPlaygrounds({
             </PaginationItem>
           </button>
         </PaginationContent>
-         onClick={handleSubmit}>Rechercher</Button>
+        <Button onClick={handleSubmit}>Rechercher</Button>
       </div>
       {/* RESULTS LIST */}
-      <div>
+      <div >
         <Table>
           <TableHeader>
             <TableRow>
