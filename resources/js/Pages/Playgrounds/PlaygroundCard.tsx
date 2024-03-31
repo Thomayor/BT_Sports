@@ -51,7 +51,7 @@ const PlaygroundCardList = ({
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
       {playgrounds.length === 0 ? (
-        <div>PAS DE TERRAINS CRÉÉS</div>
+        <div className='bg-white rounded-lg flex justify-center p-10'>PAS DE TERRAINS CRÉÉS</div>
       ) : (
         playgrounds.map(playground => {
           return (

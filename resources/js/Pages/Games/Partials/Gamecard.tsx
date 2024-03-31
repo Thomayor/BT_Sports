@@ -1,7 +1,7 @@
 import * as React from "react";
 import formatTime from '@/Services/formatTime';
 import formatDate from '@/Services/formatDate';
-import { Game, Playground, Sport } from "@/types";
+import { Game, Playground, ShowGamesProps, Sport } from "@/types";
 import { Link } from "@inertiajs/react";
 
 interface GamecardProps{
@@ -35,10 +35,10 @@ const GameCard = ({ game, sport, playground }: GamecardProps) => (
   </div>
 );
 
-const GameCardList = ({ games, sports, playgrounds }) => (
+const GameCardList = ({ games, sports, playgrounds }: ShowGamesProps) => (
   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
     {games.length === 0 ? (
-      <div>PAS DE MATCHS CRÉÉS</div>
+      <div className="bg-white rounded-lg flex justify-center p-10">PAS DE MATCHS CRÉÉS</div>
     ) : (
       games.map((game) => {
         const sport = sports.find((sport) => sport.id === game.sport_id);

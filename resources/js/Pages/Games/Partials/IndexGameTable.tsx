@@ -94,7 +94,7 @@ export default function IndexGameTable({
       </Table>
       </div>
       <div className='block sm:hidden'>
-<GameCardList games={games} sports={sports} playgrounds={playgrounds}/>
+<GameCardList games={games} sports={sports} playgrounds={playgrounds} />
       </div>
 
       
