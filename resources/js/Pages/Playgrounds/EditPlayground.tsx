@@ -12,6 +12,7 @@ import ActionMessage from '@/Components/ActionMessage';
 import PrimaryButton from '@/Components/PrimaryButton';
 import classNames from 'classnames';
 import { Button } from '@/Components/ui';
+import { t } from 'i18next';
 
 interface EditPlaygroundProps {
   playground: Playground;
@@ -41,10 +42,10 @@ const EditPlayground = ({ playground }: EditPlaygroundProps) => {
     });
   }
   return (
-    <AppLayout title="Terrains">
+    <AppLayout title={t('pages.playgrounds.title')}>
       <div className='max-w-7xl mx-auto py-10 sm:px-6 lg:px-8'>
         <Button className='my-2 bg-sky-500 hover:bg-sky-200 text-white py-2 px-8 rounded'>
-        <Link href={route('playgrounds.index')} > Retour liste </Link>
+        <Link href={route('playgrounds.index')} > {t('pages.playgrounds.return')} </Link>
         </Button>
         <FormSection
           onSubmit={updatePlayground}
@@ -53,20 +54,20 @@ const EditPlayground = ({ playground }: EditPlaygroundProps) => {
           renderActions={() => (
             <>
               <ActionMessage on={form.recentlySuccessful} className="mr-3">
-                Game created.
+              {t('pages.playgrounds.created')}
               </ActionMessage>
 
               <PrimaryButton
                 className={classNames({ 'opacity-25': form.processing })}
                 disabled={form.processing}
               >
-                Save
+                {t('pages.playgrounds.save')}
               </PrimaryButton>
             </>
           )}
         >
           <div className="col-span-6 sm:col-span-6">
-            <InputLabel htmlFor="name" value="Name" />
+            <InputLabel htmlFor="name" value={t('pages.playgrounds.name')} />
             <TextInput
               id="name"
               type="text"
@@ -77,7 +78,7 @@ const EditPlayground = ({ playground }: EditPlaygroundProps) => {
             />
             <InputError message={form.errors.name} className="mt-2" />
 
-            <InputLabel htmlFor="surfaceType" value="surfaceType" />
+            <InputLabel htmlFor="surfaceType" value={t('pages.playgrounds.surface')} />
             <TextInput
               id="surfaceType"
               type="text"
@@ -90,7 +91,7 @@ const EditPlayground = ({ playground }: EditPlaygroundProps) => {
             />
             <InputError message={form.errors.surface_type} className="mt-2" />
 
-            <InputLabel htmlFor="playground_type" value="Activite" />
+            <InputLabel htmlFor="playground_type" value={t('pages.playgrounds.activity')} />
             <TextInput
               id="playground_type"
               type="text"
@@ -106,7 +107,7 @@ const EditPlayground = ({ playground }: EditPlaygroundProps) => {
               className="mt-2"
             />
 
-            <InputLabel htmlFor="is_covered" value="Is Covered" />
+            <InputLabel htmlFor="is_covered" value={t('pages.playgrounds.iscover')} />
             <TextInput
               id="is_covered"
               type="text"
@@ -116,7 +117,7 @@ const EditPlayground = ({ playground }: EditPlaygroundProps) => {
               autoFocus
             />
             <InputError message={form.errors.is_covered} className="mt-2" />
-            <InputLabel htmlFor="city" value="city" />
+            <InputLabel htmlFor="city" value={t('pages.playgrounds.city')} />
             <TextInput
               id="city"
               type="text"
@@ -127,7 +128,7 @@ const EditPlayground = ({ playground }: EditPlaygroundProps) => {
             />
 
             <InputError message={form.errors.city} className="mt-2" />
-            <InputLabel htmlFor="adress" value="adress" />
+            <InputLabel htmlFor="adress" value={t('pages.playgrounds.adress')} />
             <TextInput
               id="adress"
               type="text"
@@ -137,7 +138,7 @@ const EditPlayground = ({ playground }: EditPlaygroundProps) => {
               autoFocus
             />
             <InputError message={form.errors.adress} className="mt-2" />
-            <InputLabel htmlFor="postcode" value="postcode" />
+            <InputLabel htmlFor="postcode" value={t('pages.playgrounds.postcode')} />
             <TextInput
               id="postcode"
               type="text"
@@ -147,7 +148,7 @@ const EditPlayground = ({ playground }: EditPlaygroundProps) => {
               autoFocus
             />
             <InputError message={form.errors.postcode} className="mt-2" />
-            <InputLabel htmlFor="coordgpsx" value="coordgpsx" />
+            <InputLabel htmlFor="coordgpsx" value={t('pages.playgrounds.coordgpsx')} />
             <TextInput
               id="coordgpsx"
               type="number"
@@ -159,7 +160,7 @@ const EditPlayground = ({ playground }: EditPlaygroundProps) => {
               value={playground.coordgpsx.toString()}
             />
             <InputError message={form.errors.coordgpsx} className="mt-2" />
-            <InputLabel htmlFor="coordgpsy" value="coordgpsy" />
+            <InputLabel htmlFor="coordgpsy" value={t('pages.playgrounds.coordgpsy')} />
             <TextInput
               id="coordgpsy"
               type="number"
@@ -171,7 +172,7 @@ const EditPlayground = ({ playground }: EditPlaygroundProps) => {
               value={playground.coordgpsy.toString()}
             />
             <InputError message={form.errors.coordgpsy} className="mt-2" />
-            <InputLabel htmlFor="equipment_id" value="equipment_id" />
+            <InputLabel htmlFor="equipment_id" value={t('pages.playgrounds.equipmentid')} />
             <TextInput
               id="equipment_id"
               type="text"
@@ -183,7 +184,7 @@ const EditPlayground = ({ playground }: EditPlaygroundProps) => {
               value={playground.equipment_id}
             />
             <InputError message={form.errors.equipment_id} className="mt-2" />
-            <InputLabel htmlFor="installation_id" value="installation_id" />
+            <InputLabel htmlFor="installation_id" value={t('pages.playgrounds.installid')} />
             <TextInput
               id="installation_id"
               type="text"

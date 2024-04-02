@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, router } from '@inertiajs/react';
-import { Team, User } from '@/types';
+import { Team } from '@/types';
 import AppLayout from '@/Layouts/AppLayout';
 import { t } from 'i18next';
 import {
@@ -36,18 +36,18 @@ export default function IndexTeams({ teams }: TeamsIndexProps) {
   return (
     <AppLayout title={t('pages.team.teams')}>
       <div className="max-w-xl  sm:max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
-        <h2 className="text-sky-500 text-2xl ml-2 mb-5">Equipes</h2>
+        <h2 className="text-sky-500 text-2xl ml-2 mb-5">{t('pages.teams.title')}</h2>
 
         <div className="block sm:hidden">
           {teams.map(team => (
             <Card key={team.id} className="my-4">
               <div className="p-4">
                 <div>
-                  <span className="font-bold">Nom d'équipe: </span>
+                  <span className="font-bold">{t('pages.teams.name')}: </span>
                   {team.name}
                 </div>
                 <div>
-                  <span className="font-bold">Membres: </span>
+                  <span className="font-bold">{t('pages.teams.members')}: </span>
                   {team.users.length + 1}
                 </div>
                 <div className='mt-1'>
@@ -55,7 +55,7 @@ export default function IndexTeams({ teams }: TeamsIndexProps) {
                     className="font-medium text-sky-600 dark:text-sky-500 hover:underline"
                     href={`/team/${team.id}`}
                   >
-                    Voir Equipe
+                   {t('pages.teams.showteam')}
                   </Link>
                 </div>
                 <div className='mt-2 flex justify-center'>
@@ -66,7 +66,7 @@ export default function IndexTeams({ teams }: TeamsIndexProps) {
                       setRecieverId(team.owner.id);
                     }}
                   >
-                    Contacter
+                   {t('pages.teams.contact')}
                   </Button>
                 </div>
               </div>
@@ -77,10 +77,10 @@ export default function IndexTeams({ teams }: TeamsIndexProps) {
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead>Nom d'equipe</TableHead>
-                <TableHead>Membres</TableHead>
-                <TableHead>Voir Equipe</TableHead>
-                <TableHead>Contacter propriétaire</TableHead>
+                <TableHead>{t('pages.teams.name')}</TableHead>
+                <TableHead>{t('pages.teams.members')}</TableHead>
+                <TableHead>{t('pages.teams.showteam')}</TableHead>
+                <TableHead>{t('pages.teams.contactOwner')}</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -93,7 +93,7 @@ export default function IndexTeams({ teams }: TeamsIndexProps) {
                       className="font-medium text-sky-600 dark:text-sky-500 hover:underline"
                       href={`/team/${team.id}`}
                     >
-                      Voir
+                      {t('pages.teams.show')}
                     </Link>
                   </TableCell>
                   <TableCell>
@@ -104,7 +104,7 @@ export default function IndexTeams({ teams }: TeamsIndexProps) {
                         setRecieverId(team.owner.id);
                       }}
                     >
-                      Contacter
+                    {t('pages.teams.contact')}
                     </button>
                   </TableCell>
                 </TableRow>

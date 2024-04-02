@@ -6,6 +6,7 @@ import useRoute from '@/Hooks/useRoute';
 import { JoinGameProps, Team } from '@/types';
 import { useForm } from '@inertiajs/react';
 import classNames from 'classnames';
+import { t } from 'i18next';
 import React from 'react';
 
 
@@ -31,32 +32,32 @@ export default function JoinGameForm({ game, teams }: JoinGameProps) {
     <div>
       <FormSection
         onSubmit={joinGame}
-        title={'Game Details'}
-        description={'Create a new game and challenge opponents'}
+        title={t('pages.games.join')}
+        description={t('pages.games.descriptionjoin')}
         renderActions={() => (
           <>
             <ActionMessage on={form.recentlySuccessful} className="mr-3">
-              Game joined.
+            {t('pages.games.joined')}
             </ActionMessage>
 
             <PrimaryButton
               className={classNames({ 'opacity-25': form.processing })}
               disabled={form.processing}
             >
-              Join the Game
+                 {t('pages.games.join')}
             </PrimaryButton>
           </>
         )}
       >
         <div className="col-span-6 sm:col-span-4">
-          <InputLabel htmlFor="team" value="Team" />
+          <InputLabel htmlFor="team" value={t('pages.games.team')} />
           <select
             id="teams"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-sky-500 dark:focus:border-sky-500"
             value={form.data.team_id}
             onChange={e => form.setData('team_id', e.target.value)}
           >
-            <option value="">Choisir une équipe</option>
+            <option value="">{t('pages.games.chooseTeam')}</option>
             {teams.map((team: Team) => (
               <option key={team.id} value={team.id}>
                 {team.name}

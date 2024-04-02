@@ -4,6 +4,7 @@ import { router } from '@inertiajs/react';
 import useRoute from '@/Hooks/useRoute';
 import CreateMessage from './CreateMessage';
 import { Auth, Conversation, Message, User } from '@/types';
+import { t } from 'i18next';
 
 function MessagesList(props: {
   messages: Message[];
@@ -96,8 +97,8 @@ function MessagesList(props: {
                       src={content.user.profile_photo_url}
                       alt="user profile"
                     />
-                    {content.user.firstname} à{' '}
-                    {new Date(content.created_at).toLocaleTimeString()} le{' '}
+                    {content.user.firstname} {t('pages.messaging.at')}
+                    {new Date(content.created_at).toLocaleTimeString()} {t('pages.messaging.on')}
                     {new Date(content.created_at).toLocaleDateString()}
                   </p>
                 </div>

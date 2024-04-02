@@ -15,6 +15,7 @@ import {
   Card,
 } from '@/Components/ui';
 import TextInput from '@/Components/TextInput';
+import { t } from 'i18next';
 
 export default function IndexGameTable({
   games,
@@ -38,7 +39,8 @@ export default function IndexGameTable({
     const sport = sports.find(sport => sport.id === game.sport_id);
     return (
       (searchTerm === '' ||
-        (playground && playground.city.toLowerCase().includes(searchTerm.toLowerCase()))) &&
+        (playground &&
+          playground.city.toLowerCase().includes(searchTerm.toLowerCase()))) &&
       (selectedSport === '' ||
         (sport && sport.name.toLowerCase() === selectedSport.toLowerCase()))
     );
@@ -46,7 +48,9 @@ export default function IndexGameTable({
 
   return (
     <div className="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
-      <h2 className="text-sky-500 text-2xl ml-2 mb-5">Matchs</h2>
+      <h2 className="text-sky-500 text-2xl ml-2 mb-5">
+        {t('pages.games.matches')}
+      </h2>
       <div className="flex justify-start">
         {/* REDIRECTION BUTTON TO CREATE A GAME */}
         <PrimaryButton className="opacity-80 mb-2 bg-sky-500">
@@ -73,7 +77,7 @@ export default function IndexGameTable({
           value={selectedSport}
           onChange={e => setSelectedSport(e.target.value)}
         >
-          <option value="">All Sports</option>
+          <option value="">{t('pages.games.allSports')}</option>
           {sports.map(sport => (
             <option key={sport.id} value={sport.name}>
               {sport.name}
@@ -86,7 +90,7 @@ export default function IndexGameTable({
           id="city"
           type="text"
           className="mt-1 block mb-2 ml-2 w-48 py-2 "
-          placeholder="Search by city..."
+          placeholder={t('pages.games.searchcity')}
           value={searchTerm}
           onChange={e => setSearchTerm(e.target.value)}
           autoFocus
@@ -97,20 +101,20 @@ export default function IndexGameTable({
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead>Sport</TableHead>
-              <TableHead>Date</TableHead>
-              <TableHead>From / To</TableHead>
-              <TableHead>Playground</TableHead>
-              <TableHead>Adress</TableHead>
-              <TableHead>Max Player</TableHead>
-              <TableHead>Actions</TableHead>
+              <TableHead>{t('pages.games.sport')}</TableHead>
+              <TableHead>{t('pages.games.date')}</TableHead>
+              <TableHead>{t('pages.games.fromto')} / To</TableHead>
+              <TableHead>{t('pages.games.playground')} </TableHead>
+              <TableHead>{t('pages.games.adress')}</TableHead>
+              <TableHead>{t('pages.games.max')}</TableHead>
+              <TableHead>{t('pages.games.actions')}</TableHead>
             </TableRow>
           </TableHeader>
 
           <TableBody>
             {filteredGames.length === 0 ? (
               <TableRow>
-                <TableCell colSpan={7}>PAS DE MATCHS CRÉÉS</TableCell>
+                <TableCell colSpan={7}>{t('pages.games.nogames')}</TableCell>
               </TableRow>
             ) : (
               filteredGames.map(game => {
@@ -124,12 +128,11 @@ export default function IndexGameTable({
                     <TableHead>{sport?.name}</TableHead>
                     <TableCell>{formatDate(game.date)}</TableCell>
                     <TableCell>
-                      {formatTime(game.start_time)} /{' '}
-                      {formatTime(game.end_time)}
+                      {formatTime(game.start_time)} /{formatTime(game.end_time)}
                     </TableCell>
                     <TableCell>{playground?.name}</TableCell>
                     <TableCell>
-                      {playground?.adress}, {playground?.postcode}{' '}
+                      {playground?.adress}, {playground?.postcode}
                       {playground?.city}
                     </TableCell>
                     <TableCell>
@@ -137,7 +140,7 @@ export default function IndexGameTable({
                         (totalPlayers, team) =>
                           totalPlayers + team.users.length,
                         0,
-                      ) + game.teams.length}{' '}
+                      ) + game.teams.length}
                       / {game.max_player}
                     </TableCell>
                     <TableCell>
@@ -145,7 +148,7 @@ export default function IndexGameTable({
                         href={`games/${game.id}`}
                         className="font-medium text-sky-600 dark:text-sky-500 hover:underline"
                       >
-                        Show Details
+                        {t('pages.games.show')}
                       </Link>
                     </TableCell>
                   </TableRow>
@@ -167,13 +170,13 @@ export default function IndexGameTable({
               <div className="p-4">
                 <div className="flex justify-between">
                   <span className="font-bold">{sport?.name} </span>
-                  <span>{formatDate(game.date)} </span>{' '}
+                  <span>{formatDate(game.date)} </span>
                 </div>
                 <div className="mt-1 flex justify-center font-bold">
                   {playground?.name}
                 </div>
                 <div className="mt-1 flex justify-center">
-                  {playground?.adress}, {playground?.postcode}{' '}
+                  {playground?.adress}, {playground?.postcode}
                   {playground?.city}
                 </div>
                 <div className="mt-1 flex justify-center">
@@ -184,7 +187,7 @@ export default function IndexGameTable({
                   {game.teams.reduce(
                     (totalPlayers, team) => totalPlayers + team.users.length,
                     0,
-                  ) + 1}{' '}
+                  ) + 1}
                   / {game.max_player}
                 </div>
                 <div>
@@ -192,7 +195,7 @@ export default function IndexGameTable({
                     href={`games/${game.id}`}
                     className="font-medium text-sky-600 dark:text-sky-500 hover:underline"
                   >
-                    Show Details
+                    {t('pages.games.show')}
                   </Link>
                 </div>
               </div>

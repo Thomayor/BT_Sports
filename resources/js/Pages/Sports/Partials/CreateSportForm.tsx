@@ -8,6 +8,7 @@ import InputLabel from "@/Components/InputLabel";
 import TextInput from "@/Components/TextInput";
 import InputError from "@/Components/InputError";
 import FormSection from "@/Components/FormSection";
+import { t } from "i18next";
 
 export default function CreateSportForm() {
     const [errorMessage, setErrorMessage] = useState<string>('');
@@ -18,7 +19,7 @@ export default function CreateSportForm() {
 
     function createSport() {
         if (!form.data.name.trim()) {
-            setErrorMessage('Please enter a name for the sport.');
+            setErrorMessage(t('pages.sports.error'));
             return;
         }
 
@@ -34,25 +35,25 @@ export default function CreateSportForm() {
         <div>
             <FormSection
                 onSubmit={createSport}
-                title={'Create Sport'}
-                description={'Admin section to add sports.'}
+                title={t('pages.sports.create')}
+                description={t('pages.sports.createdesc')}
                 renderActions={() => (
                     <>
                         <ActionMessage on={form.recentlySuccessful} className="mr-3">
-                            Sport created.
+                        {t('pages.sports.created')}
                         </ActionMessage>
 
                         <PrimaryButton
                             className={classNames({ 'opacity-25': form.processing })}
                             disabled={form.processing}
                         >
-                            Save
+                            {t('pages.sports.save')}
                         </PrimaryButton>
                     </>
                 )}
             >
                 <div className="col-span-6 sm:col-span-4">
-                    <InputLabel htmlFor="name" value="Name" />
+                    <InputLabel htmlFor="name" value={t('pages.sports.name')} />
                     <TextInput
                         id="name"
                         type="text"

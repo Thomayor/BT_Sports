@@ -1,3 +1,4 @@
+import { t } from 'i18next';
 import React from 'react';
 
 export const pageSizes = [5, 10, 20, 50, 100];
@@ -33,70 +34,70 @@ export const getColumns = ({
 }) =>
   [
     {
-      label: 'Infrastructure',
+      label: t('pages.playgrounds.label.infrastructure'),
       key: 'inst_part_type_filter',
       search: {
         type: 'select',
-        placeholder: 'Infrastructure',
+        placeholder: t('pages.playgrounds.label.infrastructure'),
         options: [
-          { label: 'Complexe sportif', value: 'Complexe sportif' },
-          { label: 'Etablissement scolaire', value: 'Scolaire' },
-          { label: 'Base de plein air et/ou de loisirs', value: 'Base air loisir' },
-          { label: 'Piscine', value: 'Piscine' },
-          { label: 'Domaine de ski', value: 'ski' },
-          { label: 'Aérodrome/aéroport', value: 'Aérodrome/aéroport' },
+          { label: t('pages.playgrounds.label.sportComplex'), value: 'Complexe sportif' },
+          { label: t('pages.playgrounds.label.school'), value: 'Scolaire' },
+          { label: t('pages.playgrounds.label.outdoor'), value: 'Base air loisir' },
+          { label: t('pages.playgrounds.label.swimmingpool'), value: 'Piscine' },
+          { label: t('pages.playgrounds.label.skiresort'), value: 'ski' },
+          { label: t('pages.playgrounds.label.airport'), value: 'Aérodrome/aéroport' },
         ],
       },
     },
     {
-      label: 'Nom du terrain',
+      label: t('pages.playgrounds.name'),
       key: 'inst_nom',
       search: {
         type: 'text',
-        placeholder: 'Nom du terrain',
+        placeholder: t('pages.playgrounds.name'),
       },
     },
     {
-      label: 'Adresse',
+      label:  t('pages.playgrounds.adress'),
       key: 'inst_adresse',
       search: null,
     },
     {
-      label: 'Ville',
+      label: t('pages.playgrounds.city'),
       key: 'inst_com_nom',
       search: {
         type: 'text',
-        placeholder: 'Ville',
+        placeholder: t('pages.playgrounds.city'),
       },
     },
     {
-      label: 'Code Postal',
+      label:  t('pages.playgrounds.postcode'),
       key: 'inst_cp',
       search: {
         type: 'text',
-        placeholder: 'Code Postal',
+        placeholder:  t('pages.playgrounds.postcode'),
       },
     },
     {
-      label: 'Activite',
+      label:  t('pages.playgrounds.activity'),
       key: 'equip_type_name',
       search: {
         type: 'text',
-        placeholder: 'Activite',
+        placeholder:  t('pages.playgrounds.activity'),
       },
     },
     {
-      label: 'Surface',
+      label:  t('pages.playgrounds.surface'),
       key: 'equip_sol',
       search: null,
     },
     {
-      label: 'Couvert/Decouvert',
+      label:  t('pages.playgrounds.iscover'),
       key: 'equip_nature',
       search: null,
     },
     {
-      label: 'Selectionner',
+      label:  t('pages.playgrounds.label.select'),
       key: 'select',
       search: null,
       render: row => (

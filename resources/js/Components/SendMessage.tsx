@@ -1,3 +1,4 @@
+import { t } from 'i18next';
 import React, { useState, FormEvent } from 'react';
 
 interface SendMessageModalProps {
@@ -21,14 +22,14 @@ export default function SendMessageModal({
   return (
     <div className="absolute inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 min-h-screen">
       <div className="bg-white p-8 rounded-md  sm:w-3/6">
-        <h2 className="text-2xl font-semibold mb-4">Composez votre message</h2>
+        <h2 className="text-2xl font-semibold mb-4">{t('modal.compose')}</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-6">
             <label
               htmlFor="content"
               className="block text-sm font-medium text-gray-600"
             >
-              Message:
+              {t('modal.message')}:
               <textarea
                 id="content"
                 value={content}
@@ -42,14 +43,14 @@ export default function SendMessageModal({
             type="submit"
             className="bg-sky-500 text-white py-2 px-4 rounded-md mr-2 hover:bg-secondary"
           >
-            Envoyer
+          {t('modal.send')}
           </button>
           <button
             type="button"
             onClick={onClose}
             className="bg-gray-300 text-gray-800 py-2 px-4 rounded-md hover:bg-gray-400"
           >
-            Fermer
+            {t('modal.close')}
           </button>
         </form>
       </div>

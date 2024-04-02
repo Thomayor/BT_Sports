@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ShowGameProps } from '@/types';
+import { ShowGameListProps, User } from '@/types';
 import formatDate from '@/Services/formatDate';
 import formatTime from '@/Services/formatTime';
 import PrimaryButton from '@/Components/PrimaryButton';
@@ -10,13 +10,14 @@ import { router } from '@inertiajs/core';
 import SendMessageModal from '@/Components/SendMessage';
 import DefinitionListItem from '@/Components/Game/DefinitionListItem';
 import DefinitionList from '@/Components/Game/DefinitionList';
+import { t } from 'i18next';
 
 export default function ShowGameLists({
   game,
   sport,
   playground,
   teams,
-}: ShowGameProps) {
+}: ShowGameListProps) {
   const page = useTypedPage();
   const route = useRoute();
 
@@ -95,14 +96,14 @@ export default function ShowGameLists({
                           setRecieverId(homeOwner.id);
                         }}
                       >
-                        Contact
+                        {t('pages.games.contact')}
                       </PrimaryButton>
                     )}
                   </div>
                 </li>
               )}
 
-              {homeTeam.map(person => (
+              {homeTeam.map((person:User) => (
                 <li key={person.id} className="max-w-xs sm:max-w-none">
                   <div className="flex items-center gap-x-6">
                     <img
@@ -157,14 +158,14 @@ export default function ShowGameLists({
                             setRecieverId(awayOwner.id);
                           }}
                         >
-                          Contact
+                          {t('pages.games.contact')}
                         </PrimaryButton>
                       )}
                     </div>
                   </li>
                 )}
 
-                {awayTeam.map(person => (
+                {awayTeam.map((person:User) => (
                   <li key={person.id} className="max-w-xs sm:max-w-none">
                     <div className="flex items-center gap-x-6">
                       <img
@@ -198,32 +199,38 @@ export default function ShowGameLists({
       <div className="bg-white flex flex-col justify-evenly rounded-lg mt-10 mx-1 px-2 max-h-auto border-solid border border-sky-600">
         <div className="">
           <h3 className="text-base font-semibold leading-7 text-gray-900">
-            Game Informations
+            {t('pages.games.info')}
           </h3>
           <p className="mt-1 max-w-2xl text-sm leading-6 text-gray-500">
-            All game informations are displayed here
+            {t('pages.games.infodescription')}
           </p>
         </div>
 
         <DefinitionList>
-          <DefinitionListItem term="Sport" description={`${sport[0].name}`} />
-          <DefinitionListItem term="Date" description={formatDate(game.date)} />
           <DefinitionListItem
-            term="From / To"
+            term={t('pages.games.sport')}
+            description={`${sport[0].name}`}
+          />
+          <DefinitionListItem
+            term={t('pages.games.date')}
+            description={formatDate(game.date)}
+          />
+          <DefinitionListItem
+            term={t('pages.games.fromto')}
             description={`${formatTime(game.start_time)} / ${formatTime(
               game.end_time,
             )}`}
           />
           <DefinitionListItem
-            term="Players"
+            term={t('pages.games.players')}
             description={`${totalLength + numTeams} / ${game.max_player}`}
           />
           <DefinitionListItem
-            term="Playground"
+            term={t('pages.games.playground')}
             description={`${playground[0].name}`}
           />
           <DefinitionListItem
-            term="Adress"
+            term={t('pages.games.adress')}
             description={`${playground[0].adress}, ${playground[0].postcode} ${playground[0].city}`}
           />
 
@@ -231,7 +238,9 @@ export default function ShowGameLists({
             {/* DISPLAY ONLY IF ONE TEAM IS ASSOCIATED TO THE GAME */}
             {numTeams < 2 && userID !== game.user_id && (
               <PrimaryButton className="opacity-80 mt-6 bg-sky-500 mr-2">
-                <Link href={`${game.id}/join-team`}>Join the game</Link>
+                <Link href={`${game.id}/join-team`}>
+                  {t('pages.games.join')}
+                </Link>
               </PrimaryButton>
             )}
 
@@ -257,23 +266,24 @@ export default function ShowGameLists({
                   </Link>
                 </PrimaryButton>
 
-                <PrimaryButton className="opacity-80 mt-6 bg-red-700">
-                  <Link href="" onClick={e => deleteGame(game.id, e)}>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth={1.5}
-                      stroke="currentColor"
-                      className="w-6 h-6"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0"
-                      />
-                    </svg>
-                  </Link>
+                <PrimaryButton
+                  className="opacity-80 mt-6 bg-red-700"
+                  onClick={e => deleteGame(game.id, e)}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="w-6 h-6"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0"
+                    />
+                  </svg>
                 </PrimaryButton>
               </>
             )}

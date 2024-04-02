@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { FormTextarea } from '@/Components/Form';
+import { t } from 'i18next';
 
 function CreateMessage(props: {
   submitMessage: (m: string ) => void;
@@ -59,11 +60,11 @@ function CreateMessage(props: {
         value={messageState}
         onChange={onHandleChange}
         onKeyPress={onHandleKeyPress}
-        placeholder="Ecrire message..."
+        placeholder={t('pages.messaging.write')}
       />
       <button
         id="button"
-        aria-label="Envoyer le message"
+        aria-label={t('pages.games.send')}
         type="submit"
         className="m-4 p-2 flex  items-center justify-center rounded-full bg-sky-500 text-white "
         onClick={handleSubmitMessage}

@@ -29,6 +29,7 @@ import {
   getColumns,
   pageSizes,
 } from './ListPlaygrounds.config';
+import { t } from 'i18next';
 
 interface ListPlaygroundsProps {
   setEquipmentId: (equipmentId: string) => void;
@@ -43,7 +44,7 @@ export default function ListPlaygrounds({
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
     equip_numero: string,
   ) => {
-    console.log('Paramètres reçus :', { equip_numero });
+   
     e.preventDefault();
 
     try {
@@ -79,7 +80,8 @@ export default function ListPlaygrounds({
         offset: (page - 1) * pageSize,
         limit: pageSize,
       });
-      console.log('API Response:', data);
+  
+
       setResults(data.results);
       setTotalResults(data.total_count);
     } catch (error) {
@@ -88,15 +90,12 @@ export default function ListPlaygrounds({
   };
 
   useEffect(() => {
-    console.log('Filters changed:', filters);
-
     fetchResults();
   }, []);
 
   const handleSubmit = async (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   ) => {
-    console.log('Submit:', filters);
     e.preventDefault();
     fetchResults();
   };
@@ -190,7 +189,7 @@ export default function ListPlaygrounds({
           className="bg-sky-600 dark:text-sky-500 hover:bg-sky-500"
           onClick={handleSubmit}
         >
-          Rechercher
+          {t('pages.playgrounds.search')}
         </Button>
       </div>
 
@@ -211,13 +210,13 @@ export default function ListPlaygrounds({
                   onClick={e => handleChoose(e, result.equip_numero)}
                   className="mt-4 font-medium bg-sky-600 dark:text-sky-500 hover:bg-sky-500 "
                 >
-                  Choose
+                   {t('pages.playgrounds.choose')}
                 </Button>
               </div>
             </Card>
           ))}
         </div>
-        <div>Total {totalResults} infrastructures sportives</div>
+        <div>Total {totalResults} {t('pages.playgrounds.sportinfra')}</div>
       </div>
 
       <div className="hidden lg:block">
@@ -243,7 +242,7 @@ export default function ListPlaygrounds({
           <TableFooter>
             <TableRow>
               <TableCell colSpan={12}>
-                Total {totalResults} infrastructures sportives
+                Total {totalResults} {t('pages.playgrounds.sportinfra')}
               </TableCell>
             </TableRow>
           </TableFooter>

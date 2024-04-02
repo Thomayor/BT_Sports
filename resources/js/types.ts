@@ -149,11 +149,14 @@ export interface UpdateGameProps extends CreateGameProps {
   game: Game;
 }
 
-export interface ShowGamesProps extends CreateGameProps {
+export interface ShowGamesProps  {
   games: Game[];
+  teams: Team[];
+  playgrounds: Playground[];
+  sports: Sport[];
 }
 
-export interface ShowGameProps extends CreateGameProps {
+export interface ShowGameListProps {
   game: Game;
   teams: Team[];
   playground: Playground[];

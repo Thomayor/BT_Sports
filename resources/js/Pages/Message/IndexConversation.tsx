@@ -4,13 +4,9 @@ import AppLayout from '@/Layouts/AppLayout';
 import ShowMessages from './Show';
 import { Auth, Conversation, User } from '@/types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faCheck,
-  faDeleteLeft,
-  faEllipsis,
-  faTrash,
-} from '@fortawesome/free-solid-svg-icons';
+import { faEllipsis, faTrash } from '@fortawesome/free-solid-svg-icons';
 import useRoute from '@/Hooks/useRoute';
+import { t } from 'i18next';
 
 interface IndexProps {
   conversations: Conversation[];
@@ -19,9 +15,14 @@ interface IndexProps {
   auth: Auth;
 }
 
-function IndexConversation({ conversations, conversation, messages, auth }: IndexProps) {
+function IndexConversation({
+  conversations,
+  conversation,
+  messages,
+  auth,
+}: IndexProps) {
   const [searchTerm, setSearchTerm] = useState('');
-  const [filter, setFilter] = useState('all');
+  const [filter, setFilter] = useState(t('pages.messaging.all'));
   const [showDropdown, setShowDropdown] = useState(false);
   const selectedConversation: Conversation | undefined = conversation;
 
@@ -34,24 +35,25 @@ function IndexConversation({ conversations, conversation, messages, auth }: Inde
     const isRead = c.messages.length > 0;
     const isUnread = !isRead;
 
-    if (filter === 'all') return hasMatchingMessages;
-    if (filter === 'read') return isRead && hasMatchingMessages;
-    if (filter === 'unread') return isUnread && hasMatchingMessages;
+    if (filter === t('pages.messaging.all')) return hasMatchingMessages;
+    if (filter === t('pages.messaging.read')) return isRead && hasMatchingMessages;
+    if (filter === t('pages.messaging.unread'))
+      return isUnread && hasMatchingMessages;
 
     return true;
   });
   const route = useRoute();
-  const {
-    delete: destroy,
-    reset,
-  } = inertiaForm({
+  const { delete: destroy, reset } = inertiaForm({
     conversation,
   });
 
-  const deleteConversation = (conversationId: number, e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  const deleteConversation = (
+    conversationId: number,
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+  ) => {
     e.preventDefault();
 
-    destroy(route('conversation.destroy',  { id: conversationId }), {
+    destroy(route('conversation.destroy', { id: conversationId }), {
       preserveScroll: true,
       onSuccess: () => setShowDropdown(showDropdown),
       onFinish: () => reset(),
@@ -62,12 +64,16 @@ function IndexConversation({ conversations, conversation, messages, auth }: Inde
     <AppLayout title="Ma Messagerie">
       <div className="flex items-center justify-between p-4">
         <div className="flex items-center space-x-3">
-        <h2 className="text-sky-500 text-2xl ml-2 mb-5">Messagerie</h2>
+          <h2 className="text-sky-500 text-2xl ml-2 mb-5">
+            {t('pages.messaging.messenger')}
+          </h2>
         </div>
       </div>
 
       <div className="mx-4 bg-white rounded-xl">
-        <h2 className="p-4 text-2xl font-semibold">Boîte de réception</h2>
+        <h2 className="p-4 text-2xl font-semibold">
+          {t('pages.messaging.mailbox')}
+        </h2>
         <div className="flex flex-col lg:flex-row">
           <div
             className={
@@ -77,7 +83,7 @@ function IndexConversation({ conversations, conversation, messages, auth }: Inde
             <div className="px-4 flex flex-col">
               <input
                 type="text"
-                placeholder="Rechercher par mot-clé"
+                placeholder={t('pages.messaging.searchKey')}
                 value={searchTerm}
                 onChange={e => setSearchTerm(e.target.value)}
                 className="border rounded p-2"
@@ -85,36 +91,36 @@ function IndexConversation({ conversations, conversation, messages, auth }: Inde
               <div className="mt-2 sm:space-x-2">
                 <button
                   type="button"
-                  onClick={() => setFilter('all')}
+                  onClick={() => setFilter(t('pages.messaging.all'))}
                   className={`border rounded  px-5 py-2 ${
-                    filter === 'all' ? 'bg-sky-500 text-white' : ''
+                    filter === t('pages.messaging.all') ? 'bg-sky-500 text-white' : ''
                   }`}
                 >
-                  Tous
+                  {t('pages.messaging.all')}
                 </button>
                 <button
                   type="button"
-                  onClick={() => setFilter('read')}
+                  onClick={() => setFilter(t('pages.messaging.read'))}
                   className={`border rounded px-6 py-2 ${
-                    filter === 'read' ? 'bg-sky-500 text-white' : ''
+                    filter === t('pages.messaging.read') ? 'bg-sky-500 text-white' : ''
                   }`}
                 >
-                  Lus
+                  {t('pages.messaging.read')}
                 </button>
                 <button
                   type="button"
-                  onClick={() => setFilter('unread')}
+                  onClick={() => setFilter(t('pages.messaging.unread'))}
                   className={`border rounded py-2 px-3 ${
-                    filter === 'unread' ? 'bg-sky-500 text-white' : ''
+                    filter === t('pages.messaging.unread') ? 'bg-sky-500 text-white' : ''
                   }`}
                 >
-                  Non lus
+                  {t('pages.messaging.unread')}
                 </button>
               </div>
             </div>
             {filteredConversations.length === 0 ? (
               <div className="p-4 text-center text-gray-500">
-                Vous n&apos;avez pas de messages.
+               { t('pages.messaging.nomessages')}
               </div>
             ) : (
               <div>
@@ -177,7 +183,7 @@ function IndexConversation({ conversations, conversation, messages, auth }: Inde
                                   icon={faTrash}
                                   className="w-15 h-15 text-red-500"
                                 />
-                                <span>Supprimer</span>
+                                <span>{t('pages.messaging.delete')}</span>
                               </button>
                             </form>
                           )}

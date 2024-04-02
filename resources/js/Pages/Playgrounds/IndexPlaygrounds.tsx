@@ -12,6 +12,7 @@ import {
   TableRow,
   Card
 } from '@/Components/ui';
+import { t } from 'i18next';
 
 
 interface IndexProps {
@@ -37,26 +38,26 @@ export default function IndexPlaygrounds({
     });
   };
   return (
-    <AppLayout title="Terrains">
+    <AppLayout title={t('pages.playgrounds.title')}>
       <div className="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
-        <h2 className="text-sky-500 text-2xl ml-2 mb-5">Playgrounds</h2>
+        <h2 className="text-sky-500 text-2xl ml-2 mb-5">{t('pages.playgrounds.title')}</h2>
 
         <div className="block sm:hidden">
           {playgrounds.map(playground => (
             <Card key={playground.id} className="my-4">
               <div className="p-4">
                 <div>
-                  <span className="font-bold">Nom du terrain:</span>
+                  <span className="font-bold">{t('pages.playgrounds.name')}:</span>
                   <Link href={`/playgrounds/${playground.id}`}>
                     {playground.name}
                   </Link>
                 </div>
                 <div>
-                  <span className="font-bold">Ville:</span>
+                  <span className="font-bold">{t('pages.playgrounds.city')}:</span>
                   {playground.city}
                 </div>
                 <div>
-                  <span className="font-bold">Activité:</span>
+                  <span className="font-bold">{t('pages.playgrounds.activity')}:</span>
                   {playground.playground_type}
                 </div>
                 <div>
@@ -64,7 +65,7 @@ export default function IndexPlaygrounds({
                     className="font-medium text-sky-600 dark:text-sky-500 hover:underline"
                     href={`/playgrounds/${playground.id}/edit`}
                   >
-                    Modifier
+                    {t('pages.playgrounds.modify')}
                   </Link>
                 </div>
                 <div>
@@ -72,7 +73,7 @@ export default function IndexPlaygrounds({
                     className="font-medium text-red-600 dark:text-red-500 hover:underline"
                     onClick={e => deletePlayground(playground.id, e)}
                   >
-                    Supprimer
+                    {t('pages.playgrounds.delete')}
                   </button>
                 </div>
               </div>
@@ -84,17 +85,17 @@ export default function IndexPlaygrounds({
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead>Nom du terrain</TableHead>
-                <TableHead>Ville</TableHead>
-                <TableHead>Activite</TableHead>
-                <TableHead>Modification</TableHead>
-                <TableHead>Suppression</TableHead>
+                <TableHead>{t('pages.playgrounds.name')}</TableHead>
+                <TableHead>{t('pages.playgrounds.city')}</TableHead>
+                <TableHead>{t('pages.playgrounds.activity')}</TableHead>
+                <TableHead>{t('pages.playgrounds.modification')}</TableHead>
+                <TableHead>{t('pages.playgrounds.deletion')}</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {playgrounds.length === 0 ? (
                 <TableRow>
-                  <TableCell colSpan={5}>PAS DE TERRAINS CRÉÉS</TableCell>
+                  <TableCell colSpan={5}>{t('pages.playgrounds.noplay')}</TableCell>
                 </TableRow>
               ) : (
                 playgrounds.map(playground => (
@@ -111,7 +112,7 @@ export default function IndexPlaygrounds({
                         className="font-medium text-sky-600 dark:text-sky-500 hover:underline"
                         href={`/playgrounds/${playground.id}/edit`}
                       >
-                        Modifier
+                       {t('pages.playgrounds.modify')}
                       </Link>
                     </TableCell>
                     <TableCell>
@@ -119,7 +120,7 @@ export default function IndexPlaygrounds({
                         className="font-medium text-red-600 dark:text-red-500 hover:underline"
                         onClick={e => deletePlayground(playground.id, e)}
                       >
-                        Supprimer
+                       {t('pages.playgrounds.delete')}
                       </button>
                     </TableCell>
                   </TableRow>

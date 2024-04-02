@@ -5,6 +5,7 @@ import useRoute from '@/Hooks/useRoute';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faEllipsis } from '@fortawesome/free-solid-svg-icons';
 import AppLayout from '@/Layouts/AppLayout';
+import { t } from 'i18next';
 
 interface DropdownNotificationProps {
   notifications: Notification[];
@@ -41,9 +42,9 @@ export default function View({ notifications }: DropdownNotificationProps) {
   }
 
   return (
-    <AppLayout title="Notifications">
+    <AppLayout title={t('pages.notifications.notif')}>
       <div className="p-2 flex justify-between items-center text-base font-medium">
-        <h5 className="text-sm font-medium">Notifications</h5>
+        <h1 className="text-sm font-medium">{t('pages.notifications.notif')}</h1>
         <button
           className="cursor-pointer rounded-full border px-2 hover:border-sky-500"
           onClick={() => setShowDropdown(!showDropdown)}
@@ -60,7 +61,7 @@ export default function View({ notifications }: DropdownNotificationProps) {
                 icon={faCheck}
                 className="w-15 h-15 text-sky-500"
               />
-              <span>Tout marquer comme lu</span>
+              <span>{t('pages.notifications.allread')}</span>
             </button>
           </div>
         )}
@@ -110,7 +111,7 @@ export default function View({ notifications }: DropdownNotificationProps) {
         ) : (
           <div>
             <p className="text-sm px-4.5 py-3 text-center">
-              Pas de notifications
+            {t('pages.notifications.notif')}
             </p>
           </div>
         )}

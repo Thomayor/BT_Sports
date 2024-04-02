@@ -25,13 +25,16 @@ export default function ShowInfoTeam({ team }: ShowTeamProps) {
     <AppLayout title={t('pages.team.members')}>
       <div className="m-5">
         <div>
-          <h2 className="text-sky-500 text-2xl ml-2 mb-5">Fiche de l'équipe</h2>
+          <h2 className="text-sky-500 text-2xl ml-2 mb-5">
+            {t('pages.teams.sheet')}
+          </h2>
 
           <div className="my-2 bg-white rounded-lg p-4">
-            <p className="my-2">Nom d'équipe : {team.name} </p>
             <p className="my-2">
-              {' '}
-              Création :{' '}
+              {t('pages.teams.name')}: {team.name}
+            </p>
+            <p className="my-2">
+              {t('pages.teams.creation')}:
               {new Date(team.created_at).toLocaleTimeString('fr-FR', {
                 day: '2-digit',
                 month: '2-digit',
@@ -40,8 +43,8 @@ export default function ShowInfoTeam({ team }: ShowTeamProps) {
                 minute: 'numeric',
               })}
             </p>
-            <p className="my-2">Matchs joués :</p>
-            <p className="my-2">Sport Favori :</p>
+            <p className="my-2">{t('pages.teams.play')} :</p>
+            <p className="my-2">{t('pages.teams.favorite')}:</p>
           </div>
         </div>
 
@@ -72,7 +75,7 @@ export default function ShowInfoTeam({ team }: ShowTeamProps) {
                   setRecieverId(team.owner.id);
                 }}
               >
-                Contacter
+                {t('pages.teams.contact')}
               </button>
             </div>
           </div>
@@ -103,7 +106,7 @@ export default function ShowInfoTeam({ team }: ShowTeamProps) {
                     setRecieverId(member.id);
                   }}
                 >
-                  Contacter
+                  {t('pages.teams.contact')}
                 </button>
               </div>
             </div>
