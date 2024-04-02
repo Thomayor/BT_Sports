@@ -100,7 +100,7 @@ export const getColumns = ({
       key: 'select',
       search: null,
       render: row => (
-        <button onClick={(e) => handleChoose(e,row.equip_numero)}>Choisir</button>
+        <button className='hidden sm:block' onClick={(e) => handleChoose(e,row.equip_numero)}>Choisir</button>
       ),
     },
   ] satisfies PlaygroundColumn[];

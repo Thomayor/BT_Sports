@@ -13,6 +13,7 @@ import {
   TableRow,
 } from '@/Components/ui';
 import GameCardList from './Gamecard';
+import { Card } from '@/Components/ui/card';
 
 export default function IndexGameTable({
   games,
@@ -39,65 +40,102 @@ export default function IndexGameTable({
           </svg>
         </PrimaryButton>
       </Link>
-<div className='hidden sm:block'>
-      <Table >
-        <TableHeader>
-          <TableRow>
-            <TableHead>Sport</TableHead>
-            <TableHead>Date</TableHead>
-            <TableHead>From / To</TableHead>
-            <TableHead>Playground</TableHead>
-            <TableHead>Adress</TableHead>
-            <TableHead>Max Player</TableHead>
-            <TableHead>Actions</TableHead>
-          </TableRow>
-        </TableHeader>
-
-        <TableBody>
-          {games.length === 0 ? (
+      <div className="hidden sm:block">
+        <Table>
+          <TableHeader>
             <TableRow>
-              <TableCell colSpan={7}>PAS DE MATCHS CRÉÉS</TableCell>
+              <TableHead>Sport</TableHead>
+              <TableHead>Date</TableHead>
+              <TableHead>From / To</TableHead>
+              <TableHead>Playground</TableHead>
+              <TableHead>Adress</TableHead>
+              <TableHead>Max Player</TableHead>
+              <TableHead>Actions</TableHead>
             </TableRow>
-          ) : (
-            games.map(game => {
-              const sport = sports.find(sport => sport.id === game.sport_id);
-              const playground = playgrounds.find(
-                playground => playground.equipment_id === game.equipment_id,
-              );
+          </TableHeader>
 
-              return (
-                <TableRow key={game.id}>
-                  <TableHead>{sport?.name}</TableHead>
-                  <TableCell>{formatDate(game.date)}</TableCell>
-                  <TableCell>
-                    {formatTime(game.start_time)} / {formatTime(game.end_time)}
-                  </TableCell>
-                  <TableCell>{playground?.name}</TableCell>
-                  <TableCell>
-                    {playground?.adress}, {playground?.postcode}{' '}
-                    {playground?.city}
-                  </TableCell>
-                  <TableCell>{game.max_player} players</TableCell>
-                  <TableCell>
-                    <Link
-                      href={`games/${game.id}`}
-                      className="font-medium text-sky-600 dark:text-sky-500 hover:underline"
-                    >
-                      Show Details
-                    </Link>
-                  </TableCell>
-                </TableRow>
-              );
-            })
-          )}
-        </TableBody>
-      </Table>
-      </div>
-      <div className='block sm:hidden'>
-<GameCardList games={games} sports={sports} playgrounds={playgrounds} />
-      </div>
+          <TableBody>
+            {games.length === 0 ? (
+              <TableRow>
+                <TableCell colSpan={7}>PAS DE MATCHS CRÉÉS</TableCell>
+              </TableRow>
+            ) : (
+              games.map(game => {
+                const sport = sports.find(sport => sport.id === game.sport_id);
+                const playground = playgrounds.find(
+                  playground => playground.equipment_id === game.equipment_id,
+                );
 
-      
+                return (
+                  <TableRow key={game.id}>
+                    <TableHead>{sport?.name}</TableHead>
+                    <TableCell>{formatDate(game.date)}</TableCell>
+                    <TableCell>
+                      {formatTime(game.start_time)} /{' '}
+                      {formatTime(game.end_time)}
+                    </TableCell>
+                    <TableCell>{playground?.name}</TableCell>
+                    <TableCell>
+                      {playground?.adress}, {playground?.postcode}{' '}
+                      {playground?.city}
+                    </TableCell>
+                    <TableCell>{game.max_player} players</TableCell>
+                    <TableCell>
+                      <Link
+                        href={`games/${game.id}`}
+                        className="font-medium text-sky-600 dark:text-sky-500 hover:underline"
+                      >
+                        Show Details
+                      </Link>
+                    </TableCell>
+                  </TableRow>
+                );
+              })
+            )}
+          </TableBody>
+        </Table>
+      </div>
+      <div className="block sm:hidden">
+        {games.map(game => {
+          const sport = sports.find(sport => sport.id === game.sport_id);
+          const playground = playgrounds.find(
+            playground => playground.equipment_id === game.equipment_id,
+          );
+
+          return (
+            <Card key={game.id} className="my-4">
+              <div className="p-4">
+                <div className='flex justify-between'>
+                  <span className='font-bold'>{sport?.name} </span>
+              <span>{formatDate(game.date)} </span>  </div>
+                <div className='mt-1 flex justify-center font-bold'>
+                  {playground?.name}
+                </div>
+                <div className='mt-1 flex justify-center'>
+             
+                  {playground?.adress}, {playground?.postcode}{' '}
+                  {playground?.city}
+                </div>
+                <div className='mt-1 flex justify-center'>
+               <span className='font-bold mr-1'>From / To:</span> 
+                  {formatTime(game.start_time)} / {formatTime(game.end_time)}
+                </div>
+                <div className='mt-1 flex justify-center'>
+                  {game.max_player} players
+                </div>
+                <div>
+                  <Link
+                    href={`games/${game.id}`}
+                    className="font-medium text-sky-600 dark:text-sky-500 hover:underline"
+                  >
+                    Show Details
+                  </Link>
+                </div>
+              </div>
+            </Card>
+          );
+        })}
+      </div>
     </div>
   );
 }

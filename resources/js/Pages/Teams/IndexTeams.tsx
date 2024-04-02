@@ -11,17 +11,17 @@ import {
   TableHead,
   TableHeader,
   TableRow,
+  Card
 } from '@/Components/ui';
 import useRoute from '@/Hooks/useRoute';
 import SendMessageModal from '@/Components/SendMessage';
-import TeamCardList from './TeamCard';
+
 
 interface TeamsIndexProps {
   teams: Team[];
 }
 
 export default function IndexTeams({ teams }: TeamsIndexProps) {
-  console.log(teams, 'ok');
   const route = useRoute();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [receiverId, setRecieverId] = useState<number | null>(null);
@@ -33,17 +33,45 @@ export default function IndexTeams({ teams }: TeamsIndexProps) {
     setRecieverId(null);
   };
 
-  const handleContactOwner = (ownerId: number) => {
-    setIsModalOpen(true);
-    setRecieverId(ownerId);
-  };
   return (
     <AppLayout title={t('pages.team.teams')}>
       <div className="max-w-xl  sm:max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
         <h2 className="text-sky-500 text-2xl ml-2 mb-5">Equipes</h2>
 
         <div className="block sm:hidden">
-          <TeamCardList teams={teams} onContactOwner={handleContactOwner} />
+          {teams.map(team => (
+            <Card key={team.id} className="my-4">
+              <div className="p-4">
+                <div>
+                  <span className="font-bold">Nom d'équipe: </span>
+                  {team.name}
+                </div>
+                <div>
+                  <span className="font-bold">Membres: </span>
+                  {team.users.length + 1}
+                </div>
+                <div className='mt-1'>
+                  <Link
+                    className="font-medium text-sky-600 dark:text-sky-500 hover:underline"
+                    href={`/team/${team.id}`}
+                  >
+                    Voir Equipe
+                  </Link>
+                </div>
+                <div className='mt-2 flex justify-center'>
+                  <Button
+                    className="font-medium bg-sky-600 hover:bg-sky-500 dark:text-sky-500"
+                    onClick={() => {
+                      setIsModalOpen(true);
+                      setRecieverId(team.owner.id);
+                    }}
+                  >
+                    Contacter
+                  </Button>
+                </div>
+              </div>
+            </Card>
+          ))}
         </div>
         <div className="sm:block hidden">
           <Table>

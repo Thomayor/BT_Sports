@@ -21,6 +21,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
+  Card,
 } from '@/Components/ui';
 
 import {
@@ -53,7 +54,7 @@ export default function ListPlaygrounds({
     } catch (error) {
       console.error('Erreur lors de la requête POST:', error);
     }
-  
+
     setEquipmentId(equip_numero);
   };
 
@@ -110,7 +111,7 @@ export default function ListPlaygrounds({
   return (
     <div className="mt-2">
       {/* FILTER SEARCH */}
-      <div className="flex gap-2">
+      <div className="flex sm:flex-row flex-col gap-2">
         {columns.map((column: PlaygroundColumn) => {
           if (!column.search) return null;
           if (column.search.type === 'text') {
@@ -133,7 +134,7 @@ export default function ListPlaygrounds({
                   onValueChange={value => handleFilterChange(column.key, value)}
                   value={filters[column.key]}
                 >
-                  <SelectTrigger className="w-[180px]">
+                  <SelectTrigger>
                     <SelectValue placeholder={column.search.placeholder} />
                   </SelectTrigger>
                   <SelectContent>
@@ -148,12 +149,11 @@ export default function ListPlaygrounds({
             );
           }
         })}
-
         <Select
           onValueChange={value => setPageSize(Number(value))}
           value={pageSize.toString()}
         >
-          <SelectTrigger className="w-[180px]">
+          <SelectTrigger >
             <SelectValue placeholder="" />
           </SelectTrigger>
           <SelectContent>
@@ -186,10 +186,36 @@ export default function ListPlaygrounds({
             </PaginationItem>
           </button>
         </PaginationContent>
-        <Button onClick={handleSubmit}>Rechercher</Button>
+        <Button className='bg-sky-600 dark:text-sky-500 hover:bg-sky-500' onClick={handleSubmit}>Rechercher</Button>
       </div>
+
       {/* RESULTS LIST */}
-      <div >
+
+      <div className="sm:hidden block">
+        <div>
+          {results.map((result, index) => (
+            <Card key={index} className="my-2">
+              <div className="p-4">
+                {columns.map((column: PlaygroundColumn) => (
+                  <div key={column.key} className="mb-2">
+                    <span className="font-bold">{column.label}:</span>{' '}
+                    {column.render ? column.render(result) : result[column.key]}
+                  </div>
+                ))}
+                <Button
+                  onClick={e => handleChoose(e, result.equip_numero)}
+                  className="mt-4 font-medium bg-sky-600 dark:text-sky-500 hover:bg-sky-500 "
+                >
+                  Choose
+                </Button>
+              </div>
+            </Card>
+          ))}
+        </div>
+        <div>Total {totalResults} infrastructures sportives</div>
+      </div>
+
+      <div className="hidden sm:block">
         <Table>
           <TableHeader>
             <TableRow>
@@ -202,7 +228,7 @@ export default function ListPlaygrounds({
             {results.map((result, index) => (
               <TableRow key={index}>
                 {columns.map((column: PlaygroundColumn) => (
-                  <TableCell key={column.key}>
+                  <TableCell key={column.key} className={column.key === 'select' ? 'sm:hidden' : 'block'}>
                     {column.render ? column.render(result) : result[column.key]}
                   </TableCell>
                 ))}
