@@ -228,7 +228,7 @@ export default function ListPlaygrounds({
             {results.map((result, index) => (
               <TableRow key={index}>
                 {columns.map((column: PlaygroundColumn) => (
-                  <TableCell key={column.key} className={column.key === 'select' ? 'sm:hidden' : 'block'}>
+                  <TableCell key={column.key} >
                     {column.render ? column.render(result) : result[column.key]}
                   </TableCell>
                 ))}
