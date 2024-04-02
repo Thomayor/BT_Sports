@@ -8,23 +8,19 @@ use App\Models\Team;
 
 class TeamController extends Controller
 {
-    public function showTeams()
-    {
-        $teams = Team::all();
-        return Inertia::render('Teams/Index', ['teams' => $teams]);
-    }
+  public function showTeams()
+  {
+    $teams = Team::with('owner', 'users')->get();
 
-    public function showMembers($teamId)
-    {
-        $team = Team::with('users')->findOrFail($teamId);
-        $members = $team->users;
-        $owner = $team->owner;
+    return Inertia::render('Teams/IndexTeams', ['teams' => $teams]);
+  }
 
-        return Inertia::render('Teams/Members', [
-            'team' => $team,
-            'members' => $members,
-            'owner' => $owner
-        ]);
-    }
+  public function showInfoTeam($id)
+  {
+    $team = Team::with('owner', 'users')->findOrFail($id);
 
+    return Inertia::render('Teams/ShowInfoTeam', [
+      'team' => $team,
+    ]);
+  }
 }

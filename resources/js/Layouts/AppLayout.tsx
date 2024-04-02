@@ -100,17 +100,23 @@ export default function AppLayout({
                   >
                     Messagerie
                   </NavLink>
+                  {page.props.auth.user?.account_type === "ADMIN" ? (
+                    
                   <NavLink
                     href={route('playgrounds.index')}
                     active={route().current('playgrounds.index')}
                   >
                     Terrains
                   </NavLink>
+                  ): null}
                 </div>
               </div>
 
               <div className="hidden sm:flex sm:items-center sm:ml-6">
+                <div className='relative z-20'>
+
                 <ModalNotification notifications={notifications} />
+                </div>
 
                 <div className="ml-3 relative">
                   {/* <!-- Teams Dropdown --> */}
@@ -329,6 +335,27 @@ export default function AppLayout({
               >
                 Dashboard
               </ResponsiveNavLink>
+              <ResponsiveNavLink
+                  href={route('games.index')}
+                  active={route().current('games.index')}
+                >
+               Games
+              </ResponsiveNavLink>
+              <ResponsiveNavLink
+                  href={route('teams')}
+                  active={route().current('teams')}
+                >
+               Team
+              </ResponsiveNavLink>
+              {page.props.auth.user?.account_type === "ADMIN" ? (
+                    
+                    <ResponsiveNavLink
+                      href={route('playgrounds.index')}
+                      active={route().current('playgrounds.index')}
+                    >
+                      Terrains
+                    </ResponsiveNavLink>
+                    ): null}
             </div>
 
             {/* <!-- Responsive Settings Options --> */}
@@ -355,7 +382,7 @@ export default function AppLayout({
                 <ul>
                   <Link
                     href="/notifications"
-                    className="ml-40 flex  items-center gap-1"
+                    className="ml-28 flex  items-center gap-1"
                   >
                     <ModalNotification notifications={notifications} />
                   </Link>
@@ -368,7 +395,12 @@ export default function AppLayout({
                 >
                   {t('nav.profile.profile')}
                 </ResponsiveNavLink>
-
+                <ResponsiveNavLink
+                  href={route('conversations.index')}
+                  active={route().current('conversation.index')}
+                >
+                Messagerie
+                </ResponsiveNavLink>
                 {page.props.jetstream.hasApiFeatures ? (
                   <ResponsiveNavLink
                     href={route('api-tokens.index')}

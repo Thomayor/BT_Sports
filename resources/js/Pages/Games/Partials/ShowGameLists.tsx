@@ -7,7 +7,7 @@ import useTypedPage from "@/Hooks/useTypedPage";
 import useRoute from "@/Hooks/useRoute";
 import { Link, useForm as inertiaForm } from '@inertiajs/react';
 
-export default function ShowGameLists({ game, sport, playground, teams, users }: ShowGameProps) {
+export default function ShowGameLists({ game, sport, playground, teams }: ShowGameProps) {
     const page = useTypedPage();
     const route = useRoute();
 

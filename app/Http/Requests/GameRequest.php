@@ -27,7 +27,7 @@ class GameRequest extends FormRequest
             'end_time' => 'required|',
             'max_player' => 'required|integer',
             'sport_id' => 'required',
-            'playground_id' => 'required'
+            'equipment_id' => 'required'
         ];
     }
 }

@@ -10,7 +10,7 @@ export const fetchFacilitiesWithFilters = async (
     const queryParams =
       Object.entries(filters)
         .filter(([_, value]) => !!value)
-        .map(([key, value]) => `search(${key}, "${value}")`)
+        .map(([key, value]) => `search(${key},"${value}")`)
         .join(' and ') || null;
 
     const paginationParams = `limit=${pagination.limit}&offset=${pagination.offset}`;

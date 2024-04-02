@@ -26,7 +26,7 @@ class ConversationController extends Controller
       ->with(['users', 'messages'])
       ->get();
 
-    return Inertia::render('Message/Index', [
+    return Inertia::render('Message/IndexConversation', [
       'conversations' => $conversations,
     ]);
   }

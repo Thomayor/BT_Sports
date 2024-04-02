@@ -84,7 +84,7 @@ function MessagesList(props: {
                   <p
                     className={`xl:w-80 rounded-md px-4 py-1 text-white ${
                       displayMessagePosition(content.user_id)
-                        ? 'bg-blue-500'
+                        ? 'bg-sky-500'
                         : 'bg-gray-400'
                     }`}
                   >

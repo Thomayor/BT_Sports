@@ -18,7 +18,7 @@ class PlaygroundController extends Controller
   {
     $playgrounds = Playground::all();
 
-    return Inertia::render('Playgrounds/Index', [
+    return Inertia::render('Playgrounds/IndexPlaygrounds', [
       'playgrounds' => $playgrounds,
     ]);
   }
@@ -42,13 +42,13 @@ class PlaygroundController extends Controller
   {
     $base_url = 'https://equipements.sports.gouv.fr';
 
-    $equipement_id = $request->input('numequipement');
+    $equipement_id = $request->input('equip_numero');
 
     $userId = Auth::id();
 
     $path =
       $base_url .
-      '/api/explore/v2.1/catalog/datasets/data-es/records?where=numequipement%20like%20%22' .
+      '/api/explore/v2.1/catalog/datasets/data-es/records?where=equip_numero%20like%20%22' .
       $equipement_id .
       '%22';
 
@@ -60,17 +60,17 @@ class PlaygroundController extends Controller
       Playground::updateOrCreate(
         ['equipment_id' => $equipement_id],
         [
-          'name' => $playgroundData['nominstallation'],
-          'equipment_id' => $playgroundData['numequipement'],
-          'installation_id' => $playgroundData['numinstallation'],
-          'surface_type' => $playgroundData['carac167'],
-          'adress' => $playgroundData['adresse'],
-          'postcode' => $playgroundData['codepostal'],
-          'playground_type' => $playgroundData['typequipement'],
-          'is_covered' => $playgroundData['carac168'],
-          'city' => $playgroundData['new_name'],
-          'coordgpsx' => $playgroundData['coordgpsx'],
-          'coordgpsy' => $playgroundData['coordgpsy'],
+          'name' => $playgroundData['inst_nom'],
+          'equipment_id' => $playgroundData['equip_numero'],
+          'installation_id' => $playgroundData['inst_numero'],
+          'surface_type' => $playgroundData['equip_sol'],
+          'adress' => $playgroundData['inst_adresse'],
+          'postcode' => $playgroundData['inst_cp'],
+          'playground_type' => $playgroundData['equip_type_name'],
+          'is_covered' => $playgroundData['equip_nature'],
+          'city' => $playgroundData['inst_com_nom'],
+          'coordgpsx' => $playgroundData['equip_x'],
+          'coordgpsy' => $playgroundData['equip_y'],
           'user_id' => $userId,
         ]
       );
@@ -101,7 +101,11 @@ class PlaygroundController extends Controller
    */
   public function edit(string $id)
   {
-    //
+    $playground = Playground::findOrFail($id);
+
+    return Inertia::render('Playgrounds/EditPlayground', [
+      'playground' => $playground,
+    ]);
   }
 
   /**
@@ -121,7 +125,7 @@ class PlaygroundController extends Controller
   {
     $playground = Playground::findOrFail($id);
 
-    if (Auth::user()->role !== 'ADMIN') {
+    if (Auth::user()->account_type !== 'ADMIN') {
       return response()->json(
         [
           'message' =>
@@ -132,6 +136,12 @@ class PlaygroundController extends Controller
     }
 
     $playground->delete();
-    return response()->json(null, 204);
+
+    return redirect()
+    ->route('playgrounds.index')
+      ->refresh()
+      ->with([
+        'flash' => 'Votre Playground a été supprimé avec succès !',
+      ]);
   }
 }
