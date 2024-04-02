@@ -8,138 +8,120 @@ use App\Http\Requests\GameRequest;
 use App\Models\Playground;
 use App\Models\Sport;
 use App\Models\Team;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 
 class GameController extends Controller
 {
-  public function index()
-  {
-    $games = Game::all();
-    $sports = Sport::all();
-    $playgrounds = Playground::all();
-    $teams = Team::all();
+    public function index()
+    {
+        $games = Game::with('teams.users')->get();
+        $sports = Sport::all();
+        $playgrounds = Playground::all();
 
-    return Inertia::render('Games/IndexGames', [
-      'games' => $games,
-      'sports' => $sports,
-      'playgrounds' => $playgrounds,
-      'teams' => $teams,
-    ]);
-  }
-
-  public function create()
-  {
-    $user = auth()->id();
-    $playgrounds = Playground::all();
-    $sports = Sport::all();
-    $teams = Team::where('user_id', $user)->get();
-
-    return Inertia::render('Games/CreateGame', [
-      'playgrounds' => $playgrounds,
-      'sports' => $sports,
-      'teams' => $teams,
-    ]);
-  }
-
-  public function store(GameRequest $request)
-  {
-   
-    $user = Auth::user()->id;
-
-    $game = Game::create([
-      'date' => $request->input('date'),
-      'start_time' => $request->input('start_time'),
-      'end_time' => $request->input('end_time'),
-      'max_player' => $request->input('max_player'),
-      'sport_id' => $request->input('sport_id'),
-      'equipment_id' => $request->input('equipment_id'),
-      'user_id' => $user,
-    ]);
-
-    if ($game) {
-      Log::info('Le jeu a été créé avec succès. ID du jeu : ' . $game->id);
-    } else {
-      Log::error('Échec de la création du jeu.');
+        return Inertia::render('Games/IndexGames', [
+            'games' => $games,
+            'sports' => $sports,
+            'playgrounds' => $playgrounds
+        ]);
     }
 
-    $gameID = $game->id;
-    $teamID = $request->input('team_id');
+    public function create()
+    {
+        $user = auth()->id();
+        $playgrounds = Playground::all();
+        $sports = Sport::all();
+        $teams = Team::where('user_id', $user)->get();
 
-    $game->teams()->attach($teamID, ['game_id' => $gameID]);
-
-    return to_route('games.index')->with(
-      [
-        'game' => $game,
-      ],
-      200
-    );
-  }
-
-  public function show($id)
-  {
-    $game = Game::findOrFail($id);
-    $sport = Sport::where('id', '=', $game->sport_id)->get();
-    $playground = Playground::where('equipment_id', '=', $game->equipment_id)->get();
-    $teams = $game
-      ->teams()
-      ->with('users')
-      ->get();
-
-    $usersByTeam = [];
-
-    foreach ($teams as $team) {
-      $users = $team->users()->get();
-      $usersByTeam[$team->id] = $users->toArray();
+        return Inertia::render('Games/CreateGame', [
+            'playgrounds' => $playgrounds,
+            'sports' => $sports,
+            'teams' => $teams
+        ]);
     }
 
-    return Inertia::render('Games/ShowGame', [
-      'game' => $game,
-      'sport' => $sport,
-      'playground' => $playground,
-      'teams' => $teams,
-      'users' => $users,
-    ]);
-  }
+    public function store(GameRequest $request)
+    {
+        $user = Auth::user()->id;
 
-  public function edit($id)
-  {
-    $user = auth()->id();
-    $game = Game::findOrFail($id);
-    $playgrounds = Playground::all();
-    $sports = Sport::all();
-    $teams = Team::where('user_id', $user)->get();
+        $game = Game::create([
+            'date' => $request->input('date'),
+            'start_time' => $request->input('start_time'),
+            'end_time' => $request->input('end_time'),
+            'max_player' => $request->input('max_player'),
+            'sport_id' => $request->input('sport_id'),
+            'playground_id' => $request->input('playground_id'),
+            'user_id' => $user
+        ]);
 
-    return Inertia::render('Games/EditGame', [
-      'game' => $game,
-      'playgrounds' => $playgrounds,
-      'sports' => $sports,
-      'teams' => $teams,
-    ]);
-  }
+        $gameID = $game->id;
+        $teamID = $request->input('team_id');
 
-  public function update(GameRequest $request, $id)
-  {
-    $game = Game::findOrFail($id);
+        $game->teams()->attach($teamID, ['game_id' => $gameID]);
 
-    $game->update([
-      'date' => $request->input('date'),
-      'start_time' => $request->input('start_time'),
-      'end_time' => $request->input('end_time'),
-      'max_player' => $request->input('max_player'),
-      'sport_id' => $request->input('sport_id'),
-      'playground_id' => $request->input('playground_id'),
-    ]);
+        return to_route('games.index')->with([
+            'game' => $game
+        ], 200);
+    }
 
-    return redirect()->route('games.show', ['id' => $game->id]);
-  }
+    public function show($id)
+    {
+        $game = Game::findOrFail($id);
+        $sport = Sport::where('id', '=', $game->sport_id)->get();
+        $playground = Playground::where('id', '=', $game->playground_id)->get();
+        $teams = $game->teams()->with('users')->get();
 
-  public function destroy($id)
-  {
-    $game = Game::findOrFail($id);
+        $owners = [];
 
-    $game->delete();
+        foreach($teams as $team) {
+            $owners[] = $team->owner;
+        }
 
-    return redirect()->route('dashboard');
-  }
+        return Inertia::render('Games/ShowGame', [
+            'game' => $game,
+            'sport' => $sport,
+            'playground' => $playground,
+            'teams' => $teams
+        ]);
+    }
+
+    public function edit($id)
+    {
+        $user = auth()->id();
+        $game = Game::findOrFail($id);
+        $playgrounds = Playground::all();
+        $sports = Sport::all();
+        $teams = Team::where('user_id', $user)->get();
+
+        return Inertia::render('Games/EditGame', [
+            'game' => $game,
+            'playgrounds' => $playgrounds,
+            'sports' => $sports,
+            'teams' => $teams
+        ]);
+    }
+
+    public function update(GameRequest $request, $id)
+    {
+        $game = Game::findOrFail($id);
+
+        $game->update([
+            'date' => $request->input('date'),
+            'start_time' => $request->input('start_time'),
+            'end_time' => $request->input('end_time'),
+            'max_player' => $request->input('max_player'),
+            'sport_id' => $request->input('sport_id'),
+            'playground_id' => $request->input('playground_id'), 
+        ]);
+
+        return redirect()->route('games.show', ['id' => $game->id]);
+    }
+
+    public function destroy($id)
+    {
+        $game = Game::findOrFail($id);
+
+        $game->delete();
+
+        return redirect()->route('dashboard');
+    }
 }

@@ -1,5 +1,6 @@
+import React, { useState } from 'react';
+
 import { ShowGamesProps } from '@/types';
-import React from 'react';
 import formatTime from '@/Services/formatTime';
 import formatDate from '@/Services/formatDate';
 import { Link } from '@inertiajs/react';
@@ -11,9 +12,10 @@ import {
   TableHead,
   TableHeader,
   TableRow,
+  Card
 } from '@/Components/ui';
 import GameCardList from './Gamecard';
-import { Card } from '@/Components/ui/card';
+
 
 export default function IndexGameTable({
   games,
@@ -21,25 +23,64 @@ export default function IndexGameTable({
   playgrounds,
   teams,
 }: ShowGamesProps) {
+  
+   {/* SET FILTER VARIABLES */}
+    const [searchTerm, setSearchTerm] = useState<string>("");
+    const [selectedSport, setSelectedSport] = useState<string>("");
+
+
+    {/* FILTERED GAMES BY SPORTS OR POSTCODE*/}
+    const filteredGames = games.filter(game => {
+        const playground = playgrounds.find(playground => playground.id === game.playground_id);
+        const sport = sports.find(sport => sport.id === game.sport_id);
+        return (
+            (searchTerm === "" || (playground && playground.postcode.includes(searchTerm))) &&
+            (selectedSport === "" || (sport && sport.name.toLowerCase() === selectedSport.toLowerCase()))
+        );
+    });
+  
   return (
     <div className="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
       <h2 className="text-sky-500 text-2xl ml-2 mb-5">Matchs</h2>
-      <Link href="games/create/">
-        <PrimaryButton className="opacity-80 mb-2 bg-sky-500 ml-2">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 20 20"
-            fill="currentColor"
-            className="top-0 right-0 w-5 h-5"
-          >
-            <path
-              fillRule="evenodd"
-              d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm.75-11.25a.75.75 0 0 0-1.5 0v2.5h-2.5a.75.75 0 0 0 0 1.5h2.5v2.5a.75.75 0 0 0 1.5 0v-2.5h2.5a.75.75 0 0 0 0-1.5h-2.5v-2.5Z"
-              clipRule="evenodd"
-            />
-          </svg>
-        </PrimaryButton>
-      </Link>
+     <div className="flex justify-start">
+
+                    {/* REDIRECTION BUTTON TO CREATE A GAME */}
+                    <PrimaryButton className='opacity-80 mb-2 bg-sky-500'>
+                        <Link href="games/create/">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="top-0 right-0 w-5 h-5">
+                                <path fillRule="evenodd" d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm.75-11.25a.75.75 0 0 0-1.5 0v2.5h-2.5a.75.75 0 0 0 0 1.5h2.5v2.5a.75.75 0 0 0 1.5 0v-2.5h2.5a.75.75 0 0 0 0-1.5h-2.5v-2.5Z" clipRule="evenodd" />
+                            </svg>
+                        </Link>
+                    </PrimaryButton>
+
+                    {/* DROPDOWN TO FILTER BY SPORTS */}
+                    <select
+                        id="sports"
+                        className="mt-1 block mb-2 ml-2 w-48 py-2 rounded-md"
+                        value={selectedSport}
+                        onChange={e => setSelectedSport(e.target.value)}
+                    >
+                        <option value="">All Sports</option>
+                        {sports.map(sport => (
+                            <option key={sport.id} value={sport.name}>
+                                {sport.name}
+                            </option>
+                        ))}
+                    </select>
+
+
+                    {/* INPUT TO FILTER BY POSTCODE */}
+                    <TextInput
+                        id="postcode"
+                        type="text"
+                        className="mt-1 block mb-2 ml-2 w-48 py-2"
+                        placeholder="Search by postcode..."
+                        value={searchTerm}
+                        onChange={e => setSearchTerm(e.target.value)}
+                        autoFocus
+                    />
+                </div>
+
       <div className="hidden sm:block">
         <Table>
           <TableHeader>
@@ -55,12 +96,12 @@ export default function IndexGameTable({
           </TableHeader>
 
           <TableBody>
-            {games.length === 0 ? (
+            {filteredGames.length === 0 ? (
               <TableRow>
                 <TableCell colSpan={7}>PAS DE MATCHS CRÉÉS</TableCell>
               </TableRow>
             ) : (
-              games.map(game => {
+              filteredGames.map(game => {
                 const sport = sports.find(sport => sport.id === game.sport_id);
                 const playground = playgrounds.find(
                   playground => playground.equipment_id === game.equipment_id,
@@ -79,7 +120,7 @@ export default function IndexGameTable({
                       {playground?.adress}, {playground?.postcode}{' '}
                       {playground?.city}
                     </TableCell>
-                    <TableCell>{game.max_player} players</TableCell>
+                    <TableCell>{game.teams.reduce((totalPlayers, team) => totalPlayers + team.users.length, 0) + 1} / {game.max_player}</TableCell>
                     <TableCell>
                       <Link
                         href={`games/${game.id}`}
@@ -121,7 +162,7 @@ export default function IndexGameTable({
                   {formatTime(game.start_time)} / {formatTime(game.end_time)}
                 </div>
                 <div className='mt-1 flex justify-center'>
-                  {game.max_player} players
+                {game.teams.reduce((totalPlayers, team) => totalPlayers + team.users.length, 0) + 1} / {game.max_player}
                 </div>
                 <div>
                   <Link

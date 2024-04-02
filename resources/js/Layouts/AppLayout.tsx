@@ -20,15 +20,12 @@ interface Props {
   renderHeader?(): JSX.Element;
 }
 
-export default function AppLayout({
-  title,
-  renderHeader,
-  children,
-}: PropsWithChildren<Props>) {
+export default function AppLayout({ title, renderHeader, children }: PropsWithChildren<Props>) {
   const page = useTypedPage();
   const route = useRoute();
-  const [showingNavigationDropdown, setShowingNavigationDropdown] =
-    useState(false);
+  const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
+  const notifications = (page.props.notifications || []) as Notification[];
+  const userRole = page.props.auth.user?.role;
 
   function switchToTeam(e: React.FormEvent, team: Team) {
     e.preventDefault();
@@ -41,14 +38,13 @@ export default function AppLayout({
         preserveState: false,
       },
     );
-  }
+  };
 
   function logout(e: React.FormEvent) {
     e.preventDefault();
     router.post(route('logout'));
-  }
+  };
 
-  const notifications = (page.props.notifications || []) as Notification[];
 
 
 
@@ -79,36 +75,44 @@ export default function AppLayout({
                   >
                     Dashboard
                   </NavLink>
-                  
+
                   <NavLink
                     href={route('games.index')}
                     active={route().current('games.index')}
                   >
-                    Matchs 
+                    Games
                   </NavLink>
-                    
+
                   <NavLink
                     href={route('teams')}
                     active={route().current('teams')}
                   >
-                    Team
+                    Teams
                   </NavLink>
-                    
+
                   <NavLink
                     href={route('conversations.index')}
                     active={route().current('conversations.index')}
                   >
                     Messagerie
                   </NavLink>
+                  
                   {page.props.auth.user?.account_type === "ADMIN" ? (
-                    
+                    <>
                   <NavLink
                     href={route('playgrounds.index')}
                     active={route().current('playgrounds.index')}
                   >
                     Terrains
                   </NavLink>
-                  ): null}
+                                  <NavLink
+                        href={route('sports.index')}
+                        active={route().current('sports.index')}
+                      >
+                        Sports
+                      </NavLink>
+                        </>                  ): null}
+
                 </div>
               </div>
 
@@ -187,18 +191,18 @@ export default function AppLayout({
                                   <div className="flex items-center">
                                     {team.id ==
                                       page.props.auth.user?.current_team_id && (
-                                      <svg
-                                        className="mr-2 h-5 w-5 text-green-400"
-                                        fill="none"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth="2"
-                                        stroke="currentColor"
-                                        viewBox="0 0 24 24"
-                                      >
-                                        <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                      </svg>
-                                    )}
+                                        <svg
+                                          className="mr-2 h-5 w-5 text-green-400"
+                                          fill="none"
+                                          strokeLinecap="round"
+                                          strokeLinejoin="round"
+                                          strokeWidth="2"
+                                          stroke="currentColor"
+                                          viewBox="0 0 24 24"
+                                        >
+                                          <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                        </svg>
+                                      )}
                                     <div>{team.name}</div>
                                   </div>
                                 </DropdownLink>
@@ -458,18 +462,18 @@ export default function AppLayout({
                           <div className="flex items-center">
                             {team.id ==
                               page.props.auth.user?.current_team_id && (
-                              <svg
-                                className="mr-2 h-5 w-5 text-green-400"
-                                fill="none"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth="2"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
-                              >
-                                <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                              </svg>
-                            )}
+                                <svg
+                                  className="mr-2 h-5 w-5 text-green-400"
+                                  fill="none"
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  strokeWidth="2"
+                                  stroke="currentColor"
+                                  viewBox="0 0 24 24"
+                                >
+                                  <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                              )}
                             <div>{team.name}</div>
                           </div>
                         </ResponsiveNavLink>

@@ -1,3 +1,5 @@
+import React, { ReactNode } from "react";
+
 type DateTime = string;
 
 export type Nullable<T> = T | null;
@@ -109,8 +111,14 @@ export interface TeamInvitation {
 }
 
 export interface Sport {
-  id: number;
-  name: string;
+
+  id: number,
+  name: string,
+  user_id: number;
+}
+
+export interface ShowSportsProps {
+  sports: Sport[];
 }
 
 export interface Game {
@@ -120,6 +128,7 @@ export interface Game {
   end_time: DateTime;
   max_player: number;
   sport_id: number;
+  teams: Team[];
   equipment_id: string;
   user_id: number;
 }
@@ -143,13 +152,22 @@ export interface ShowGameProps extends CreateGameProps {
   teams: Team[];
   playground: Playground[];
   sport: Sport[];
-  users: User[];
 }
 
 export interface JoinGameProps {
   game: Game;
   teams: Team[];
 }
+
+export interface DefinitionListItemProps {
+  term: string;
+  description: string;
+}
+
+export interface DefinitionListProps {
+  children: React.ReactNode
+}
+
 
 export interface Conversation {
   users: any;
@@ -164,6 +182,7 @@ export interface Conversation {
   receiver: User;
   messages: Message[];
 }
+
 export interface Message {
   id: number;
   content: string;
@@ -191,6 +210,11 @@ export interface Playground {
   equipment_id: string;
   installation_id: string;
 }
+
+export interface TableProps {
+  children: React.ReactNode;
+  className?: string
+};
 
 export enum Method {
   GET = 'get',
