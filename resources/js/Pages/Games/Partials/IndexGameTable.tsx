@@ -8,10 +8,15 @@ import TextInput from "@/Components/TextInput";
 import TableHeaderCell from "@/Components/Table/TableHeaderCell";
 import TableDataCell from "@/Components/Table/TableDataCell";
 
-export default function IndexGameTable({ games, sports, playgrounds, teams }: ShowGamesProps) {
-    const [searchTerm, setSearchTerm] = useState("");
-    const [selectedSport, setSelectedSport] = useState("");
 
+export default function IndexGameTable({ games, sports, playgrounds }: ShowGamesProps) {
+
+    {/* SET FILTER VARIABLES */}
+    const [searchTerm, setSearchTerm] = useState<string>("");
+    const [selectedSport, setSelectedSport] = useState<string>("");
+
+
+    {/* FILTERED GAMES BY SPORTS OR POSTCODE*/}
     const filteredGames = games.filter(game => {
         const playground = playgrounds.find(playground => playground.id === game.playground_id);
         const sport = sports.find(sport => sport.id === game.sport_id);
@@ -21,12 +26,12 @@ export default function IndexGameTable({ games, sports, playgrounds, teams }: Sh
         );
     });
 
-    console.log(games);
-
     return (
         <div>
             <div className="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
                 <div className="flex justify-start">
+
+                    {/* REDIRECTION BUTTON TO CREATE A GAME */}
                     <PrimaryButton className='opacity-80 mb-2 bg-sky-500'>
                         <Link href="games/create/">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="top-0 right-0 w-5 h-5">
@@ -35,6 +40,7 @@ export default function IndexGameTable({ games, sports, playgrounds, teams }: Sh
                         </Link>
                     </PrimaryButton>
 
+                    {/* DROPDOWN TO FILTER BY SPORTS */}
                     <select
                         id="sports"
                         className="mt-1 block mb-2 ml-2 w-48 py-2 rounded-md"
@@ -49,6 +55,8 @@ export default function IndexGameTable({ games, sports, playgrounds, teams }: Sh
                         ))}
                     </select>
 
+
+                    {/* INPUT TO FILTER BY POSTCODE */}
                     <TextInput
                         id="postcode"
                         type="text"
@@ -60,6 +68,8 @@ export default function IndexGameTable({ games, sports, playgrounds, teams }: Sh
                     />
                 </div>
 
+                
+                {/* DISPLAY ALL GAMES */}
                 <div className="overflow-x-auto shadow-md sm:rounded-lg">
                     <table className="sm:table-auto w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -103,9 +113,12 @@ export default function IndexGameTable({ games, sports, playgrounds, teams }: Sh
                                         </TableDataCell>
 
                                         <TableDataCell className="text-center">
-                                            {game.teams.map(team => team.users.length + 1)} / {game.max_player}
+                                            {game.teams.reduce(
+                                                (totalPlayers, team) => totalPlayers + team.users.length, 0) + 1} / {game.max_player}
                                         </TableDataCell>
-                                        
+
+
+                                        {/* REDIRECTION BUTTON TO DISPLAY ONE GAME DETAILS */}
                                         <TableDataCell className="text-center">
                                             <Link
                                                 href={`games/${game.id}`}

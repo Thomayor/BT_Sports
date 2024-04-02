@@ -17,13 +17,11 @@ class GameController extends Controller
         $games = Game::with('teams.users')->get();
         $sports = Sport::all();
         $playgrounds = Playground::all();
-        $teams = Team::with('users')->get();
 
         return Inertia::render('Games/IndexGames', [
             'games' => $games,
             'sports' => $sports,
-            'playgrounds' => $playgrounds,
-            'teams' => $teams
+            'playgrounds' => $playgrounds
         ]);
     }
 
@@ -82,8 +80,7 @@ class GameController extends Controller
             'game' => $game,
             'sport' => $sport,
             'playground' => $playground,
-            'teams' => $teams,
-            'owners' => $owners
+            'teams' => $teams
         ]);
     }
 

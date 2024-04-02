@@ -1,13 +1,15 @@
 import React from "react";
-import { ShowSportsProps, Sport } from "@/types";
+import { ShowSportsProps } from "@/types";
 import PrimaryButton from "@/Components/PrimaryButton";
 import { Link, useForm as inertiaForm } from "@inertiajs/react";
 import useRoute from "@/Hooks/useRoute";
 import TableHeaderCell from "@/Components/Table/TableHeaderCell";
 import TableDataCell from "@/Components/Table/TableDataCell";
 
-export default function IndexSportsTable({ sports }: ShowSportsProps) {
+const IndexSportsTable: React.FC<ShowSportsProps> = ({ sports }) =>{
     const route = useRoute();
+
+    {/* DELETE SPORT */}
     const { delete: destroy, reset } = inertiaForm({
         sports
     });
@@ -24,7 +26,7 @@ export default function IndexSportsTable({ sports }: ShowSportsProps) {
     return (
         <div>
             <div className="max-w-2xl mx-auto py-10 sm:px-6 lg:px-8">
-                <PrimaryButton className='opacity-80 mb-2 bg-sky-500' >
+                <PrimaryButton className='opacity-80 ml-2 mb-2 bg-sky-500' >
                     <Link href="sports/create/">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -41,7 +43,7 @@ export default function IndexSportsTable({ sports }: ShowSportsProps) {
                     </Link>
                 </PrimaryButton>
 
-                <div className="overflow-x-auto shadow-md sm:rounded-lg">
+                <div className="mx-2 overflow-x-auto shadow-md rounded-lg">
                     <table className="sm:table-auto w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                             <tr>
@@ -92,3 +94,5 @@ export default function IndexSportsTable({ sports }: ShowSportsProps) {
         </div>
     )
 }
+
+export default IndexSportsTable;

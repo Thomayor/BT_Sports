@@ -8,6 +8,7 @@ import { useForm } from "@inertiajs/react";
 import classNames from "classnames";
 import React from "react";
 
+
 export default function JoinGameForm({ game, teams }: JoinGameProps) {
     const route = useRoute();
     const form = useForm({
@@ -15,6 +16,8 @@ export default function JoinGameForm({ game, teams }: JoinGameProps) {
         team_id: ''
     });
 
+
+    {/* FUNCTION TO JOIN A GAME */}
     function joinGame() {
         form.post(route('games.teams.store', game.id), {
             errorBag: 'joinGame',

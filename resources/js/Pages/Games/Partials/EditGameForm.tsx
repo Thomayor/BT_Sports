@@ -12,12 +12,13 @@ import { Playground, Sport, Team, UpdateGameProps } from "@/types";
 import formatDate from "@/Services/formatDate";
 import formatTime from "@/Services/formatTime";
 
-export default function CreateGameForm({ game, playgrounds, sports, teams }: UpdateGameProps) {
-    const [isCompleted, setIsCompleted] = useState<boolean>(false);
-    const [errorMessage, setErrorMessage] = useState<string>('');
 
+export default function CreateGameForm({ game, playgrounds, sports, teams }: UpdateGameProps) {
     const route = useRoute();
 
+    {/* SET FORM VARIABLES */}
+    const [isCompleted, setIsCompleted] = useState<boolean>(false);
+    const [errorMessage, setErrorMessage] = useState<string>('');
     const form = useForm({
         date: '',
         start_time: '',
@@ -28,6 +29,7 @@ export default function CreateGameForm({ game, playgrounds, sports, teams }: Upd
         team_id: ''
     });
 
+    {/* FUNCTION TO UPDATE GAME */}
     function updateGame() {
         form.put(route('games.update', game.id), {
             errorBag: 'updateGame',
@@ -38,6 +40,7 @@ export default function CreateGameForm({ game, playgrounds, sports, teams }: Upd
         setErrorMessage('');
     };
 
+    {/* FUNCTION TO DISPPLAY THE NEXT FORM */}
     function showAddTeam() {
         if (
             form.data.date &&

@@ -10,12 +10,13 @@ import TextInput from "@/Components/TextInput";
 import InputError from "@/Components/InputError";
 import { CreateGameProps, Playground, Sport, Team } from "@/types";
 
-export default function CreateGameForm({ playgrounds, sports, teams }: CreateGameProps) {
-    const [isCompleted, setIsCompleted] = useState<boolean>(false);
-    const [errorMessage, setErrorMessage] = useState<string>('');
 
+export default function CreateGameForm({ playgrounds, sports, teams }: CreateGameProps) {
     const route = useRoute();
 
+    {/* SET FORM VARIABLES */}
+    const [isCompleted, setIsCompleted] = useState<boolean>(false);
+    const [errorMessage, setErrorMessage] = useState<string>('');
     const form = useForm({
         date: '',
         start_time: '',
@@ -26,6 +27,8 @@ export default function CreateGameForm({ playgrounds, sports, teams }: CreateGam
         team_id: ''
     });
 
+
+    {/* FUNCTION TO STORE A GAME */}
     function createGame() {
         form.post(route('games.store'), {
             errorBag: 'createGame',
@@ -36,6 +39,8 @@ export default function CreateGameForm({ playgrounds, sports, teams }: CreateGam
         setErrorMessage('');
     };
 
+
+    {/* FUNCTION TO DISPLAY THE NEXT FORM */}
     function showAddTeam() {
         if (
             form.data.date &&

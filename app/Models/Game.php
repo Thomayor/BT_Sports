@@ -21,8 +21,16 @@ class Game extends Model
 
     public function teams()
     {
-        return $this->belongsToMany(
-            Team::class, 'join_games'
-        )->take(2)->withTimestamps();
+        return $this->belongsToMany(Team::class, 'join_games')->withTimestamps();
+    }
+
+    public function sport()
+    {
+        return $this->belongsTo(Sport::class, 'sport_id');
+    }
+
+    public function playground()
+    {
+        return $this->belongsTo(Playground::class, 'playground_id');
     }
 }

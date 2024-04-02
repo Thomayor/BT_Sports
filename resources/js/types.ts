@@ -1,3 +1,5 @@
+import React, { ReactNode } from "react";
+
 type DateTime = string;
 
 export type Nullable<T> = T | null;
@@ -149,12 +151,20 @@ export interface ShowGameProps extends CreateGameProps {
   teams: Team[];
   playground: Playground[];
   sport: Sport[];
-  owners: User[];
 }
 
 export interface JoinGameProps {
   game: Game;
   teams: Team[];
+}
+
+export interface DefinitionListItemProps {
+  term: string;
+  description: string;
+}
+
+export interface DefinitionListProps {
+  children: React.ReactNode
 }
 
 export interface Playground {
