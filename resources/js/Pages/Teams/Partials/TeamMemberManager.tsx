@@ -195,7 +195,7 @@ export default function TeamMemberManager({
                     <button
                       type="button"
                       className={classNames(
-                        'relative px-4 py-3 inline-flex w-full rounded-lg focus:z-10 focus:outline-none focus:border-indigo-500 dark:focus:border-sky-500 focus:ring-2 focus:ring-indigo-500 dark:focus:ring-sky-500',
+                        'relative px-4 py-3 inline-flex w-full rounded-lg focus:z-10 focus:outline-none focus:border-sky-500 dark:focus:border-sky-500 focus:ring-2 focus:ring-sky-500 dark:focus:ring-sky-500',
                         {
                           'border-t border-gray-200 dark:border-gray-700 focus:border-none rounded-t-none':
                             i > 0,
@@ -383,7 +383,7 @@ export default function TeamMemberManager({
                 <button
                   type="button"
                   className={classNames(
-                    'relative px-4 py-3 inline-flex w-full rounded-lg focus:z-10 focus:outline-none focus:border-indigo-500 dark:focus:border-sky-500 focus:ring-2 focus:ring-indigo-500 dark:focus:ring-sky-500',
+                    'relative px-4 py-3 inline-flex w-full rounded-lg focus:z-10 focus:outline-none focus:border-sky-500 dark:focus:border-sky-500 focus:ring-2 focus:ring-sky-500 dark:focus:ring-sky-500',
                     {
                       'border-t border-gray-200 dark:border-gray-700 focus:border-none rounded-t-none':
                         i > 0,

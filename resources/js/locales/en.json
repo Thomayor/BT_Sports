@@ -3,6 +3,7 @@
     "nav": {
       "dashboard": "Dashboard",
       "team": {
+        "teams": "Teams",
         "title1": "Manage Team",
         "settings": "Team Settings",
         "newTeam": "Create New Team",
@@ -13,9 +14,40 @@
         "profile": "Profile",
         "APIToken": "API Tokens",
         "logout": "Log Out"
-      }
+      },
+      "games": "Matchs",
+      "messaging": "Messaging",
+      "playgrounds": "Playgrounds",
+      "sports": "Sports"
     },
     "pages": {
+      "dashboard": {
+        "welcome": "Welcome to your Dashboard!",
+        "totalgames": "Total Matches",
+        "totalteams": "Total Team",
+        "totalusers": "Total Users",
+        "news": "News",
+        "infos": "This is your dashboard overview. Below you can see some statistics about our application."
+      },
+      "games":{
+        "create":"Create Match",
+        "error":"Please fill out all fields in the Game Details section",
+        "details":"Match Details",
+        "descriptioncreate":"Create a new game and challenge opponents",
+        "nextpage":"Next Page.",
+        "next":"Next",
+        "date":"Date",
+        "sport":"Sport",
+        "chooseSport":"Choose a sport",
+        "chooseTeam":"Choose your team",
+        "startTime":"Start Time",
+        "endTime":"End Time",
+        "team":"Team",
+        "max":"Max Players",
+        "created":"Game created.",
+        "save":"Save",
+        "choosePlayground":"Choose Playground"
+      },
       "auth": {
         "login": {
           "email": "Email",
@@ -27,7 +59,7 @@
         },
         "register": {
           "firstname": "Firstname",
-          "lastname":"Lastname",
+          "lastname": "Lastname",
           "email": "Email",
           "password": "Password",
           "confirmPassword": "Confirm Password",
@@ -71,7 +103,7 @@
           "selectPhoto": "Select A New Photo",
           "removePhoto": "Remove Photo",
           "firstname": "Firstname",
-          "lastname":"Lastname",
+          "lastname": "Lastname",
           "email": "Email",
           "unverifEmail": "Your email address is unverified.",
           "resentLink": "Click here to re-send the verification email.",
@@ -128,49 +160,49 @@
       },
       "team": {
         "title": "Team informations",
-        "teamOwner":"Team owner",
+        "teamOwner": "Team owner",
         "description": "Update your team informations",
         "name": "Team name",
-        "nameDesc":"The team's name and owner information.",
+        "nameDesc": "The team's name and owner information.",
         "alert": "Saved.",
         "save": "Save",
-        "text":"Once a team is deleted, all of its resources and data will be permanently deleted. Before deleting this team, please download any data or information regarding this team that you wish to retain.",
-        "sure":"Are you sure you want to delete this team? Once a team is deleted, all of its resources and data will be permanently deleted.",
-        "cancel":"Cancel",
-        "deleteTeam":"Delete Team",
-        "createTeam":"Create Team",
-        "createdesc":"Create a new team to collaborate with others on sports activities.",
-        "permanently":"Permanently delete this team.",
-        "addTeamMember":"Add Team Member",
-        "descTeamMember":"Add a new team member to your team, allowing them to share sport activities with you.",
-        "added":"Added.",
-        "add":"Add",
-        "addEmail":"Please provide the email address of the person you would like to add to this team.",
-        "pending":"Pending Team Invitations",
-        "descPending":"These people have been invited to your team and have been sent an invitation email. They may join the team by accepting the email invitation.",
-        "teamMember":"Team Members",
-        "teamMemberDesc":"All of the people that are part of this team.",
-        "leave":"Leave",
-        "remove":"Remove",
-        "manageRole":"Manage Role",
-        "leaveTeam":"Leave Team",
-        "confirmLeave":"Are you sure you would like to leave this team?",
-        "removeTeamMember":"Remove Team Member",
-        "confirmRemove":"Are you sure you would like to remove this person from the team?",
+        "text": "Once a team is deleted, all of its resources and data will be permanently deleted. Before deleting this team, please download any data or information regarding this team that you wish to retain.",
+        "sure": "Are you sure you want to delete this team? Once a team is deleted, all of its resources and data will be permanently deleted.",
+        "cancel": "Cancel",
+        "deleteTeam": "Delete Team",
+        "createTeam": "Create Team",
+        "createdesc": "Create a new team to collaborate with others on sports activities.",
+        "permanently": "Permanently delete this team.",
+        "addTeamMember": "Add Team Member",
+        "descTeamMember": "Add a new team member to your team, allowing them to share sport activities with you.",
+        "added": "Added.",
+        "add": "Add",
+        "addEmail": "Please provide the email address of the person you would like to add to this team.",
+        "pending": "Pending Team Invitations",
+        "descPending": "These people have been invited to your team and have been sent an invitation email. They may join the team by accepting the email invitation.",
+        "teamMember": "Team Members",
+        "teamMemberDesc": "All of the people that are part of this team.",
+        "leave": "Leave",
+        "remove": "Remove",
+        "manageRole": "Manage Role",
+        "leaveTeam": "Leave Team",
+        "confirmLeave": "Are you sure you would like to leave this team?",
+        "removeTeamMember": "Remove Team Member",
+        "confirmRemove": "Are you sure you would like to remove this person from the team?",
         "roles": {
           "admin": {
-            "name":"Administrator",
+            "name": "Administrator",
             "description": "Administrator users can perform any action."
           },
-          "editor":{
-            "name":"Editor",
-            "description":"Editor users have the ability to read, create, and update."
+          "editor": {
+            "name": "Editor",
+            "description": "Editor users have the ability to read, create, and update."
           }
-         },
-         "teamSettings":"Team Settings", 
-         "teams":"Equipes",
-         "members":"Team Members"
         },
+        "teamSettings": "Team Settings",
+        "teams": "Equipes",
+        "members": "Team Members"
+      },
       "faq": {
         "title": "Frequently Asked Questions.",
         "help": "Need some help?",

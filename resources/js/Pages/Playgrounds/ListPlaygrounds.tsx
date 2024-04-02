@@ -111,7 +111,7 @@ export default function ListPlaygrounds({
   return (
     <div className="mt-2">
       {/* FILTER SEARCH */}
-      <div className="flex sm:flex-row flex-col gap-2">
+      <div className="flex lg:flex-row flex-col gap-2">
         {columns.map((column: PlaygroundColumn) => {
           if (!column.search) return null;
           if (column.search.type === 'text') {
@@ -153,7 +153,7 @@ export default function ListPlaygrounds({
           onValueChange={value => setPageSize(Number(value))}
           value={pageSize.toString()}
         >
-          <SelectTrigger >
+          <SelectTrigger className="sm:w-[180px]">
             <SelectValue placeholder="" />
           </SelectTrigger>
           <SelectContent>
@@ -186,12 +186,17 @@ export default function ListPlaygrounds({
             </PaginationItem>
           </button>
         </PaginationContent>
-        <Button className='bg-sky-600 dark:text-sky-500 hover:bg-sky-500' onClick={handleSubmit}>Rechercher</Button>
+        <Button
+          className="bg-sky-600 dark:text-sky-500 hover:bg-sky-500"
+          onClick={handleSubmit}
+        >
+          Rechercher
+        </Button>
       </div>
 
       {/* RESULTS LIST */}
 
-      <div className="sm:hidden block">
+      <div className="lg:hidden block">
         <div>
           {results.map((result, index) => (
             <Card key={index} className="my-2">
@@ -215,7 +220,7 @@ export default function ListPlaygrounds({
         <div>Total {totalResults} infrastructures sportives</div>
       </div>
 
-      <div className="hidden sm:block">
+      <div className="hidden lg:block">
         <Table>
           <TableHeader>
             <TableRow>
@@ -228,7 +233,7 @@ export default function ListPlaygrounds({
             {results.map((result, index) => (
               <TableRow key={index}>
                 {columns.map((column: PlaygroundColumn) => (
-                  <TableCell key={column.key} >
+                  <TableCell key={column.key}>
                     {column.render ? column.render(result) : result[column.key]}
                   </TableCell>
                 ))}

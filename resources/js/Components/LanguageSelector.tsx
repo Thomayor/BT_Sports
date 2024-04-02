@@ -8,7 +8,9 @@ interface FlagIconProps {
 function FlagIcon({ countryCode = '' }: FlagIconProps) {
   return (
     <span
-      className={`fi fis rounded-full text-2xl inline-block mr-2 fi-${countryCode === 'en' ? 'gb' : countryCode}`}
+      className={`fi fis rounded-full text-2xl inline-block mr-2 fi-${
+        countryCode === 'en' ? 'gb' : countryCode
+      }`}
     />
   );
 }
@@ -67,7 +69,7 @@ function LanguageSelector() {
             onClick={() => setIsOpen(!isOpen)}
             type="button"
             aria-label="Language selector"
-            className="inline-flex items-center justify-center w-full border-none px-2 py-3  text-sm font-medium hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            className="inline-flex items-center justify-center w-full border-none px-2 py-3  text-sm font-medium hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500"
             id={LANGUAGE_SELECTOR_ID}
             aria-haspopup="true"
             aria-expanded={isOpen}
@@ -106,7 +108,9 @@ function LanguageSelector() {
                       selectedLanguage.key === language.key
                         ? 'bg-gray-100 text-gray-900'
                         : 'text-gray-700'
-                    } block px-4 py-2 text-sm text-left items-center  hover:bg-gray-100 ${index % 2 === 0 ? 'rounded-r' : 'rounded-l'}`}
+                    } block px-4 py-2 text-sm text-left items-center  hover:bg-gray-100 ${
+                      index % 2 === 0 ? 'rounded-r' : 'rounded-l'
+                    }`}
                     role="menuitem"
                   >
                     <FlagIcon countryCode={language.key} />

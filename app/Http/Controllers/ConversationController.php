@@ -49,14 +49,14 @@ class ConversationController extends Controller
   })->first();
 
   if ($existingConversation) {
-      // Une conversation existe déjà, redirigez l'utilisateur vers cette conversation
+      // Une conversation existe déjà, redirige l'user vers cette conversation
       return Redirect::route('conversations.messages', $existingConversation->id)->with(
           'success',
           'You already have a conversation with this user.'
       );
   }
 
-  // Si aucune conversation n'existe, créez une nouvelle conversation
+  // Si aucune conversation n'existe, créez une nouvelle
   $conversation = Conversation::create([
       'title' => 'Message',
       'user_id' => $sender->id,

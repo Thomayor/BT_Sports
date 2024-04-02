@@ -69,7 +69,7 @@ export default function IndexGameTable({
         {/* DROPDOWN TO FILTER BY SPORTS */}
         <select
           id="sports"
-          className="mt-1 block mb-2 ml-2 w-48 py-2 rounded-md"
+          className="mt-1 block mb-2 ml-2 w-48 py-2 rounded-md focus:border-sky-500 dark:focus:border-sky-500 focus:ring-sky-500 dark:focus:ring-sky-500"
           value={selectedSport}
           onChange={e => setSelectedSport(e.target.value)}
         >
@@ -85,7 +85,7 @@ export default function IndexGameTable({
         <TextInput
           id="city"
           type="text"
-          className="mt-1 block mb-2 ml-2 w-48 py-2"
+          className="mt-1 block mb-2 ml-2 w-48 py-2 "
           placeholder="Search by city..."
           value={searchTerm}
           onChange={e => setSearchTerm(e.target.value)}

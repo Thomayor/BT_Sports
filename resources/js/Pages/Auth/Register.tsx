@@ -16,7 +16,7 @@ export default function Register() {
   const route = useRoute();
   const form = useForm({
     firstname: '',
-    lastname:'',
+    lastname: '',
     email: '',
     password: '',
     password_confirmation: '',
@@ -35,7 +35,7 @@ export default function Register() {
       <Head title="Register" />
 
       <form onSubmit={onSubmit}>
-      <div >
+        <div>
           <InputLabel htmlFor="lastname">
             {t('pages.auth.register.lastname')}
           </InputLabel>
@@ -52,7 +52,7 @@ export default function Register() {
           <InputError className="mt-2" message={form.errors.lastname} />
         </div>
 
-        <div  className="mt-4">
+        <div className="mt-4">
           <InputLabel htmlFor="firstname">
             {t('pages.auth.register.firstname')}
           </InputLabel>
@@ -68,8 +68,6 @@ export default function Register() {
           />
           <InputError className="mt-2" message={form.errors.firstname} />
         </div>
-
-       
 
         <div className="mt-4">
           <InputLabel htmlFor="email">
@@ -140,7 +138,7 @@ export default function Register() {
                   <a
                     target="_blank"
                     href={route('terms.show')}
-                    className="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
+                    className="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500 dark:focus:ring-offset-gray-800"
                     rel="noreferrer"
                   >
                     Terms of Service
@@ -149,7 +147,7 @@ export default function Register() {
                   <a
                     target="_blank"
                     href={route('policy.show')}
-                    className="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
+                    className="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500 dark:focus:ring-offset-gray-800"
                     rel="noreferrer"
                   >
                     Privacy Policy
@@ -164,7 +162,7 @@ export default function Register() {
         <div className="flex items-center justify-end mt-4">
           <Link
             href={route('login')}
-            className="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
+            className="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500 dark:focus:ring-offset-gray-800"
           >
             {t('pages.auth.register.alreadyReg')}
           </Link>

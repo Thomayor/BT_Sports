@@ -3,6 +3,7 @@
     "nav": {
       "dashboard": "Tableau de bord",
       "team": {
+        "teams": "Equipes",
         "title": "Gérer l'équipe",
         "settings": "Paramètres de l'équipe",
         "newTeam": "Créer une nouvelle équipe",
@@ -13,9 +14,40 @@
         "profile": "Profil",
         "APIToken": "Jetons API",
         "logout": "Déconnexion"
-      }
+      },
+      "games": "Matchs",
+      "messaging": "Messagerie",
+      "playgrounds": "Terrains",
+      "sports": "Sports"
     },
     "pages": {
+      "dashboard": {
+        "welcome": "Bienvenue sur votre Tableau de Bord !",
+        "totalgames": "Total de matchs",
+        "totalteams": "Total d'équipes",
+        "totalusers": "Total d'utilisateurs",
+        "news": "Actualités",
+        "infos": "Ceci est un aperçu de votre tableau de bord. Ci-dessus, vous pouvez voir quelques statistiques concernant notre application."
+      },
+      "games": {
+        "create": "Créer un match",
+        "error": "Veuillez remplir tous les champs dans la section Détails du match.",
+        "details": "Détails du match",
+        "descriptioncreate": "Créez un nouveau match et défiez des adversaires.",
+        "nextpage": "Page suivante.",
+        "next": "Suivant",
+        "date":"Date",
+        "sport":"Sport",
+        "chooseSport":"Choisir un sport",
+        "chooseTeam":"Choisis ton équipe",
+        "startTime": "Heure de début",
+        "endTime": "Heure de fin",
+        "team": "Équipe",
+        "max": "Nombre maximum de joueurs",
+        "created": "Match créé.",
+        "save": "Enregistrer",
+        "choosePlayground": "Choisir le Terrain du match"
+      },
       "auth": {
         "login": {
           "email": "Email",
@@ -138,7 +170,7 @@
         "sure": "Êtes-vous sûr de vouloir supprimer cette équipe ? Une fois qu'une équipe est supprimée, toutes ses ressources et données seront définitivement supprimées.",
         "cancel": "Annuler",
         "deleteTeam": "Delete Team",
-        "createTeam":"Créer équipe",
+        "createTeam": "Créer équipe",
         "createDesc": "Créez une nouvelle équipe pour collaborer avec d'autres sur des activités sportives.",
         "permanently": "Supprimer définitivement cette équipe.",
         "addTeamMember": "Ajouter un membre à l'équipe",
@@ -167,9 +199,9 @@
             "description": "Les utilisateurs éditeurs ont la capacité de lire, créer et mettre à jour."
           }
         },
-        "teamSettings":"Paramètres d'équipe",
-        "teams":"Equipes",
-        "members":"Membres de l'équipe"
+        "teamSettings": "Paramètres d'équipe",
+        "teams": "Equipes",
+        "members": "Membres de l'équipe"
       },
       "faq": {
         "title": "Questions fréquentes.",

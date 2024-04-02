@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+
 import useRoute from '@/Hooks/useRoute';
 import { useForm } from '@inertiajs/react';
 import FormSection from '@/Components/FormSection';
@@ -8,12 +9,12 @@ import classNames from 'classnames';
 import InputLabel from '@/Components/InputLabel';
 import TextInput from '@/Components/TextInput';
 import InputError from '@/Components/InputError';
-import { CreateGameProps, Playground, Sport, Team } from '@/types';
+import { CreateGameProps, Sport, Team } from '@/types';
 import ListPlaygrounds from '@/Pages/Playgrounds/ListPlaygrounds';
 import FormSectionArray from '@/Components/FormSectionArray';
+import { t } from 'i18next';
 
 export default function CreateGameForm({
-  playgrounds,
   sports,
   teams,
 }: CreateGameProps) {
@@ -36,7 +37,7 @@ export default function CreateGameForm({
 
   useEffect(() => {
     form.setData('equipment_id', equipmentId);
-    console.log('equipmentId', equipmentId);
+    
   }, [equipmentId]);
 
   function createGame() {
@@ -45,7 +46,7 @@ export default function CreateGameForm({
       preserveScroll: true,
     });
 
-    console.log(form, 'form');
+ 
 
     setIsCompleted(false);
     setErrorMessage('');
@@ -61,7 +62,7 @@ export default function CreateGameForm({
     ) {
       setIsCompleted(true);
     }
-    setErrorMessage('Please fill out all fields in the Game Details section');
+    setErrorMessage(t('pages.games.error'));
   }
 
   return (
@@ -69,32 +70,32 @@ export default function CreateGameForm({
       {!isCompleted ? (
         <FormSection
           onSubmit={showAddTeam}
-          title={'Game Details'}
-          description={'Create a new game and challenge opponents'}
+          title={t('pages.games.details')}
+          description={t('pages.games.descriptioncreate')}
           renderActions={() => (
             <>
               <ActionMessage on={form.recentlySuccessful} className="mr-3">
-                Next Page.
+              {t('pages.games.nextpage')}
               </ActionMessage>
 
               <PrimaryButton
                 className={classNames({ 'opacity-25': form.processing })}
                 disabled={form.processing}
               >
-                Next
+                {t('pages.games.next')}
               </PrimaryButton>
             </>
           )}
         >
           <div className="col-span-6 sm:col-span-4">
-            <InputLabel htmlFor="sport" value="Sport" />
+            <InputLabel htmlFor="sport" value={t('pages.games.sport')} />
             <select
               id="sports"
               className="bg-gray-50 border mb-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-sky-500 dark:focus:border-sky-500"
               value={form.data.sport_id}
               onChange={e => form.setData('sport_id', e.target.value)}
             >
-              <option value="">Choisir un sport</option>
+              <option value="">{t('pages.games.chooseSport')}</option>
               {sports.map((sport: Sport) => (
                 <option key={sport.id} value={sport.id}>
                   {sport.name}
@@ -102,7 +103,7 @@ export default function CreateGameForm({
               ))}
             </select>
 
-            <InputLabel htmlFor="date" value="Date" />
+            <InputLabel htmlFor="date" value={t('pages.games.date')} />
             <TextInput
               id="date"
               type="date"
@@ -113,7 +114,7 @@ export default function CreateGameForm({
             />
             <InputError message={form.errors.date} className="mt-2" />
 
-            <InputLabel htmlFor="start_time" value="Start Time" />
+            <InputLabel htmlFor="start_time" value={t('pages.games.startTime')} />
             <TextInput
               id="start_time"
               type="time"
@@ -123,7 +124,7 @@ export default function CreateGameForm({
               autoFocus
             />
 
-            <InputLabel htmlFor="end_time" value="End Time" />
+            <InputLabel htmlFor="end_time" value={t('pages.games.endTime')} />
             <TextInput
               id="end_time"
               type="time"
@@ -134,14 +135,14 @@ export default function CreateGameForm({
             />
 
             <div className="mt-2">
-              <InputLabel htmlFor="team" value="Team" />
+              <InputLabel htmlFor="team" value={t('pages.games.team')} />
               <select
                 id="teams"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-sky-500 dark:focus:border-sky-500"
                 value={form.data.team_id}
                 onChange={e => form.setData('team_id', e.target.value)}
               >
-                <option value="">Choisir une équipe</option>
+                <option value="">{t('pages.games.chooseTeam')}</option>
                 {teams.map((team: Team) => (
                   <option key={team.id} value={team.id}>
                     {team.name}
@@ -151,7 +152,7 @@ export default function CreateGameForm({
             </div>
 
             <div className="mt-2">
-              <InputLabel htmlFor="max_players" value="Max Players" />
+              <InputLabel htmlFor="max_players" value={t('pages.games.max')} />
               <TextInput
                 id="max_players"
                 type="number"
@@ -173,40 +174,26 @@ export default function CreateGameForm({
       ) : (
         <FormSectionArray
           onSubmit={createGame}
-          title={'Game Details'}
-          description={'Create a new game and challenge opponents'}
+          title={t('pages.games.details')}
+          description={t('pages.games.descriptioncreate')}
           renderActions={() => (
             <>
               <ActionMessage on={form.recentlySuccessful} className="mr-3">
-                Game created.
+              {t('pages.games.created')}
               </ActionMessage>
 
               <PrimaryButton
                 className={classNames({ 'opacity-25': form.processing })}
                 disabled={form.processing}
               >
-                Save
+                {t('pages.games.save')}
               </PrimaryButton>
             </>
           )}
         >
           <div className="col-span-12 sm:col-span-12">
-            <InputLabel htmlFor="playground" value=" Choisir Playground" />
+            <InputLabel htmlFor="playground" value={t('pages.games.choosePlayground')} />
             <ListPlaygrounds setEquipmentId={setEquipmentId} />
-
-            {/*     <select
-              id="playgrounds"
-              className="bg-gray-50 border mb-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-sky-500 dark:focus:border-sky-500"
-              value={form.data.playground_id}
-              onChange={e => form.setData('playground_id', e.target.value)}
-            >
-              <option value="">Choisir un terrain</option>
-              {playgrounds.map((playground: Playground) => (
-                <option key={playground.id} value={playground.id}>
-                  {playground.name}
-                </option>
-              ))}
-            </select> */}
           </div>
         </FormSectionArray>
       )}

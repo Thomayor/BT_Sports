@@ -4,6 +4,12 @@ type DateTime = string;
 
 export type Nullable<T> = T | null;
 
+export interface DashboardProps {
+  countGame?: number;
+  countTeam?: number;
+  countUser?: number;
+}
+
 export interface Team {
   id: number;
   name: string;

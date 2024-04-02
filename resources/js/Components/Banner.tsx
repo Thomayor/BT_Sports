@@ -13,7 +13,7 @@ export default function Banner() {
       {show && message ? (
         <div
           className={classNames({
-            'bg-indigo-500': style == 'success',
+            'bg-sky-500': style == 'success',
             'bg-red-700': style == 'danger',
           })}
         >
