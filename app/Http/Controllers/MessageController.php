@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use App\Models\Conversation;
 use App\Models\Message;
-use App\Models\User;
 
 class MessageController extends Controller
 {
@@ -38,7 +37,7 @@ class MessageController extends Controller
     $messages = $conversation->messages;
     $messages->load('user');
 
-    return Inertia::render('Message/Index', [
+    return Inertia::render('Message/IndexConversation', [
       'conversations' => $conversations,
       'conversation' => $conversation,
       'messages' => $messages,
@@ -47,8 +46,6 @@ class MessageController extends Controller
 
   public function storeMessage(Request $request, Conversation $conversation)
   {
-    
-
     $user = Auth::user();
 
     $request->validate([

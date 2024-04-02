@@ -85,10 +85,10 @@ Route::middleware([
   })->name('dashboard');
 
   Route::get('/teams', [TeamController::class, 'showTeams'])->name('teams');
-  Route::get('/teams/{teamId}/members', [
+  Route::get('/team/{id}', [
     TeamController::class,
-    'showMembers',
-  ])->name('team.members');
+    'showInfoTeam',
+  ])->name('team.showInfoTeam');
 
   Route::get('/notifications', function () {
     return Inertia::render('Notifications/View');
@@ -132,7 +132,7 @@ Route::middleware([
 
 });
 
-Route::middleware(['role:ADMIN,SUPPORT'])->group(function () {
+Route::middleware(['account_type:ADMIN,SUPPORT'])->group(function () {
   Route::resource('playgrounds', PlaygroundController::class);
   Route::get('/list-playgrounds', [PlaygroundController::class, 'listPlaygroundApi'])->name(
     'playgrounds.listApi'

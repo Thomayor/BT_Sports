@@ -1,17 +1,30 @@
-import React, { useState } from "react";
-import { ShowGamesProps } from "@/types";
-import formatTime from "@/Services/formatTime";
-import formatDate from "@/Services/formatDate";
-import { Link } from "@inertiajs/react";
-import PrimaryButton from "@/Components/PrimaryButton";
-import TextInput from "@/Components/TextInput";
-import TableHeaderCell from "@/Components/Table/TableHeaderCell";
-import TableDataCell from "@/Components/Table/TableDataCell";
+import React, { useState } from 'react';
+
+import { ShowGamesProps } from '@/types';
+import formatTime from '@/Services/formatTime';
+import formatDate from '@/Services/formatDate';
+import { Link } from '@inertiajs/react';
+import PrimaryButton from '@/Components/PrimaryButton';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+  Card
+} from '@/Components/ui';
+import GameCardList from './Gamecard';
 
 
-export default function IndexGameTable({ games, sports, playgrounds }: ShowGamesProps) {
-
-    {/* SET FILTER VARIABLES */}
+export default function IndexGameTable({
+  games,
+  sports,
+  playgrounds,
+  teams,
+}: ShowGamesProps) {
+  
+   {/* SET FILTER VARIABLES */}
     const [searchTerm, setSearchTerm] = useState<string>("");
     const [selectedSport, setSelectedSport] = useState<string>("");
 
@@ -25,11 +38,11 @@ export default function IndexGameTable({ games, sports, playgrounds }: ShowGames
             (selectedSport === "" || (sport && sport.name.toLowerCase() === selectedSport.toLowerCase()))
         );
     });
-
-    return (
-        <div>
-            <div className="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
-                <div className="flex justify-start">
+  
+  return (
+    <div className="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
+      <h2 className="text-sky-500 text-2xl ml-2 mb-5">Matchs</h2>
+     <div className="flex justify-start">
 
                     {/* REDIRECTION BUTTON TO CREATE A GAME */}
                     <PrimaryButton className='opacity-80 mb-2 bg-sky-500'>
@@ -68,72 +81,102 @@ export default function IndexGameTable({ games, sports, playgrounds }: ShowGames
                     />
                 </div>
 
-                
-                {/* DISPLAY ALL GAMES */}
-                <div className="overflow-x-auto shadow-md sm:rounded-lg">
-                    <table className="sm:table-auto w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                        <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                            <tr>
-                                <TableHeaderCell className="text-center">Sport</TableHeaderCell>
-                                <TableHeaderCell className="text-center">Date</TableHeaderCell>
-                                <TableHeaderCell className="text-center">From / To</TableHeaderCell>
-                                <TableHeaderCell className="text-center">Playground</TableHeaderCell>
-                                <TableHeaderCell className="text-center">Adress</TableHeaderCell>
-                                <TableHeaderCell className="text-center">Max Player</TableHeaderCell>
-                                <TableHeaderCell className="text-center">Action</TableHeaderCell>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {filteredGames.map((game) => {
-                                const sport = sports.find(sport => sport.id === game.sport_id);
-                                const playground = playgrounds.find(playground => playground.id === game.playground_id);
+      <div className="hidden sm:block">
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Sport</TableHead>
+              <TableHead>Date</TableHead>
+              <TableHead>From / To</TableHead>
+              <TableHead>Playground</TableHead>
+              <TableHead>Adress</TableHead>
+              <TableHead>Max Player</TableHead>
+              <TableHead>Actions</TableHead>
+            </TableRow>
+          </TableHeader>
 
-                                return (
-                                    <tr key={game.id} className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
-                                        <TableHeaderCell
-                                            className="font-medium text-gray-900 whitespace-nowrap dark:text-white text-center"
-                                        >
-                                            {sport?.name}
-                                        </TableHeaderCell>
+          <TableBody>
+            {filteredGames.length === 0 ? (
+              <TableRow>
+                <TableCell colSpan={7}>PAS DE MATCHS CRÉÉS</TableCell>
+              </TableRow>
+            ) : (
+              filteredGames.map(game => {
+                const sport = sports.find(sport => sport.id === game.sport_id);
+                const playground = playgrounds.find(
+                  playground => playground.equipment_id === game.equipment_id,
+                );
 
-                                        <TableDataCell className="text-center">
-                                            {formatDate(game.date)}
-                                        </TableDataCell>
+                return (
+                  <TableRow key={game.id}>
+                    <TableHead>{sport?.name}</TableHead>
+                    <TableCell>{formatDate(game.date)}</TableCell>
+                    <TableCell>
+                      {formatTime(game.start_time)} /{' '}
+                      {formatTime(game.end_time)}
+                    </TableCell>
+                    <TableCell>{playground?.name}</TableCell>
+                    <TableCell>
+                      {playground?.adress}, {playground?.postcode}{' '}
+                      {playground?.city}
+                    </TableCell>
+                    <TableCell>{game.teams.reduce((totalPlayers, team) => totalPlayers + team.users.length, 0) + 1} / {game.max_player}</TableCell>
+                    <TableCell>
+                      <Link
+                        href={`games/${game.id}`}
+                        className="font-medium text-sky-600 dark:text-sky-500 hover:underline"
+                      >
+                        Show Details
+                      </Link>
+                    </TableCell>
+                  </TableRow>
+                );
+              })
+            )}
+          </TableBody>
+        </Table>
+      </div>
+      <div className="block sm:hidden">
+        {games.map(game => {
+          const sport = sports.find(sport => sport.id === game.sport_id);
+          const playground = playgrounds.find(
+            playground => playground.equipment_id === game.equipment_id,
+          );
 
-                                        <TableDataCell className="text-center">
-                                            {formatTime(game.start_time)} / {formatTime(game.end_time)}
-                                        </TableDataCell>
-
-                                        <TableDataCell className="text-center">
-                                            {playground?.name}
-                                        </TableDataCell>
-
-                                        <TableDataCell className="text-center">
-                                            {playground?.adress}, {playground?.postcode} {playground?.city}
-                                        </TableDataCell>
-
-                                        <TableDataCell className="text-center">
-                                            {game.teams.reduce(
-                                                (totalPlayers, team) => totalPlayers + team.users.length, 0) + 1} / {game.max_player}
-                                        </TableDataCell>
-
-
-                                        {/* REDIRECTION BUTTON TO DISPLAY ONE GAME DETAILS */}
-                                        <TableDataCell className="text-center">
-                                            <Link
-                                                href={`games/${game.id}`}
-                                                className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                                            >
-                                                Show Details
-                                            </Link>
-                                        </TableDataCell>
-                                    </tr>
-                                )
-                            })}
-                        </tbody>
-                    </table>
+          return (
+            <Card key={game.id} className="my-4">
+              <div className="p-4">
+                <div className='flex justify-between'>
+                  <span className='font-bold'>{sport?.name} </span>
+              <span>{formatDate(game.date)} </span>  </div>
+                <div className='mt-1 flex justify-center font-bold'>
+                  {playground?.name}
                 </div>
-            </div>
-        </div>
-    )
+                <div className='mt-1 flex justify-center'>
+             
+                  {playground?.adress}, {playground?.postcode}{' '}
+                  {playground?.city}
+                </div>
+                <div className='mt-1 flex justify-center'>
+               <span className='font-bold mr-1'>From / To:</span> 
+                  {formatTime(game.start_time)} / {formatTime(game.end_time)}
+                </div>
+                <div className='mt-1 flex justify-center'>
+                {game.teams.reduce((totalPlayers, team) => totalPlayers + team.users.length, 0) + 1} / {game.max_player}
+                </div>
+                <div>
+                  <Link
+                    href={`games/${game.id}`}
+                    className="font-medium text-sky-600 dark:text-sky-500 hover:underline"
+                  >
+                    Show Details
+                  </Link>
+                </div>
+              </div>
+            </Card>
+          );
+        })}
+      </div>
+    </div>
+  );
 }

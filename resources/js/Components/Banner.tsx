@@ -22,7 +22,7 @@ export default function Banner() {
               <div className="w-0 flex-1 flex items-center min-w-0">
                 <span
                   className={classNames('flex p-2 rounded-lg', {
-                    'bg-indigo-600': style == 'success',
+                    'bg-sky-500': style == 'success',
                     'bg-red-600': style == 'danger',
                   })}
                 >
@@ -79,8 +79,7 @@ export default function Banner() {
                   className={classNames(
                     '-mr-1 flex p-2 rounded-md focus:outline-none sm:-mr-2 transition',
                     {
-                      'hover:bg-indigo-600 focus:bg-indigo-600':
-                        style == 'success',
+                      'hover:bg-sky-500 focus:bg-sky-500': style == 'success',
                       'hover:bg-red-600 focus:bg-red-600': style == 'danger',
                     },
                   )}

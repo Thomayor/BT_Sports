@@ -15,7 +15,7 @@ class Game extends Model
         'end_time',
         'max_player',
         'sport_id',
-        'playground_id',
+        'equipment_id',
         'user_id'
     ];
 

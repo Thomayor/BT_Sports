@@ -43,7 +43,7 @@ function ModalNotification({ notifications }: ModalNotificationProps) {
       <div className="p-2 flex justify-between items-center text-base font-medium">
         <h5 className="text-sm font-medium">{title}</h5>
         <button
-          className="absolute top-1 right-2 cursor-pointer rounded-full border px-2 hover:border-blue-500"
+          className="absolute  top-1 right-2 cursor-pointer rounded-full border px-2 hover:border-sky-500"
           onClick={() => setShowModal(!showModal)}
         >
           <FontAwesomeIcon icon={faEllipsis} className="w-15 h-15" />
@@ -51,12 +51,12 @@ function ModalNotification({ notifications }: ModalNotificationProps) {
         {showModal && (
           <div className="absolute z-20 top-8 right-0 bg-white shadow-md rounded-md ">
             <button
-              className="flex space-x-2 items-center p-6 hover:text-blue-500  rounded-md"
+              className="flex space-x-2 items-center p-6 hover:text-sky-500  rounded-md"
               onClick={handleMarkAllAsRead}
             >
               <FontAwesomeIcon
                 icon={faCheck}
-                className="w-15 h-15 text-blue-500"
+                className="w-15 h-15 text-sky-500"
               />
               <span>Tout marquer comme lu</span>
             </button>
@@ -76,16 +76,18 @@ function ModalNotification({ notifications }: ModalNotificationProps) {
                       : 'text-slate-500 dark:text-slate-300'
                   }`}
                 >
-                  <a
-                    href={`/${notification.link}`}
+                  <div
                     className="mr-1"
-                    onClick={() => handleMarkAsRead(notification.id)}
+                    onClick={() => {
+                      handleMarkAsRead(notification.id);
+                      window.location.href = `/${notification.link}`;
+                    }}
                   >
                     <p className="text-sm">{notification.content}</p>
                     <p className="text-xs">
                       {new Date(notification.created_at).toLocaleString()}
                     </p>
-                  </a>
+                  </div>
                 </div>
                 <div className="flex items-center justify-end">
                   {notification.pivot.read_at === null ? (

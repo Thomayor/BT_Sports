@@ -11,7 +11,9 @@ import SendMessageModal from "@/Components/SendMessage";
 import DefinitionListItem from "@/Components/Game/DefinitionListItem";
 import DefinitionList from "@/Components/Game/DefinitionList";
 
-export default function ShowGameLists ({ game, sport, playground, teams }: ShowGameProps) {
+
+export default function ShowGameLists({ game, sport, playground, teams }: ShowGameProps) {
+
     const page = useTypedPage();
     const route = useRoute();
 

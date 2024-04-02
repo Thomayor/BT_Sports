@@ -65,7 +65,7 @@ function CreateMessage(props: {
         id="button"
         aria-label="Envoyer le message"
         type="submit"
-        className="m-4 p-2 flex  items-center justify-center rounded-full bg-blue-500 text-white "
+        className="m-4 p-2 flex  items-center justify-center rounded-full bg-sky-500 text-white "
         onClick={handleSubmitMessage}
       >
         <span className="w-full">{sendSvg}</span>

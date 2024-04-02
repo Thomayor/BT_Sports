@@ -15,8 +15,8 @@ class CreatePlaygroundsTable extends Migration
     {
         Schema::create('playgrounds', function (Blueprint $table) {
             $table->id(); 
-            $table->string('name', 50)->unique();
-            $table->string('surface_type', 20);
+            $table->string('name', 50);
+            $table->string('surface_type', 50);
             $table->string('playground_type');
             $table->string('is_covered');
             $table->foreignId('user_id')->constrained();
@@ -26,7 +26,7 @@ class CreatePlaygroundsTable extends Migration
             $table->string('postcode', 20);
             $table->float('coordgpsx', 10, 6)->nullable();
             $table->float('coordgpsy', 10, 6)->nullable();
-            $table->string('equipment_id');
+            $table->string('equipment_id')->unique();
             $table->string('installation_id');
         });
     }

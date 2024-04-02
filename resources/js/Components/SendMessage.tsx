@@ -1,24 +1,26 @@
 import React, { useState, FormEvent } from 'react';
 
-
 interface SendMessageModalProps {
   onClose: () => void;
   onSubmit: (data: { content: string }) => void;
 }
 
-export default function SendMessageModal({ onClose, onSubmit }: SendMessageModalProps) {
+export default function SendMessageModal({
+  onClose,
+  onSubmit,
+}: SendMessageModalProps) {
   const [content, setContent] = useState<string>('');
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    onSubmit({content });
+    onSubmit({ content });
     setContent('');
     onClose();
   };
 
   return (
     <div className="absolute inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 min-h-screen">
-      <div className="bg-white p-8 rounded-md w-3/6">
+      <div className="bg-white p-8 rounded-md  sm:w-3/6">
         <h2 className="text-2xl font-semibold mb-4">Composez votre message</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-6">
@@ -38,7 +40,7 @@ export default function SendMessageModal({ onClose, onSubmit }: SendMessageModal
           </div>
           <button
             type="submit"
-            className="bg-blue-500 text-white py-2 px-4 rounded-md mr-2 hover:bg-secondary"
+            className="bg-sky-500 text-white py-2 px-4 rounded-md mr-2 hover:bg-secondary"
           >
             Envoyer
           </button>
@@ -54,7 +56,3 @@ export default function SendMessageModal({ onClose, onSubmit }: SendMessageModal
     </div>
   );
 }
-
-
-
-

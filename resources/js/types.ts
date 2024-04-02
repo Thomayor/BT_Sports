@@ -26,7 +26,7 @@ export interface User {
   email_verified_at: Nullable<DateTime>;
   created_at: DateTime;
   updated_at: DateTime;
-  role: string
+  account_type: string;
 }
 
 export interface Auth {
@@ -40,7 +40,7 @@ export interface Auth {
 }
 
 export interface Notification {
-  pivot: { read_at: string | null;}
+  pivot: { read_at: string | null };
   id: number;
   content: string;
   created_at: string;
@@ -111,6 +111,7 @@ export interface TeamInvitation {
 }
 
 export interface Sport {
+
   id: number,
   name: string,
   user_id: number;
@@ -127,9 +128,9 @@ export interface Game {
   end_time: DateTime;
   max_player: number;
   sport_id: number;
-  playground_id: number;
-  user_id: number;
   teams: Team[];
+  equipment_id: string;
+  user_id: number;
 }
 
 export interface CreateGameProps {
@@ -167,18 +168,6 @@ export interface DefinitionListProps {
   children: React.ReactNode
 }
 
-export interface Playground {
-  id: number;
-  name: string;
-  is_covered: boolean;
-  is_booked: boolean;
-  city: string;
-  adress: string;
-  postcode: string;
-  coordgpsx: number;
-  coordgpsy: number;
-}
-
 
 export interface Conversation {
   users: any;
@@ -193,6 +182,7 @@ export interface Conversation {
   receiver: User;
   messages: Message[];
 }
+
 export interface Message {
   id: number;
   content: string;
@@ -204,19 +194,21 @@ export interface Message {
 }
 
 export interface Playground {
+  playground_type: string;
   id: number;
   name: string;
   surface_type: string;
-  is_covered: boolean;
-  is_booked: boolean;
+  is_covered: string;
   user_id: number;
-  created_at: string; 
-  updated_at: string; 
-  city: string; 
-  adress: string; 
-  postcode: string; 
+  created_at: string;
+  updated_at: string;
+  city: string;
+  adress: string;
+  postcode: string;
   coordgpsx: number;
   coordgpsy: number;
+  equipment_id: string;
+  installation_id: string;
 }
 
 export interface TableProps {
@@ -233,4 +225,3 @@ export enum Method {
 }
 
 export default Method;
-
