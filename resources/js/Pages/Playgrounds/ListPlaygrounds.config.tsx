@@ -30,7 +30,7 @@ export type Search =
 export const getColumns = ({
   handleChoose,
 }: {
-  handleChoose: (e,num: string) => void;
+  handleChoose: (e:React.MouseEvent<HTMLButtonElement, MouseEvent>,num: string) => void;
 }) =>
   [
     {

@@ -159,7 +159,8 @@
           "remember": "Remember me",
           "forgotPassword": "Forgot your password?",
           "needAccount": "Need an account?",
-          "login": "Log in"
+          "login": "Log in",
+          "failed":"These credentials do not match our records."
         },
         "register": {
           "firstname": "Firstname",

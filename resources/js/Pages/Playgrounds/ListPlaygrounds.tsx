@@ -30,6 +30,7 @@ import {
   pageSizes,
 } from './ListPlaygrounds.config';
 import { t } from 'i18next';
+import { Results } from '@/types';
 
 interface ListPlaygroundsProps {
   setEquipmentId: (equipmentId: string) => void;
@@ -59,8 +60,9 @@ export default function ListPlaygrounds({
     setEquipmentId(equip_numero);
   };
 
-  const [results, setResults] = useState([]);
+  const [results, setResults] = useState<Results[]>([]);
   const [totalResults, setTotalResults] = useState(0);
+console.log(results,"test");
 
   const columns = getColumns({ handleChoose });
 
@@ -203,7 +205,7 @@ export default function ListPlaygrounds({
                 {columns.map((column: PlaygroundColumn) => (
                   <div key={column.key} className="mb-2">
                     <span className="font-bold">{column.label}:</span>{' '}
-                    {column.render ? column.render(result) : result[column.key]}
+                    {column.render ? column.render(result) : result[column.key as keyof Results]}
                   </div>
                 ))}
                 <Button
@@ -233,7 +235,7 @@ export default function ListPlaygrounds({
               <TableRow key={index}>
                 {columns.map((column: PlaygroundColumn) => (
                   <TableCell key={column.key}>
-                    {column.render ? column.render(result) : result[column.key]}
+                    {column.render ? column.render(result) : result[column.key as keyof Results]}
                   </TableCell>
                 ))}
               </TableRow>

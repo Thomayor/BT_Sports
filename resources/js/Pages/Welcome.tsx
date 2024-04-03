@@ -24,13 +24,13 @@ export default function Welcome({
     <section className="relative">
       <Head title="Welcome" />
 
-      <div className="relative min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
+      <div className="relative min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-sky-500 selection:text-white">
         {canLogin ? (
           <div className="absolute top-6 right-6 z-10">
             {page.props.auth.user ? (
               <Link
                 href={route('dashboard')}
-                className="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
+                className="font-semibold text-sky-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-sky-500"
               >
                 Dashboard
               </Link>
@@ -38,7 +38,7 @@ export default function Welcome({
               <>
                 <Link
                   href={route('login')}
-                  className="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
+                  className="font-semibold text-white hover:text-gray-200 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-sky-500"
                 >
                   Log in
                 </Link>
@@ -46,7 +46,7 @@ export default function Welcome({
                 {canRegister ? (
                   <Link
                     href={route('register')}
-                    className="ml-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
+                    className="ml-4 font-semibold text-white hover:text-gray-200 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-sky-500"
                   >
                     Register
                   </Link>

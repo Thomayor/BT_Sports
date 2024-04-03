@@ -2,13 +2,12 @@
 
 namespace Database\Factories;
 
-use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
-
+use App\Models\User;
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Team>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Sport>
  */
-class TeamFactory extends Factory
+class SportFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -18,9 +17,8 @@ class TeamFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => 'Team'. ' ' . $this->faker->unique()->word(),
-            'user_id' => User::factory(),
-            'personal_team' => true,
+            'name' => $this->faker->unique()->word(), 
+            'user_id' => User::findOrFail(1)->id
         ];
     }
 }

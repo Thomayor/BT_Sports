@@ -159,7 +159,8 @@
           "remember": "Se souvenir de moi",
           "forgotPassword": "Mot de passe oublié ?",
           "needAccount": "Besoin d'un compte ?",
-          "login": "Se connecter"
+          "login": "Se connecter",
+          "failed":"Vos identifiants ne correspondent pas à nos enregistrements."
         },
         "register": {
           "firstname": "Prénom",

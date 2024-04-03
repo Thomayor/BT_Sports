@@ -87,8 +87,17 @@ export default function Login({ canResetPassword, status }: Props) {
             </span>
           </label>
         </div>
-
-        <div className="flex flex-col space-y-2 md:flex-row md:items-center md:justify-between md:space-y-0 mt-4">
+        <div className='mt-4 flex justify-center'>
+        <PrimaryButton
+              type="submit"
+              className={classNames('', { 'opacity-25': form.processing })}
+              disabled={form.processing}
+            >
+              {t('pages.auth.login.login')}
+            </PrimaryButton>
+        </div>
+       
+        <div className="flex flex-col space-y-2 md:flex-row md:items-center md:justify-evenly md:space-y-0 mt-4">
           {canResetPassword && (
             <div>
               <Link
@@ -108,13 +117,7 @@ export default function Login({ canResetPassword, status }: Props) {
               {t('pages.auth.login.needAccount')}
             </Link>
 
-            <PrimaryButton
-              type="submit"
-              className={classNames('ml-4', { 'opacity-25': form.processing })}
-              disabled={form.processing}
-            >
-              {t('pages.auth.login.login')}
-            </PrimaryButton>
+        
           </div>
         </div>
       </form>

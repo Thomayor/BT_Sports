@@ -10,6 +10,18 @@ export interface DashboardProps {
   countUser?: number;
 }
 
+export interface Results{
+  infrastructure?: string;
+  inst_nom: string;
+  inst_adresse: string;
+  inst_com_nom: string;
+  inst_cp: string;
+  equip_type_name: string;
+  equip_sol: string;
+  equip_nature: string;
+  equip_numero: string;
+}
+
 export interface Team {
   id: number;
   name: string;

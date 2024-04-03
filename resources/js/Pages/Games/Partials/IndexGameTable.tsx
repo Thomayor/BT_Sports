@@ -103,7 +103,7 @@ export default function IndexGameTable({
             <TableRow>
               <TableHead>{t('pages.games.sport')}</TableHead>
               <TableHead>{t('pages.games.date')}</TableHead>
-              <TableHead>{t('pages.games.fromto')} / To</TableHead>
+              <TableHead>{t('pages.games.fromto')}</TableHead>
               <TableHead>{t('pages.games.playground')} </TableHead>
               <TableHead>{t('pages.games.adress')}</TableHead>
               <TableHead>{t('pages.games.max')}</TableHead>
@@ -126,14 +126,16 @@ export default function IndexGameTable({
                 return (
                   <TableRow key={game.id}>
                     <TableHead>{sport?.name}</TableHead>
-                    <TableCell>{formatDate(game.date)}</TableCell>
+                    <TableCell className="w-40">
+                      {formatDate(game.date)}
+                    </TableCell>
                     <TableCell>
-                      {formatTime(game.start_time)} /{formatTime(game.end_time)}
+                      {formatTime(game.start_time)}/{formatTime(game.end_time)}
                     </TableCell>
                     <TableCell>{playground?.name}</TableCell>
                     <TableCell>
                       {playground?.adress}, {playground?.postcode}
-                      {playground?.city}
+                      <span className="px-1">{playground?.city}</span>
                     </TableCell>
                     <TableCell>
                       {game.teams.reduce(
@@ -176,8 +178,8 @@ export default function IndexGameTable({
                   {playground?.name}
                 </div>
                 <div className="mt-1 flex justify-center">
-                  {playground?.adress}, {playground?.postcode}
-                  {playground?.city}
+                  {playground?.adress},{playground?.postcode}
+                  <span className="px-1">{playground?.city}</span>
                 </div>
                 <div className="mt-1 flex justify-center">
                   <span className="font-bold mr-1">From / To:</span>
