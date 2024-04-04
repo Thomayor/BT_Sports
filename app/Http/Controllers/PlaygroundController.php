@@ -137,11 +137,6 @@ class PlaygroundController extends Controller
 
     $playground->delete();
 
-    return redirect()
-    ->route('playgrounds.index')
-      ->refresh()
-      ->with([
-        'flash' => 'Votre Playground a été supprimé avec succès !',
-      ]);
+    return to_route('playgrounds.index')->with(200);
   }
 }
