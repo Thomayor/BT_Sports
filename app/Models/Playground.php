@@ -14,7 +14,7 @@ class Playground extends Model
         'equipment_id',
         'installation_id',
         'surface_type',
-        'adress',
+        'address',
         'postcode',
         'playground_type',
         'is_covered',

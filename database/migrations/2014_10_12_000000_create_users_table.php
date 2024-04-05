@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('city', 20)->nullable();
             $table->date('birth')->nullable();
             $table->string('phone', 20)->nullable();
-            $table->string('adress', 150)->nullable();
+            $table->string('address', 150)->nullable();
             $table->string('postcode', 20)->nullable();
             $table->enum('account_type',['PLAYER', 'SUPPORT','ADMIN'])->default('PLAYER');
             $table->foreignId('current_team_id')->nullable();

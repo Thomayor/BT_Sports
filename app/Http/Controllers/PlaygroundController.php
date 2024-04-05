@@ -64,7 +64,7 @@ class PlaygroundController extends Controller
           'equipment_id' => $playgroundData['equip_numero'],
           'installation_id' => $playgroundData['inst_numero'],
           'surface_type' => $playgroundData['equip_sol'],
-          'adress' => $playgroundData['inst_adresse'],
+          'address' => $playgroundData['inst_adresse'],
           'postcode' => $playgroundData['inst_cp'],
           'playground_type' => $playgroundData['equip_type_name'],
           'is_covered' => $playgroundData['equip_nature'],

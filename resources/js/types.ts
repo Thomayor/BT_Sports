@@ -224,7 +224,7 @@ export interface Playground {
   created_at: string;
   updated_at: string;
   city: string;
-  adress: string;
+  address: string;
   postcode: string;
   coordgpsx: number;
   coordgpsy: number;

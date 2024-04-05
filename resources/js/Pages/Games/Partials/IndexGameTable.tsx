@@ -105,7 +105,7 @@ export default function IndexGameTable({
               <TableHead>{t('pages.games.date')}</TableHead>
               <TableHead>{t('pages.games.fromto')}</TableHead>
               <TableHead>{t('pages.games.playground')} </TableHead>
-              <TableHead>{t('pages.games.adress')}</TableHead>
+              <TableHead>{t('pages.games.address')}</TableHead>
               <TableHead>{t('pages.games.max')}</TableHead>
               <TableHead>{t('pages.games.actions')}</TableHead>
             </TableRow>
@@ -134,7 +134,7 @@ export default function IndexGameTable({
                     </TableCell>
                     <TableCell>{playground?.name}</TableCell>
                     <TableCell>
-                      {playground?.adress}, {playground?.postcode}
+                      {playground?.address}, {playground?.postcode}
                       <span className="px-1">{playground?.city}</span>
                     </TableCell>
                     <TableCell>
@@ -178,7 +178,7 @@ export default function IndexGameTable({
                   {playground?.name}
                 </div>
                 <div className="mt-1 flex justify-center">
-                  {playground?.adress},{playground?.postcode}
+                  {playground?.address},{playground?.postcode}
                   <span className="px-1">{playground?.city}</span>
                 </div>
                 <div className="mt-1 flex justify-center">

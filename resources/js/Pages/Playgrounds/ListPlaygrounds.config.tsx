@@ -58,7 +58,7 @@ export const getColumns = ({
       },
     },
     {
-      label:  t('pages.playgrounds.adress'),
+      label:  t('pages.playgrounds.address'),
       key: 'inst_adresse',
       search: null,
     },

@@ -22,7 +22,7 @@ class CreatePlaygroundsTable extends Migration
             $table->foreignId('user_id')->constrained();
             $table->timestamps();
             $table->string('city',50);
-            $table->string('adress', 150)->nullable();
+            $table->string('address', 150)->nullable();
             $table->string('postcode', 20);
             $table->float('coordgpsx', 10, 6)->nullable();
             $table->float('coordgpsy', 10, 6)->nullable();

@@ -27,7 +27,7 @@ const EditPlayground = ({ playground }: EditPlaygroundProps) => {
     playground_type: playground.playground_type,
     is_covered: playground.is_covered,
     city: playground.city,
-    adress: playground.adress,
+    address: playground.address,
     postcode: playground.postcode,
     coordgpsx: playground.coordgpsx,
     coordgpsy: playground.coordgpsy,
@@ -128,16 +128,16 @@ const EditPlayground = ({ playground }: EditPlaygroundProps) => {
             />
 
             <InputError message={form.errors.city} className="mt-2" />
-            <InputLabel htmlFor="adress" value={t('pages.playgrounds.adress')} />
+            <InputLabel htmlFor="address" value={t('pages.playgrounds.address')} />
             <TextInput
-              id="adress"
+              id="address"
               type="text"
-              value={playground.adress}
+              value={playground.address}
               className="mt-1 block w-full mb-2"
-              onChange={e => form.setData('adress', e.currentTarget.value)}
+              onChange={e => form.setData('address', e.currentTarget.value)}
               autoFocus
             />
-            <InputError message={form.errors.adress} className="mt-2" />
+            <InputError message={form.errors.address} className="mt-2" />
             <InputLabel htmlFor="postcode" value={t('pages.playgrounds.postcode')} />
             <TextInput
               id="postcode"

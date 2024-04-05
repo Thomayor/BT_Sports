@@ -233,8 +233,8 @@ export default function ShowGameLists({
             description={`${playground[0].name}`}
           />
           <DefinitionListItem
-            term={t('pages.games.adress')}
-            description={`${playground[0].adress}, ${playground[0].postcode} ${playground[0].city}`}
+            term={t('pages.games.address')}
+            description={`${playground[0].address}, ${playground[0].postcode} ${playground[0].city}`}
           />
 
           <div className="flex justify-start">
