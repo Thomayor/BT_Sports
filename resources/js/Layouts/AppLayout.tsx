@@ -10,7 +10,9 @@ import Dropdown from '@/Components/Dropdown';
 import DropdownLink from '@/Components/DropdownLink';
 import NavLink from '@/Components/NavLink';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
-import { Team } from '@/types';
+import { Notification, Team } from '@/types';
+import { t } from 'i18next';
+import ModalNotification from '@/Components/Modal/ModalNotification';
 
 interface Props {
   title: string;
@@ -26,6 +28,8 @@ export default function AppLayout({
   const route = useRoute();
   const [showingNavigationDropdown, setShowingNavigationDropdown] =
     useState(false);
+  const notifications = (page.props.notifications || []) as Notification[];
+
 
   function switchToTeam(e: React.FormEvent, team: Team) {
     e.preventDefault();
@@ -70,12 +74,54 @@ export default function AppLayout({
                     href={route('dashboard')}
                     active={route().current('dashboard')}
                   >
-                    Dashboard
+                    {t('nav.dashboard')}
                   </NavLink>
+
+                  <NavLink
+                    href={route('games.index')}
+                    active={route().current('games.index')}
+                  >
+                      {t('nav.games')}
+                  </NavLink>
+
+                  <NavLink
+                    href={route('teams')}
+                    active={route().current('teams')}
+                  >
+                   {t('nav.team.teams')}
+                  </NavLink>
+
+                  <NavLink
+                    href={route('conversations.index')}
+                    active={route().current('conversations.index')}
+                  >
+                   {t('nav.messaging')}
+                  </NavLink>
+
+                  {page.props.auth.user?.account_type === 'ADMIN' ? (
+                    <>
+                      <NavLink
+                        href={route('playgrounds.index')}
+                        active={route().current('playgrounds.index')}
+                      >
+                       {t('nav.playgrounds')}
+                      </NavLink>
+                      <NavLink
+                        href={route('sports.index')}
+                        active={route().current('sports.index')}
+                      >
+                         {t('nav.sports')}
+                      </NavLink>
+                    </>
+                  ) : null}
                 </div>
               </div>
 
               <div className="hidden sm:flex sm:items-center sm:ml-6">
+                <div className="relative z-20">
+                  <ModalNotification notifications={notifications} />
+                </div>
+
                 <div className="ml-3 relative">
                   {/* <!-- Teams Dropdown --> */}
                   {page.props.jetstream.hasTeamFeatures ? (
@@ -111,7 +157,7 @@ export default function AppLayout({
                         {page.props.jetstream.hasTeamFeatures ? (
                           <>
                             <div className="block px-4 py-2 text-xs text-gray-400">
-                              Manage Team
+                              {t('nav.team.title')}
                             </div>
 
                             {/* <!-- Team Settings --> */}
@@ -120,12 +166,12 @@ export default function AppLayout({
                                 page.props.auth.user?.current_team!,
                               ])}
                             >
-                              Team Settings
+                              {t('nav.team.settings')}
                             </DropdownLink>
 
                             {page.props.jetstream.canCreateTeams ? (
                               <DropdownLink href={route('teams.create')}>
-                                Create New Team
+                                {t('nav.team.newTeam')}
                               </DropdownLink>
                             ) : null}
 
@@ -133,7 +179,7 @@ export default function AppLayout({
 
                             {/* <!-- Team Switcher --> */}
                             <div className="block px-4 py-2 text-xs text-gray-400">
-                              Switch Teams
+                              {t('nav.team.switch')}
                             </div>
 
                             {page.props.auth.user?.all_teams?.map(team => (
@@ -180,17 +226,20 @@ export default function AppLayout({
                           <img
                             className="h-8 w-8 rounded-full object-cover"
                             src={page.props.auth.user?.profile_photo_url}
-                            alt={page.props.auth.user?.name}
+                            alt={page.props.auth.user?.firstname}
                           />
                         </button>
                       ) : (
-                          <span className="inline-flex rounded-md">
-                            <img src={page.props.auth.user?.profile_photo_url} className='rounded-full w-9 '/>
+                        <span className="inline-flex rounded-md">
+                          <img
+                            src={page.props.auth.user?.profile_photo_url}
+                            className="rounded-full w-9 "
+                          />
                           <button
                             type="button"
                             className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none focus:bg-gray-50 dark:focus:bg-gray-700 active:bg-gray-50 dark:active:bg-gray-700 transition ease-in-out duration-150"
                           >
-                            {page.props.auth.user?.name}
+                            {page.props.auth.user?.firstname}
 
                             <svg
                               className="ml-2 -mr-0.5 h-4 w-4"
@@ -211,16 +260,16 @@ export default function AppLayout({
                   >
                     {/* <!-- Account Management --> */}
                     <div className="block px-4 py-2 text-xs text-gray-400">
-                      Manage Account
+                      {t('nav.profile.title')}
                     </div>
 
                     <DropdownLink href={route('profile.show')}>
-                      Profile
+                      {t('nav.profile.profile')}
                     </DropdownLink>
 
                     {page.props.jetstream.hasApiFeatures ? (
                       <DropdownLink href={route('api-tokens.index')}>
-                        API Tokens
+                        {t('nav.profile.APIToken')}
                       </DropdownLink>
                     ) : null}
 
@@ -228,12 +277,14 @@ export default function AppLayout({
 
                     {/* <!-- Authentication --> */}
                     <form onSubmit={logout}>
-                      <DropdownLink as="button">Log Out</DropdownLink>
+                      <DropdownLink as="button">
+                        {' '}
+                        {t('nav.profile.logout')}
+                      </DropdownLink>
                     </form>
                   </Dropdown>
                 </div>
               </div>
-
               {/* <!-- Hamburger --> */}
               <div className="-mr-2 flex items-center sm:hidden">
                 <button
@@ -286,8 +337,36 @@ export default function AppLayout({
                 href={route('dashboard')}
                 active={route().current('dashboard')}
               >
-                Dashboard
+                 {t('nav.dashboard')}
               </ResponsiveNavLink>
+              <ResponsiveNavLink
+                href={route('games.index')}
+                active={route().current('games.index')}
+              >
+                 {t('nav.games')}
+              </ResponsiveNavLink>
+              <ResponsiveNavLink
+                href={route('teams')}
+                active={route().current('teams')}
+              >
+               {t('nav.team.teams')}
+              </ResponsiveNavLink>
+              {page.props.auth.user?.account_type === 'ADMIN' ? (
+                <>
+                  <ResponsiveNavLink
+                    href={route('playgrounds.index')}
+                    active={route().current('playgrounds.index')}
+                  >
+                    {t('nav.playgrounds')}
+                  </ResponsiveNavLink>
+                  <ResponsiveNavLink
+                    href={route('sports.index')}
+                    active={route().current('sports.index')}
+                  >
+                     {t('nav.sports')}
+                  </ResponsiveNavLink>
+                </>
+              ) : null}
             </div>
 
             {/* <!-- Responsive Settings Options --> */}
@@ -298,41 +377,56 @@ export default function AppLayout({
                     <img
                       className="h-10 w-10 rounded-full object-cover"
                       src={page.props.auth.user?.profile_photo_url}
-                      alt={page.props.auth.user?.name}
+                      alt={page.props.auth.user?.firstname}
                     />
                   </div>
                 ) : null}
 
                 <div>
                   <div className="font-medium text-base text-gray-800 dark:text-gray-200">
-                    {page.props.auth.user?.name}
+                    {page.props.auth.user?.firstname}
                   </div>
                   <div className="font-medium text-sm text-gray-500">
                     {page.props.auth.user?.email}
                   </div>
                 </div>
+                <ul>
+                  <Link
+                    href="/notifications"
+                    className="ml-28 flex  items-center gap-1"
+                  >
+                    <ModalNotification notifications={notifications} />
+                  </Link>
+                </ul>
               </div>
-
               <div className="mt-3 space-y-1">
                 <ResponsiveNavLink
                   href={route('profile.show')}
                   active={route().current('profile.show')}
                 >
-                  Profile
+                  {t('nav.profile.profile')}
                 </ResponsiveNavLink>
-
+                <ResponsiveNavLink
+                  href={route('conversations.index')}
+                  active={route().current('conversation.index')}
+                >
+                   {t('nav.messaging')}
+                </ResponsiveNavLink>
                 {page.props.jetstream.hasApiFeatures ? (
                   <ResponsiveNavLink
                     href={route('api-tokens.index')}
                     active={route().current('api-tokens.index')}
                   >
-                    API Tokens
+                    {t('nav.team.APIToken')}
                   </ResponsiveNavLink>
                 ) : null}
 
                 {/* <!-- Authentication --> */}
                 <form method="POST" onSubmit={logout}>
-                  <ResponsiveNavLink as="button">Log Out</ResponsiveNavLink>
+                  <ResponsiveNavLink as="button">
+                    {' '}
+                    {t('nav.profile.logout')}
+                  </ResponsiveNavLink>
                 </form>
 
                 {/* <!-- Team Management --> */}
@@ -341,7 +435,7 @@ export default function AppLayout({
                     <div className="border-t border-gray-200 dark:border-gray-600"></div>
 
                     <div className="block px-4 py-2 text-xs text-gray-400">
-                      Manage Team
+                      {t('nav.team.title')}
                     </div>
 
                     {/* <!-- Team Settings --> */}
@@ -351,7 +445,7 @@ export default function AppLayout({
                       ])}
                       active={route().current('teams.show')}
                     >
-                      Team Settings
+                      {t('nav.team.settings')}
                     </ResponsiveNavLink>
 
                     {page.props.jetstream.canCreateTeams ? (
@@ -359,7 +453,7 @@ export default function AppLayout({
                         href={route('teams.create')}
                         active={route().current('teams.create')}
                       >
-                        Create New Team
+                        {t('nav.team.newTeam')}
                       </ResponsiveNavLink>
                     ) : null}
 
@@ -367,7 +461,7 @@ export default function AppLayout({
 
                     {/* <!-- Team Switcher --> */}
                     <div className="block px-4 py-2 text-xs text-gray-400">
-                      Switch Teams
+                      {t('nav.team.switch')}
                     </div>
                     {page.props.auth.user?.all_teams?.map(team => (
                       <form onSubmit={e => switchToTeam(e, team)} key={team.id}>

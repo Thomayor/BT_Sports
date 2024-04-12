@@ -1,6 +1,7 @@
 import { Link, useForm, Head } from '@inertiajs/react';
 import classNames from 'classnames';
 import React from 'react';
+import { t } from 'i18next';
 import useRoute from '@/Hooks/useRoute';
 import AuthenticationCard from '@/Components/AuthenticationCard';
 import Checkbox from '@/Components/Checkbox';
@@ -22,12 +23,12 @@ export default function Login({ canResetPassword, status }: Props) {
     remember: '',
   });
 
-  function onSubmit(e: React.FormEvent) {
+  const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     form.post(route('login'), {
       onFinish: () => form.reset('password'),
     });
-  }
+  };
 
   return (
     <AuthenticationCard>
@@ -41,7 +42,7 @@ export default function Login({ canResetPassword, status }: Props) {
 
       <form onSubmit={onSubmit}>
         <div>
-          <InputLabel htmlFor="email">Email</InputLabel>
+          <InputLabel htmlFor="email">{t('pages.auth.login.email')}</InputLabel>
           <TextInput
             id="email"
             type="email"
@@ -55,7 +56,9 @@ export default function Login({ canResetPassword, status }: Props) {
         </div>
 
         <div className="mt-4">
-          <InputLabel htmlFor="password">Password</InputLabel>
+          <InputLabel htmlFor="password">
+            {t('pages.auth.login.password')}
+          </InputLabel>
           <TextInput
             id="password"
             type="password"
@@ -69,8 +72,10 @@ export default function Login({ canResetPassword, status }: Props) {
         </div>
 
         <div className="mt-4">
-          <label className="flex items-center">
+          {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+          <label className="flex items-center" htmlFor="rememberId">
             <Checkbox
+              id="rememberId"
               name="remember"
               checked={form.data.remember === 'on'}
               onChange={e =>
@@ -78,19 +83,28 @@ export default function Login({ canResetPassword, status }: Props) {
               }
             />
             <span className="ml-2 text-sm text-gray-600 dark:text-gray-400">
-              Remember me
+              {t('pages.auth.login.remember')}
             </span>
           </label>
         </div>
-
-        <div className="flex flex-col space-y-2 md:flex-row md:items-center md:justify-between md:space-y-0 mt-4">
+        <div className='mt-4 flex justify-center'>
+        <PrimaryButton
+              type="submit"
+              className={classNames('', { 'opacity-25': form.processing })}
+              disabled={form.processing}
+            >
+              {t('pages.auth.login.login')}
+            </PrimaryButton>
+        </div>
+       
+        <div className="flex flex-col space-y-2 md:flex-row md:items-center md:justify-evenly md:space-y-0 mt-4">
           {canResetPassword && (
             <div>
               <Link
                 href={route('password.request')}
-                className="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
+                className="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500 dark:focus:ring-offset-gray-800"
               >
-                Forgot your password?
+                {t('pages.auth.login.forgotPassword')}
               </Link>
             </div>
           )}
@@ -98,17 +112,12 @@ export default function Login({ canResetPassword, status }: Props) {
           <div className="flex items-center justify-end">
             <Link
               href={route('register')}
-              className="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
+              className="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500 dark:focus:ring-offset-gray-800"
             >
-              Need an account?
+              {t('pages.auth.login.needAccount')}
             </Link>
 
-            <PrimaryButton
-              className={classNames('ml-4', { 'opacity-25': form.processing })}
-              disabled={form.processing}
-            >
-              Log in
-            </PrimaryButton>
+        
           </div>
         </div>
       </form>

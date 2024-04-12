@@ -1,14 +1,15 @@
 import CreateTeamForm from '@/Pages/Teams/Partials/CreateTeamForm';
 import AppLayout from '@/Layouts/AppLayout';
 import React from 'react';
+import { t } from 'i18next';
 
 export default function Create() {
   return (
     <AppLayout
-      title="Create Team"
+      title={t('pages.team.createTeam')}
       renderHeader={() => (
         <h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-          Create Team
+          {t('pages.team.createTeam')}
         </h2>
       )}
     >

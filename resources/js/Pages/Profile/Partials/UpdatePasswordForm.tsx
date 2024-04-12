@@ -1,6 +1,7 @@
 import { useForm } from '@inertiajs/react';
 import classNames from 'classnames';
 import React, { useRef } from 'react';
+import { t } from 'i18next';
 import useRoute from '@/Hooks/useRoute';
 import ActionMessage from '@/Components/ActionMessage';
 import FormSection from '@/Components/FormSection';
@@ -19,7 +20,7 @@ export default function UpdatePasswordForm() {
   const passwordRef = useRef<HTMLInputElement>(null);
   const currentPasswordRef = useRef<HTMLInputElement>(null);
 
-  function updatePassword() {
+  const updatePassword = () => {
     form.put(route('user-password.update'), {
       errorBag: 'updatePassword',
       preserveScroll: true,
@@ -36,32 +37,33 @@ export default function UpdatePasswordForm() {
         }
       },
     });
-  }
+  };
 
   return (
     <FormSection
       onSubmit={updatePassword}
-      title={'Update Password'}
-      description={
-        'Ensure your account is using a long, random password to stay secure.'
-      }
+      title={t('pages.profile.updatePassword.title')}
+      description={t('pages.profile.updatePassword.description')}
       renderActions={() => (
         <>
           <ActionMessage on={form.recentlySuccessful} className="mr-3">
-            Saved.
+            {t('pages.auth.profile.updatePassword.alert')}
           </ActionMessage>
 
           <PrimaryButton
+            type="submit"
             className={classNames({ 'opacity-25': form.processing })}
             disabled={form.processing}
           >
-            Save
+            {t('pages.profile.updatePassword.save')}
           </PrimaryButton>
         </>
       )}
     >
       <div className="col-span-6 sm:col-span-4">
-        <InputLabel htmlFor="current_password">Current Password</InputLabel>
+        <InputLabel htmlFor="current_password">
+          {t('pages.profile.updatePassword.currentPw')}
+        </InputLabel>
         <TextInput
           id="current_password"
           type="password"
@@ -77,7 +79,9 @@ export default function UpdatePasswordForm() {
       </div>
 
       <div className="col-span-6 sm:col-span-4">
-        <InputLabel htmlFor="password">New Password</InputLabel>
+        <InputLabel htmlFor="password">
+          {t('pages.profile.updatePassword.newPw')}
+        </InputLabel>
         <TextInput
           id="password"
           type="password"
@@ -92,7 +96,7 @@ export default function UpdatePasswordForm() {
 
       <div className="col-span-6 sm:col-span-4">
         <InputLabel htmlFor="password_confirmation">
-          Confirm Password
+          {t('pages.profile.updatePassword.confirmPw')}
         </InputLabel>
         <TextInput
           id="password_confirmation"

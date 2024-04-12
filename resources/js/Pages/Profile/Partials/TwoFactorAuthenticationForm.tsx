@@ -3,6 +3,7 @@ import { useForm } from '@inertiajs/react';
 import axios from 'axios';
 import classNames from 'classnames';
 import React, { useState } from 'react';
+import { t } from 'i18next';
 import ActionSection from '@/Components/ActionSection';
 import ConfirmsPassword from '@/Components/ConfirmsPassword';
 import DangerButton from '@/Components/DangerButton';
@@ -33,7 +34,24 @@ export default function TwoFactorAuthenticationForm({
   const twoFactorEnabled =
     !enabling && page.props?.auth?.user?.two_factor_enabled;
 
-  function enableTwoFactorAuthentication() {
+  const showSetupKey = () => {
+    return axios.get('/user/two-factor-secret-key').then(response => {
+      setSetupKey(response.data.secretKey);
+    });
+  };
+
+  const showQrCode = () => {
+    return axios.get('/user/two-factor-qr-code').then(response => {
+      setQrCode(response.data.svg);
+    });
+  };
+
+  const showRecoveryCodes = () => {
+    return axios.get('/user/two-factor-recovery-codes').then(response => {
+      setRecoveryCodes(response.data);
+    });
+  };
+  const enableTwoFactorAuthentication = () => {
     setEnabling(true);
 
     router.post(
@@ -54,15 +72,9 @@ export default function TwoFactorAuthenticationForm({
         },
       },
     );
-  }
+  };
 
-  function showSetupKey() {
-    return axios.get('/user/two-factor-secret-key').then(response => {
-      setSetupKey(response.data.secretKey);
-    });
-  }
-
-  function confirmTwoFactorAuthentication() {
+  const confirmTwoFactorAuthentication = () => {
     confirmationForm.post('/user/confirmed-two-factor-authentication', {
       preserveScroll: true,
       preserveState: true,
@@ -73,27 +85,15 @@ export default function TwoFactorAuthenticationForm({
         setSetupKey(null);
       },
     });
-  }
+  };
 
-  function showQrCode() {
-    return axios.get('/user/two-factor-qr-code').then(response => {
-      setQrCode(response.data.svg);
-    });
-  }
-
-  function showRecoveryCodes() {
-    return axios.get('/user/two-factor-recovery-codes').then(response => {
-      setRecoveryCodes(response.data);
-    });
-  }
-
-  function regenerateRecoveryCodes() {
+  const regenerateRecoveryCodes = () => {
     axios.post('/user/two-factor-recovery-codes').then(() => {
       showRecoveryCodes();
     });
-  }
+  };
 
-  function disableTwoFactorAuthentication() {
+  const disableTwoFactorAuthentication = () => {
     setDisabling(true);
 
     router.delete('/user/two-factor-authentication', {
@@ -103,43 +103,37 @@ export default function TwoFactorAuthenticationForm({
         setConfirming(false);
       },
     });
-  }
+  };
 
   return (
     <ActionSection
-      title={'Two Factor Authentication'}
-      description={
-        'Add additional security to your account using two factor authentication.'
-      }
+      title={t('pages.profile.twoFactorAuth.title')}
+      description={t('pages.profile.twoFactorAuth.description')}
     >
       {(() => {
         if (twoFactorEnabled && !confirming) {
           return (
             <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">
-              You have enabled two factor authentication.
+              {t('pages.profile.twoFactorAuth.enabled')}
             </h3>
           );
         }
         if (confirming) {
           return (
             <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">
-              Finish enabling two factor authentication.
+              {t('pages.profile.twoFactorAuth.enabling')}
             </h3>
           );
         }
         return (
           <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">
-            You have not enabled two factor authentication.
+            {t('pages.profile.twoFactorAuth.notEnabled')}
           </h3>
         );
       })()}
 
       <div className="mt-3 max-w-xl text-sm text-gray-600 dark:text-gray-400">
-        <p>
-          When two factor authentication is enabled, you will be prompted for a
-          secure, random token during authentication. You may retrieve this
-          token from your phone's Google Authenticator application.
-        </p>
+        <p>{t('pages.profile.twoFactorAuth.textEnabled')}</p>
       </div>
 
       {twoFactorEnabled || confirming ? (
@@ -150,14 +144,14 @@ export default function TwoFactorAuthenticationForm({
                 {confirming ? (
                   <p className="font-semibold">
                     To finish enabling two factor authentication, scan the
-                    following QR code using your phone's authenticator
+                    following QR code using your phone&apos;s authenticator
                     application or enter the setup key and provide the generated
                     OTP code.
                   </p>
                 ) : (
                   <p>
                     Two factor authentication is now enabled. Scan the following
-                    QR code using your phone's authenticator application or
+                    QR code using your phone&apos;s authenticator application or
                     enter the setup key.
                   </p>
                 )}
@@ -171,7 +165,7 @@ export default function TwoFactorAuthenticationForm({
               {setupKey && (
                 <div className="mt-4 max-w-xl text-sm text-gray-600 dark:text-gray-400">
                   <p className="font-semibold">
-                    Setup Key:{' '}
+                    {t('pages.profile.twoFactorAuth.setupKey')}
                     <span
                       dangerouslySetInnerHTML={{ __html: setupKey || '' }}
                     />
@@ -189,7 +183,7 @@ export default function TwoFactorAuthenticationForm({
                     name="code"
                     className="block mt-1 w-1/2"
                     inputMode="numeric"
-                    autoFocus={true}
+                    autoFocus
                     autoComplete="one-time-code"
                     value={confirmationForm.data.code}
                     onChange={e =>
@@ -210,9 +204,7 @@ export default function TwoFactorAuthenticationForm({
             <div>
               <div className="mt-4 max-w-xl text-sm text-gray-600 dark:text-gray-400">
                 <p className="font-semibold">
-                  Store these recovery codes in a secure password manager. They
-                  can be used to recover access to your account if your two
-                  factor authentication device is lost.
+                  {t('pages.profile.twoFactorAuth.recoveryCodes')}
                 </p>
               </div>
 
@@ -235,21 +227,21 @@ export default function TwoFactorAuthenticationForm({
                   className={classNames('mr-3', { 'opacity-25': enabling })}
                   disabled={enabling}
                 >
-                  Confirm
+                  {t('pages.profile.twoFactorAuth.confirm')}
                 </PrimaryButton>
               </ConfirmsPassword>
             ) : null}
             {recoveryCodes.length > 0 && !confirming ? (
               <ConfirmsPassword onConfirm={regenerateRecoveryCodes}>
                 <SecondaryButton className="mr-3">
-                  Regenerate Recovery Codes
+                  {t('pages.profile.twoFactorAuth.regRecoveryCodes')}
                 </SecondaryButton>
               </ConfirmsPassword>
             ) : null}
             {recoveryCodes.length === 0 && !confirming ? (
               <ConfirmsPassword onConfirm={showRecoveryCodes}>
                 <SecondaryButton className="mr-3">
-                  Show Recovery Codes
+                  {t('pages.profile.twoFactorAuth.showRecoveryCodes')}
                 </SecondaryButton>
               </ConfirmsPassword>
             ) : null}
@@ -260,7 +252,7 @@ export default function TwoFactorAuthenticationForm({
                   className={classNames('mr-3', { 'opacity-25': disabling })}
                   disabled={disabling}
                 >
-                  Cancel
+                  {t('pages.profile.twoFactorAuth.cancel')}
                 </SecondaryButton>
               </ConfirmsPassword>
             ) : (
@@ -269,7 +261,7 @@ export default function TwoFactorAuthenticationForm({
                   className={classNames({ 'opacity-25': disabling })}
                   disabled={disabling}
                 >
-                  Disable
+                  {t('pages.profile.twoFactorAuth.disable')}
                 </DangerButton>
               </ConfirmsPassword>
             )}
@@ -282,7 +274,7 @@ export default function TwoFactorAuthenticationForm({
                 className={classNames({ 'opacity-25': enabling })}
                 disabled={enabling}
               >
-                Enable
+                {t('pages.profile.twoFactorAuth.enable')}
               </PrimaryButton>
             </ConfirmsPassword>
           </div>

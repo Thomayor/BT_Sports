@@ -1,3 +1,5 @@
+import React from 'react';
+
 import DeleteTeamForm from '@/Pages/Teams/Partials/DeleteTeamForm';
 import TeamMemberManager from '@/Pages/Teams/Partials/TeamMemberManager';
 import UpdateTeamNameForm from '@/Pages/Teams/Partials/UpdateTeamNameForm';
@@ -10,7 +12,7 @@ import {
   TeamInvitation,
   User,
 } from '@/types';
-import React from 'react';
+import { t } from 'i18next';
 
 interface UserMembership extends User {
   membership: {
@@ -31,10 +33,10 @@ interface Props {
 export default function Show({ team, availableRoles, permissions }: Props) {
   return (
     <AppLayout
-      title="Team Settings"
+      title={t('pages.team.teamSettings')}
       renderHeader={() => (
         <h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-          Team Settings
+         {t('pages.team.teamSettings')}
         </h2>
       )}
     >
