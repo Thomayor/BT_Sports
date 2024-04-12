@@ -83,8 +83,8 @@
         "searchKey": "Rechercher par mot-clé",
         "nomessages": "Vous n'avez pas de messages.",
         "delete": "Supprimer",
-        "at": "à",
-        "on": "le"
+        "at": "à ",
+        "on": "le "
       },
       "notifications": {
         "notif": "Notifications",
@@ -93,6 +93,7 @@
       },
       "playgrounds": {
         "title": "Terrains",
+        "addedAlert":"Terrain ajouté, cliquez sur Valider",
         "return": "Retour liste",
         "edit": "Editez le terrain",
         "editdescription": "Editez les configurations du terrain",
@@ -147,10 +148,10 @@
         "contact": "Contacter",
         "show": "Voir",
         "contactOwner": "Contacter propriétaire",
-        "sheet":"Fiche de l'équipe",
-        "creation":"Création",
-        "play":"Matchs joués",
-        "favorite":"Sport Favori"
+        "sheet": "Fiche de l'équipe",
+        "creation": "Création",
+        "play": "Matchs joués",
+        "favorite": "Sport Favori"
       },
       "auth": {
         "login": {
@@ -160,7 +161,7 @@
           "forgotPassword": "Mot de passe oublié ?",
           "needAccount": "Besoin d'un compte ?",
           "login": "Se connecter",
-          "failed":"Vos identifiants ne correspondent pas à nos enregistrements."
+          "failed": "Vos identifiants ne correspondent pas à nos enregistrements."
         },
         "register": {
           "firstname": "Prénom",

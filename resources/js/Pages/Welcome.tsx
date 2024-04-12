@@ -3,6 +3,7 @@ import React from 'react';
 import useRoute from '@/Hooks/useRoute';
 import useTypedPage from '@/Hooks/useTypedPage';
 import { Head } from '@inertiajs/react';
+import HomePageLogo from '@/Components/HomePageLogo';
 
 interface Props {
   canLogin: boolean;
@@ -11,14 +12,27 @@ interface Props {
   phpVersion: string;
 }
 
-export default function Welcome({
-  canLogin,
-  canRegister,
-  laravelVersion,
-  phpVersion,
-}: Props) {
+export default function Welcome({ canLogin, canRegister }: Props) {
   const route = useRoute();
   const page = useTypedPage();
+
+  const BTSVG = (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className="lucide lucide-send"
+    >
+      <path d="m22 2-7 20-4-9-9-4Z" />
+      <path d="M22 2 11 13" />
+    </svg>
+  );
 
   return (
     <section className="relative">
@@ -70,6 +84,9 @@ export default function Welcome({
           <div className="absolute inset-0 bg-black opacity-50" />
           <div className="absolute inset-0 flex items-center justify-center cursor-pointer">
             <div className="text-4xl font-bold text-white">
+              <div className="flex justify-center">
+                <HomePageLogo />
+              </div>
               Practicing every sport, everywhere, with everyone
             </div>
           </div>

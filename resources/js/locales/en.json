@@ -93,6 +93,7 @@
       },
       "playgrounds": {
         "title": "Playgrounds",
+        "addedAlert":"Playground added, click on Save",
         "return": "Return to list",
         "edit": "Edit Playground",
         "editdescription": "Edit Playground configurations",

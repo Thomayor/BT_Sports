@@ -29,6 +29,7 @@ import {
   getColumns,
   pageSizes,
 } from './ListPlaygrounds.config';
+
 import { t } from 'i18next';
 import { Results } from '@/types';
 
@@ -39,8 +40,10 @@ interface ListPlaygroundsProps {
 export default function ListPlaygrounds({
   setEquipmentId,
 }: ListPlaygroundsProps) {
+
   const route = useRoute();
 
+//choose playground and post or update
   const handleChoose = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
     equip_numero: string,
@@ -52,7 +55,7 @@ export default function ListPlaygrounds({
       router.post(route('playgrounds.store'), {
         equip_numero,
       });
-      alert('Terrain ajouté, cliquez sur Valider');
+      alert(t('pages.playgrounds.addedAlert'));
     } catch (error) {
       console.error('Erreur lors de la requête POST:', error);
     }
@@ -62,10 +65,11 @@ export default function ListPlaygrounds({
 
   const [results, setResults] = useState<Results[]>([]);
   const [totalResults, setTotalResults] = useState(0);
-console.log(results,"test");
 
+//
   const columns = getColumns({ handleChoose });
-
+  
+//search
   const [filters, setFilters] = useState(
     columns.reduce((acc, column) => {
       acc[column.key] = '';
@@ -95,13 +99,14 @@ console.log(results,"test");
     fetchResults();
   }, []);
 
+  //search submit
   const handleSubmit = async (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   ) => {
     e.preventDefault();
     fetchResults();
   };
-
+//add search filters 
   const handleFilterChange = (filterName: string, value: string) => {
     setFilters(prevFilters => ({
       ...prevFilters,

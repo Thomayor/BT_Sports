@@ -1,6 +1,5 @@
 <?php
 
-
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -29,8 +28,6 @@ Route::get('/', function () {
   return Inertia::render('Welcome', [
     'canLogin' => Route::has('login'),
     'canRegister' => Route::has('register'),
-    'laravelVersion' => Application::VERSION,
-    'phpVersion' => PHP_VERSION,
   ]);
 });
 
@@ -127,29 +124,29 @@ Route::middleware([
     MessageController::class,
     'storeMessage',
   ])->name('conversations.message.store');
-});
 
-Route::middleware(['account_type:ADMIN,SUPPORT'])->group(function () {
-  Route::resource('playgrounds', PlaygroundController::class);
-  Route::get('/list-playgrounds', [
-    PlaygroundController::class,
-    'listPlaygroundApi',
-  ])->name('playgrounds.listApi');
+  Route::middleware(['account_type:ADMIN,SUPPORT'])->group(function () {
+    Route::resource('playgrounds', PlaygroundController::class);
+    Route::get('/list-playgrounds', [
+      PlaygroundController::class,
+      'listPlaygroundApi',
+    ])->name('playgrounds.listApi');
 
-  Route::get('/sports', [SportController::class, 'index'])->name(
-    'sports.index'
-  );
+    Route::get('/sports', [SportController::class, 'index'])->name(
+      'sports.index'
+    );
 
-  Route::get('/sports/create', [SportController::class, 'create'])->name(
-    'sports.create'
-  );
+    Route::get('/sports/create', [SportController::class, 'create'])->name(
+      'sports.create'
+    );
 
-  Route::post('/sports/store', [SportController::class, 'store'])->name(
-    'sports.store'
-  );
+    Route::post('/sports/store', [SportController::class, 'store'])->name(
+      'sports.store'
+    );
 
-  Route::delete('/sports/{id}/delete', [
-    SportController::class,
-    'destroy',
-  ])->name('sports.destroy');
+    Route::delete('/sports/{id}/delete', [
+      SportController::class,
+      'destroy',
+    ])->name('sports.destroy');
+  });
 });

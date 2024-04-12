@@ -42,25 +42,26 @@ class ConversationController extends Controller
     $sender = Auth::user();
     $receiver = User::find($id);
 
-    $existingConversation = Conversation::whereHas('users', function ($query) use ($sender, $receiver) {
+    // Recherche d'une conversation existante entre l'utilisateur $sender et l'utilisateur $receiver
+    $existingConversation = Conversation::whereHas('users', function (
+      $query
+    ) use ($sender, $receiver) {
       $query->where('user_id', $sender->id)->orWhere('user_id', $receiver->id);
-  })->whereHas('users', function ($query) use ($sender, $receiver) {
-      $query->where('user_id', $sender->id)->orWhere('user_id', $receiver->id);
-  })->first();
+    })->first();
 
-  if ($existingConversation) {
+    if ($existingConversation) {
       // Une conversation existe déjà, redirige l'user vers cette conversation
-      return Redirect::route('conversations.messages', $existingConversation->id)->with(
-          'success',
-          'You already have a conversation with this user.'
-      );
-  }
+      return Redirect::route(
+        'conversations.messages',
+        $existingConversation->id
+      )->with('success', 'You already have a conversation with this user.');
+    }
 
-  // Si aucune conversation n'existe, créez une nouvelle
-  $conversation = Conversation::create([
+    // Si aucune conversation n'existe, créez une nouvelle
+    $conversation = Conversation::create([
       'title' => 'Message',
       'user_id' => $sender->id,
-  ]);
+    ]);
     $conversation->users()->attach([$sender->id, $receiver->id]);
 
     $message = new Message([
@@ -69,7 +70,7 @@ class ConversationController extends Controller
     ]);
 
     $conversation->messages()->save($message);
-    
+
     $conversation->generateNotificationNewConversation();
 
     return Redirect::route('conversations.messages', $conversation->id)->with(
@@ -83,9 +84,10 @@ class ConversationController extends Controller
     $conversation = Conversation::findOrFail($id);
     $conversation->delete();
 
-      return redirect()->route('conversations.index')
-          ->with([
-              'flash' => 'Votre Conversation a été supprimé avec succès !'
-          ]);
+    return redirect()
+      ->route('conversations.index')
+      ->with([
+        'flash' => 'Votre Conversation a été supprimé avec succès !',
+      ]);
   }
 }
