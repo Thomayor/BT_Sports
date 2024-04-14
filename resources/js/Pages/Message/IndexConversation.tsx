@@ -36,7 +36,8 @@ function IndexConversation({
     const isUnread = !isRead;
 
     if (filter === t('pages.messaging.all')) return hasMatchingMessages;
-    if (filter === t('pages.messaging.read')) return isRead && hasMatchingMessages;
+    if (filter === t('pages.messaging.read'))
+      return isRead && hasMatchingMessages;
     if (filter === t('pages.messaging.unread'))
       return isUnread && hasMatchingMessages;
 
@@ -77,7 +78,7 @@ function IndexConversation({
         <div className="flex flex-col lg:flex-row">
           <div
             className={
-              selectedConversation ? 'lg:w-[25%] lg:border-r' : 'w-full'
+              selectedConversation ? 'lg:w-[40%] lg:border-r' : 'w-full'
             }
           >
             <div className="px-4 flex flex-col">
@@ -93,7 +94,9 @@ function IndexConversation({
                   type="button"
                   onClick={() => setFilter(t('pages.messaging.all'))}
                   className={`border rounded  px-5 py-2 ${
-                    filter === t('pages.messaging.all') ? 'bg-sky-500 text-white' : ''
+                    filter === t('pages.messaging.all')
+                      ? 'bg-sky-500 text-white'
+                      : ''
                   }`}
                 >
                   {t('pages.messaging.all')}
@@ -102,7 +105,9 @@ function IndexConversation({
                   type="button"
                   onClick={() => setFilter(t('pages.messaging.read'))}
                   className={`border rounded px-6 py-2 ${
-                    filter === t('pages.messaging.read') ? 'bg-sky-500 text-white' : ''
+                    filter === t('pages.messaging.read')
+                      ? 'bg-sky-500 text-white'
+                      : ''
                   }`}
                 >
                   {t('pages.messaging.read')}
@@ -111,7 +116,9 @@ function IndexConversation({
                   type="button"
                   onClick={() => setFilter(t('pages.messaging.unread'))}
                   className={`border rounded py-2 px-3 ${
-                    filter === t('pages.messaging.unread') ? 'bg-sky-500 text-white' : ''
+                    filter === t('pages.messaging.unread')
+                      ? 'bg-sky-500 text-white'
+                      : ''
                   }`}
                 >
                   {t('pages.messaging.unread')}
@@ -120,7 +127,7 @@ function IndexConversation({
             </div>
             {filteredConversations.length === 0 ? (
               <div className="p-4 text-center text-gray-500">
-               { t('pages.messaging.nomessages')}
+                {t('pages.messaging.nomessages')}
               </div>
             ) : (
               <div>
@@ -152,7 +159,7 @@ function IndexConversation({
                       <div className="flex-1">
                         <div className="relative">
                           <Link href={`/conversations/${c.id}`}>
-                            <h3 className="text-lg font-semibold mb-1">
+                            <h3 className=" text-md sm:text-lg font-semibold mb-1">
                               {c.messages.length > 0 &&
                                 (auth.user?.id ===
                                 c.messages[c.messages.length - 1].user.id
