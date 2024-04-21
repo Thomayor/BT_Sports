@@ -239,7 +239,7 @@ export default function ShowGameLists({
 
           <div className="flex justify-start">
             {/* DISPLAY ONLY IF ONE TEAM IS ASSOCIATED TO THE GAME */}
-            {numTeams < 2 && userID !== game.user_id && (
+            {numTeams < 2 && userID !== game.user_id && !homeTeam.some(user => user.id === userID)&& (
               <Button className="opacity-80 mt-6 bg-sky-500 mr-2">
                 <Link href={`${game.id}/join-team`}>
                   {t('pages.games.join')}
